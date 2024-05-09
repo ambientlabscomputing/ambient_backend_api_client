@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **count** | **int** |  | 
-**timestamp** | **str** |  | [optional] [default to 'Wed May  8 19:55:26 2024']
+**timestamp** | **str** |  | [optional] [default to 'Wed May  8 20:30:12 2024']
 **results** | [**List[Notification]**](Notification.md) |  | 
 
 ## Example

@@ -27,7 +27,7 @@ class ListResultsResponse(BaseModel):
     ListResultsResponse
     """ # noqa: E501
     count: StrictInt
-    timestamp: Optional[StrictStr] = 'Wed May  8 19:55:26 2024'
+    timestamp: Optional[StrictStr] = 'Wed May  8 20:30:12 2024'
     results: List[Any]
     __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
 
@@ -83,7 +83,7 @@ class ListResultsResponse(BaseModel):
 
         _obj = cls.model_validate({
             "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else 'Wed May  8 19:55:26 2024',
+            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else 'Wed May  8 20:30:12 2024',
             "results": obj.get("results")
         })
         return _obj
