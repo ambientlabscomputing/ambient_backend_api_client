@@ -17,20 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.service import Service
+from ambient_backend_api_client.models.ambient_action_enum import AmbientActionEnum
+from ambient_backend_api_client.models.ambient_event_type_enum import AmbientEventTypeEnum
+from ambient_backend_api_client.models.event_label import EventLabel
+from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ServiceList(BaseModel):
+class EventTemplate(BaseModel):
     """
-    ServiceList
+    EventTemplate
     """ # noqa: E501
-    count: StrictInt
-    timestamp: Optional[StrictStr] = 'Wed May  8 20:38:23 2024'
-    results: List[Service]
-    __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
+    root: StrictStr
+    event_label: EventLabel
+    event_type: AmbientEventTypeEnum
+    resource_type: ResourceTypeEnum
+    resource_id: Optional[StrictStr] = None
+    action: Optional[AmbientActionEnum] = None
+    __properties: ClassVar[List[str]] = ["root", "event_label", "event_type", "resource_type", "resource_id", "action"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +56,7 @@ class ServiceList(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ServiceList from a JSON string"""
+        """Create an instance of EventTemplate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,18 +77,21 @@ class ServiceList(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['results'] = _items
+        # set to None if resource_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.resource_id is None and "resource_id" in self.model_fields_set:
+            _dict['resource_id'] = None
+
+        # set to None if action (nullable) is None
+        # and model_fields_set contains the field
+        if self.action is None and "action" in self.model_fields_set:
+            _dict['action'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ServiceList from a dict"""
+        """Create an instance of EventTemplate from a dict"""
         if obj is None:
             return None
 
@@ -90,9 +99,12 @@ class ServiceList(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else 'Wed May  8 20:38:23 2024',
-            "results": [Service.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "root": obj.get("root"),
+            "event_label": obj.get("event_label"),
+            "event_type": obj.get("event_type"),
+            "resource_type": obj.get("resource_type"),
+            "resource_id": obj.get("resource_id"),
+            "action": obj.get("action")
         })
         return _obj
 

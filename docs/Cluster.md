@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | [optional] [default to '1126bb6b-9e41-49b3-9fa0-75cd01cb93f2']
+**identifier** | **str** |  | [optional] [default to '02439f7a-5a39-457d-b117-9a8d9effe62f']
 **owner_id** | **str** |  | [optional] 
 **owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | [optional] 
 **description** | **str** |  | [optional] 

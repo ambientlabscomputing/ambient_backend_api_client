@@ -12,6 +12,7 @@ ambient_backend_api_client/api/notifications_api.py
 ambient_backend_api_client/api/ping_api.py
 ambient_backend_api_client/api/requests_api.py
 ambient_backend_api_client/api/services_api.py
+ambient_backend_api_client/api/unimplemented_api.py
 ambient_backend_api_client/api/users_api.py
 ambient_backend_api_client/api_client.py
 ambient_backend_api_client/api_response.py
@@ -19,12 +20,17 @@ ambient_backend_api_client/configuration.py
 ambient_backend_api_client/exceptions.py
 ambient_backend_api_client/models/__init__.py
 ambient_backend_api_client/models/account_type.py
+ambient_backend_api_client/models/ambient_action_enum.py
+ambient_backend_api_client/models/ambient_event_type_enum.py
 ambient_backend_api_client/models/architecture_enum.py
 ambient_backend_api_client/models/auth0_device_code_response.py
 ambient_backend_api_client/models/cluster.py
 ambient_backend_api_client/models/cluster_create.py
 ambient_backend_api_client/models/create_service_acct_request.py
 ambient_backend_api_client/models/creation_method.py
+ambient_backend_api_client/models/event.py
+ambient_backend_api_client/models/event_label.py
+ambient_backend_api_client/models/event_template.py
 ambient_backend_api_client/models/http_validation_error.py
 ambient_backend_api_client/models/interface_type_enum.py
 ambient_backend_api_client/models/list_results_response.py
@@ -63,6 +69,8 @@ ambient_backend_api_client/models/validation_error_loc_inner.py
 ambient_backend_api_client/py.typed
 ambient_backend_api_client/rest.py
 docs/AccountType.md
+docs/AmbientActionEnum.md
+docs/AmbientEventTypeEnum.md
 docs/ArchitectureEnum.md
 docs/Auth0DeviceCodeResponse.md
 docs/Cluster.md
@@ -70,6 +78,9 @@ docs/ClusterCreate.md
 docs/ClustersApi.md
 docs/CreateServiceAcctRequest.md
 docs/CreationMethod.md
+docs/Event.md
+docs/EventLabel.md
+docs/EventTemplate.md
 docs/HTTPValidationError.md
 docs/HealthApi.md
 docs/InterfaceTypeEnum.md
@@ -106,6 +117,7 @@ docs/ServicesApi.md
 docs/StatusEnumInput.md
 docs/SubscriptionModelEnum.md
 docs/TokenResponse.md
+docs/UnimplementedApi.md
 docs/User.md
 docs/UserPreferences.md
 docs/UserRoleEnum.md
@@ -119,4 +131,10 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_ambient_action_enum.py
+test/test_ambient_event_type_enum.py
+test/test_event.py
+test/test_event_label.py
+test/test_event_template.py
+test/test_unimplemented_api.py
 tox.ini

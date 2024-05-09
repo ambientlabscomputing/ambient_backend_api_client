@@ -28,7 +28,7 @@ class PostServiceResponse(BaseModel):
     PostServiceResponse
     """ # noqa: E501
     request_id: StrictStr
-    requested_ts: Optional[StrictStr] = 'Wed May  8 20:30:12 2024'
+    requested_ts: Optional[StrictStr] = 'Wed May  8 20:38:23 2024'
     location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
     refresh_interval: Optional[StrictInt] = 10
     service: Service
@@ -89,7 +89,7 @@ class PostServiceResponse(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 'Wed May  8 20:30:12 2024',
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 'Wed May  8 20:38:23 2024',
             "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
             "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
             "service": Service.from_dict(obj["service"]) if obj.get("service") is not None else None

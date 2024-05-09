@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** |  | 
-**requested_ts** | **str** |  | [optional] [default to 'Wed May  8 20:30:12 2024']
+**requested_ts** | **str** |  | [optional] [default to 'Wed May  8 20:38:23 2024']
 **location_root** | **str** |  | [optional] [default to 'http://localhost:8001/requests/']
 **refresh_interval** | **int** |  | [optional] [default to 10]
 **service** | [**Service**](Service.md) |  | 

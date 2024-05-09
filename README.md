@@ -120,6 +120,9 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**get_service_services_service_id_get**](docs/ServicesApi.md#get_service_services_service_id_get) | **GET** /services/{service_id} | Get Service
 *ServicesApi* | [**get_services_services_get**](docs/ServicesApi.md#get_services_services_get) | **GET** /services | Get Services
 *ServicesApi* | [**patch_service_services_service_id_patch**](docs/ServicesApi.md#patch_service_services_service_id_patch) | **PATCH** /services/{service_id} | Patch Service
+*UnimplementedApi* | [**create_event_events_event_get**](docs/UnimplementedApi.md#create_event_events_event_get) | **GET** /events/event | Create Event
+*UnimplementedApi* | [**create_event_label_events_event_label_get**](docs/UnimplementedApi.md#create_event_label_events_event_label_get) | **GET** /events/event_label | Create Event Label
+*UnimplementedApi* | [**create_event_template_events_event_template_get**](docs/UnimplementedApi.md#create_event_template_events_event_template_get) | **GET** /events/event_template | Create Event Template
 *UsersApi* | [**create_service_account_users_service_accounts_post**](docs/UsersApi.md#create_service_account_users_service_accounts_post) | **POST** /users/service_accounts | Create Service Account
 *UsersApi* | [**create_user_users_post**](docs/UsersApi.md#create_user_users_post) | **POST** /users | Create User
 *UsersApi* | [**delete_user_users_user_id_delete**](docs/UsersApi.md#delete_user_users_user_id_delete) | **DELETE** /users/{user_id} | Delete User
@@ -131,12 +134,17 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AccountType](docs/AccountType.md)
+ - [AmbientActionEnum](docs/AmbientActionEnum.md)
+ - [AmbientEventTypeEnum](docs/AmbientEventTypeEnum.md)
  - [ArchitectureEnum](docs/ArchitectureEnum.md)
  - [Auth0DeviceCodeResponse](docs/Auth0DeviceCodeResponse.md)
  - [Cluster](docs/Cluster.md)
  - [ClusterCreate](docs/ClusterCreate.md)
  - [CreateServiceAcctRequest](docs/CreateServiceAcctRequest.md)
  - [CreationMethod](docs/CreationMethod.md)
+ - [Event](docs/Event.md)
+ - [EventLabel](docs/EventLabel.md)
+ - [EventTemplate](docs/EventTemplate.md)
  - [HTTPValidationError](docs/HTTPValidationError.md)
  - [InterfaceTypeEnum](docs/InterfaceTypeEnum.md)
  - [ListResultsResponse](docs/ListResultsResponse.md)
