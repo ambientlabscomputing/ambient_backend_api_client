@@ -14,12 +14,8 @@ Name | Type | Description | Notes
 **requests** | **List[str]** |  | [optional] [default to []]
 **notifications** | **List[str]** |  | [optional] [default to []]
 **image** | **str** |  | 
-**replicas** | **int** |  | 
-**cluster_groups** | **List[str]** |  | [optional] [default to [default]]
 **tags** | **List[str]** |  | [optional] [default to []]
-**clusters** | **List[str]** |  | [optional] [default to []]
 **ports** | **List[str]** |  | [optional] 
-**compose_location** | **str** |  | [optional] 
 **state** | [**ServiceState**](ServiceState.md) |  | [optional] 
 **status** | [**ServiceStatusEnum**](ServiceStatusEnum.md) |  | [optional] 
 

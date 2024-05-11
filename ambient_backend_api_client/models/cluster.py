@@ -33,7 +33,7 @@ class Cluster(BaseModel):
     """ # noqa: E501
     name: StrictStr
     resource_type: Optional[ResourceTypeEnum] = None
-    identifier: Optional[StrictStr] = '02439f7a-5a39-457d-b117-9a8d9effe62f'
+    identifier: Optional[StrictStr] = '0956813f-647c-49af-a983-cc590a5cf901'
     owner_id: Optional[StrictStr] = None
     owner_type: Optional[OwnerTypeEnum] = None
     description: Optional[StrictStr] = None
@@ -128,7 +128,7 @@ class Cluster(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "resource_type": obj.get("resource_type"),
-            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '02439f7a-5a39-457d-b117-9a8d9effe62f',
+            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '0956813f-647c-49af-a983-cc590a5cf901',
             "owner_id": obj.get("owner_id"),
             "owner_type": obj.get("owner_type"),
             "description": obj.get("description"),
