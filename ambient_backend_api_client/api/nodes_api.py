@@ -1107,7 +1107,8 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get(
         self,
-        q: Optional[StrictStr] = None,
+        owner_id: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1124,8 +1125,10 @@ class NodesApi:
         """Get Nodes
 
 
-        :param q:
-        :type q: str
+        :param owner_id:
+        :type owner_id: str
+        :param name:
+        :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1149,7 +1152,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            q=q,
+            owner_id=owner_id,
+            name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1174,7 +1178,8 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_with_http_info(
         self,
-        q: Optional[StrictStr] = None,
+        owner_id: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1191,8 +1196,10 @@ class NodesApi:
         """Get Nodes
 
 
-        :param q:
-        :type q: str
+        :param owner_id:
+        :type owner_id: str
+        :param name:
+        :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1216,7 +1223,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            q=q,
+            owner_id=owner_id,
+            name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1241,7 +1249,8 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_without_preload_content(
         self,
-        q: Optional[StrictStr] = None,
+        owner_id: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1258,8 +1267,10 @@ class NodesApi:
         """Get Nodes
 
 
-        :param q:
-        :type q: str
+        :param owner_id:
+        :type owner_id: str
+        :param name:
+        :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1283,7 +1294,8 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            q=q,
+            owner_id=owner_id,
+            name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1303,7 +1315,8 @@ class NodesApi:
 
     def _get_nodes_nodes_get_serialize(
         self,
-        q,
+        owner_id,
+        name,
         _request_auth,
         _content_type,
         _headers,
@@ -1324,9 +1337,13 @@ class NodesApi:
 
         # process the path parameters
         # process the query parameters
-        if q is not None:
+        if owner_id is not None:
             
-            _query_params.append(('q', q))
+            _query_params.append(('owner_id', owner_id))
+            
+        if name is not None:
+            
+            _query_params.append(('name', name))
             
         # process the header parameters
         # process the form parameters
