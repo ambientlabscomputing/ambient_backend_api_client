@@ -26,11 +26,10 @@ class ServiceStatusEnum(str, Enum):
     """
     allowed enum values
     """
-    ACTIVE = 'active'
-    INACTIVE = 'inactive'
-    DELETED = 'deleted'
+    SUCCESS = 'success'
     PENDING = 'pending'
-    ERROR = 'error'
+    FAILURE = 'failure'
+    DELETED = 'deleted'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

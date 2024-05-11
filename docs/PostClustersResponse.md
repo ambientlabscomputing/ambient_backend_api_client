@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **str** |  | 
-**requested_ts** | **str** |  | [optional] [default to 'Wed May  8 20:38:23 2024']
+**requested_ts** | **str** |  | [optional] [default to 'Fri May 10 19:20:26 2024']
 **location_root** | **str** |  | [optional] [default to 'http://localhost:8001/requests/']
 **refresh_interval** | **int** |  | [optional] [default to 10]
 **cluster** | [**Cluster**](Cluster.md) |  | 

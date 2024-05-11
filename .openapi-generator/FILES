@@ -131,10 +131,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ambient_action_enum.py
-test/test_ambient_event_type_enum.py
-test/test_event.py
-test/test_event_label.py
-test/test_event_template.py
-test/test_unimplemented_api.py
 tox.ini

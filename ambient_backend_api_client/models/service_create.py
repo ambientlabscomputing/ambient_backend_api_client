@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.owner_type_enum import OwnerTypeEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
@@ -39,15 +39,11 @@ class ServiceCreate(BaseModel):
     requests: Optional[List[StrictStr]] = None
     notifications: Optional[List[StrictStr]] = None
     image: StrictStr
-    replicas: StrictInt
-    cluster_groups: Optional[List[StrictStr]] = None
     tags: Optional[List[StrictStr]] = None
-    clusters: Optional[List[StrictStr]] = None
     ports: Optional[List[StrictStr]] = None
-    compose_location: Optional[StrictStr] = None
     state: Optional[ServiceState] = None
     status: Optional[ServiceStatusEnum] = None
-    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "image", "replicas", "cluster_groups", "tags", "clusters", "ports", "compose_location", "state", "status"]
+    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "image", "tags", "ports", "state", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,11 +109,6 @@ class ServiceCreate(BaseModel):
         if self.ports is None and "ports" in self.model_fields_set:
             _dict['ports'] = None
 
-        # set to None if compose_location (nullable) is None
-        # and model_fields_set contains the field
-        if self.compose_location is None and "compose_location" in self.model_fields_set:
-            _dict['compose_location'] = None
-
         # set to None if status (nullable) is None
         # and model_fields_set contains the field
         if self.status is None and "status" in self.model_fields_set:
@@ -144,12 +135,8 @@ class ServiceCreate(BaseModel):
             "requests": obj.get("requests"),
             "notifications": obj.get("notifications"),
             "image": obj.get("image"),
-            "replicas": obj.get("replicas"),
-            "cluster_groups": obj.get("cluster_groups"),
             "tags": obj.get("tags"),
-            "clusters": obj.get("clusters"),
             "ports": obj.get("ports"),
-            "compose_location": obj.get("compose_location"),
             "state": obj.get("state"),
             "status": obj.get("status")
         })
