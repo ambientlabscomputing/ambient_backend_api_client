@@ -21,6 +21,7 @@ from typing import Any, Dict, Optional
 from ambient_backend_api_client.models.list_results_response import ListResultsResponse
 from ambient_backend_api_client.models.node import Node
 from ambient_backend_api_client.models.node_create import NodeCreate
+from ambient_backend_api_client.models.refresh_token_response import RefreshTokenResponse
 from ambient_backend_api_client.models.token_response import TokenResponse
 
 from ambient_backend_api_client.api_client import ApiClient, RequestSerialized
@@ -1398,7 +1399,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TokenResponse:
+    ) -> RefreshTokenResponse:
         """Refresh Node Token
 
 
@@ -1438,7 +1439,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponse",
+            '200': "RefreshTokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1469,7 +1470,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TokenResponse]:
+    ) -> ApiResponse[RefreshTokenResponse]:
         """Refresh Node Token
 
 
@@ -1509,7 +1510,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponse",
+            '200': "RefreshTokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1580,7 +1581,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponse",
+            '200': "RefreshTokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
