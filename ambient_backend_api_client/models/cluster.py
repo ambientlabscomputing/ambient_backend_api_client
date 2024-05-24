@@ -17,11 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.architecture_enum import ArchitectureEnum
 from ambient_backend_api_client.models.models_cluster_status_enum import ModelsClusterStatusEnum
-from ambient_backend_api_client.models.owner_type_enum import OwnerTypeEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.role_enum import RoleEnum
 from typing import Optional, Set
@@ -31,14 +30,12 @@ class Cluster(BaseModel):
     """
     Cluster
     """ # noqa: E501
+    id: Optional[StrictInt] = None
     name: StrictStr
     resource_type: Optional[ResourceTypeEnum] = None
-    identifier: Optional[StrictStr] = 'c7e806f5-f7ef-4afa-8223-8c3cc12298c9'
-    owner_id: Optional[StrictStr] = None
-    owner_type: Optional[OwnerTypeEnum] = None
     description: Optional[StrictStr] = None
-    requests: Optional[List[StrictStr]] = None
-    notifications: Optional[List[StrictStr]] = None
+    org_id: Optional[StrictInt] = None
+    user_id: Optional[StrictInt] = None
     role: RoleEnum
     architecture: ArchitectureEnum
     nodes: List[StrictStr]
@@ -47,8 +44,9 @@ class Cluster(BaseModel):
     manager_node: Optional[StrictStr] = None
     cluster_group: Optional[StrictStr] = 'default'
     tags: Optional[List[StrictStr]] = None
+    identifier: Optional[StrictStr] = '29c0a882-515b-46b0-9ce5-6fcbe160981c'
     status: ModelsClusterStatusEnum
-    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "role", "architecture", "nodes", "docker_swarm_attrs", "site", "manager_node", "cluster_group", "tags", "status"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "architecture", "nodes", "docker_swarm_attrs", "site", "manager_node", "cluster_group", "tags", "identifier", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,20 +87,25 @@ class Cluster(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if owner_id (nullable) is None
+        # set to None if id (nullable) is None
         # and model_fields_set contains the field
-        if self.owner_id is None and "owner_id" in self.model_fields_set:
-            _dict['owner_id'] = None
-
-        # set to None if owner_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.owner_type is None and "owner_type" in self.model_fields_set:
-            _dict['owner_type'] = None
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
 
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
+
+        # set to None if org_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.org_id is None and "org_id" in self.model_fields_set:
+            _dict['org_id'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
 
         # set to None if docker_swarm_attrs (nullable) is None
         # and model_fields_set contains the field
@@ -126,14 +129,12 @@ class Cluster(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "resource_type": obj.get("resource_type"),
-            "identifier": obj.get("identifier") if obj.get("identifier") is not None else 'c7e806f5-f7ef-4afa-8223-8c3cc12298c9',
-            "owner_id": obj.get("owner_id"),
-            "owner_type": obj.get("owner_type"),
             "description": obj.get("description"),
-            "requests": obj.get("requests"),
-            "notifications": obj.get("notifications"),
+            "org_id": obj.get("org_id"),
+            "user_id": obj.get("user_id"),
             "role": obj.get("role"),
             "architecture": obj.get("architecture"),
             "nodes": obj.get("nodes"),
@@ -142,6 +143,7 @@ class Cluster(BaseModel):
             "manager_node": obj.get("manager_node"),
             "cluster_group": obj.get("cluster_group") if obj.get("cluster_group") is not None else 'default',
             "tags": obj.get("tags"),
+            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '29c0a882-515b-46b0-9ce5-6fcbe160981c',
             "status": obj.get("status")
         })
         return _obj

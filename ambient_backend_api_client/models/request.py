@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from ambient_backend_api_client.models.owner_type_enum import OwnerTypeEnum
 from ambient_backend_api_client.models.request_status_enum import RequestStatusEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from typing import Optional, Set
@@ -29,23 +28,21 @@ class Request(BaseModel):
     """
     Request
     """ # noqa: E501
+    id: StrictInt
     name: StrictStr
     resource_type: Optional[ResourceTypeEnum] = None
-    identifier: StrictStr
-    owner_id: StrictStr
-    owner_type: OwnerTypeEnum
     description: Optional[StrictStr] = None
-    requests: Optional[List[StrictStr]] = None
-    notifications: Optional[List[StrictStr]] = None
+    org_id: Optional[StrictInt] = None
+    user_id: Optional[StrictInt] = None
     status: Optional[RequestStatusEnum] = None
     error: Optional[StrictStr] = None
-    requested_ts: Optional[Union[StrictFloat, StrictInt]] = 1.715398119204992E9
+    requested_ts: Optional[Union[StrictFloat, StrictInt]] = 1.716575809788515E9
     started_ts: Optional[Union[StrictFloat, StrictInt]] = None
     failed_ts: Optional[Union[StrictFloat, StrictInt]] = None
     completed_ts: Optional[Union[StrictFloat, StrictInt]] = None
     notes: Optional[List[StrictStr]] = None
     data: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +88,16 @@ class Request(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if org_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.org_id is None and "org_id" in self.model_fields_set:
+            _dict['org_id'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
         # set to None if error (nullable) is None
         # and model_fields_set contains the field
         if self.error is None and "error" in self.model_fields_set:
@@ -123,17 +130,15 @@ class Request(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "resource_type": obj.get("resource_type"),
-            "identifier": obj.get("identifier"),
-            "owner_id": obj.get("owner_id"),
-            "owner_type": obj.get("owner_type"),
             "description": obj.get("description"),
-            "requests": obj.get("requests"),
-            "notifications": obj.get("notifications"),
+            "org_id": obj.get("org_id"),
+            "user_id": obj.get("user_id"),
             "status": obj.get("status"),
             "error": obj.get("error"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 1.715398119204992E9,
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 1.716575809788515E9,
             "started_ts": obj.get("started_ts"),
             "failed_ts": obj.get("failed_ts"),
             "completed_ts": obj.get("completed_ts"),

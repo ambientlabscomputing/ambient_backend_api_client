@@ -17,11 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.account_type import AccountType
 from ambient_backend_api_client.models.creation_method import CreationMethod
-from ambient_backend_api_client.models.owner_type_enum import OwnerTypeEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.user_preferences import UserPreferences
 from ambient_backend_api_client.models.user_role_enum import UserRoleEnum
@@ -32,14 +31,12 @@ class User(BaseModel):
     """
     User
     """ # noqa: E501
+    id: StrictInt
     name: StrictStr
     resource_type: Optional[ResourceTypeEnum] = None
-    identifier: StrictStr
-    owner_id: StrictStr
-    owner_type: OwnerTypeEnum
     description: Optional[StrictStr] = None
-    requests: Optional[List[StrictStr]] = None
-    notifications: Optional[List[StrictStr]] = None
+    org_id: StrictInt
+    user_id: Optional[StrictInt] = None
     account_type: Optional[AccountType] = None
     creation_method: Optional[CreationMethod] = None
     email: StrictStr
@@ -51,7 +48,7 @@ class User(BaseModel):
     phone_number: Optional[StrictStr] = None
     username: Optional[StrictStr] = None
     is_super_admin: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "account_type", "creation_method", "email", "first_name", "last_name", "role", "preferences", "auth_provider_uid", "phone_number", "username", "is_super_admin"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "account_type", "creation_method", "email", "first_name", "last_name", "role", "preferences", "auth_provider_uid", "phone_number", "username", "is_super_admin"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +97,11 @@ class User(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
         # set to None if preferences (nullable) is None
         # and model_fields_set contains the field
         if self.preferences is None and "preferences" in self.model_fields_set:
@@ -137,14 +139,12 @@ class User(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "resource_type": obj.get("resource_type"),
-            "identifier": obj.get("identifier"),
-            "owner_id": obj.get("owner_id"),
-            "owner_type": obj.get("owner_type"),
             "description": obj.get("description"),
-            "requests": obj.get("requests"),
-            "notifications": obj.get("notifications"),
+            "org_id": obj.get("org_id"),
+            "user_id": obj.get("user_id"),
             "account_type": obj.get("account_type"),
             "creation_method": obj.get("creation_method"),
             "email": obj.get("email"),

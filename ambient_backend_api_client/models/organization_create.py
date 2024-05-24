@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.owner_type_enum import OwnerTypeEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.subscription_model_enum import SubscriptionModelEnum
 from typing import Optional, Set
@@ -30,18 +29,13 @@ class OrganizationCreate(BaseModel):
     OrganizationCreate
     """ # noqa: E501
     name: StrictStr
-    resource_type: Optional[ResourceTypeEnum] = None
-    identifier: Optional[StrictStr] = None
-    owner_id: Optional[StrictStr] = None
-    owner_type: Optional[OwnerTypeEnum] = None
     description: Optional[StrictStr] = None
-    requests: Optional[List[StrictStr]] = None
-    notifications: Optional[List[StrictStr]] = None
+    resource_type: Optional[ResourceTypeEnum] = None
     subscription: SubscriptionModelEnum
     root_email: StrictStr
     okta_group_id: Optional[StrictStr] = None
     auth0_org_id: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "resource_type", "identifier", "owner_id", "owner_type", "description", "requests", "notifications", "subscription", "root_email", "okta_group_id", "auth0_org_id"]
+    __properties: ClassVar[List[str]] = ["name", "description", "resource_type", "subscription", "root_email", "okta_group_id", "auth0_org_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,21 +76,6 @@ class OrganizationCreate(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if identifier (nullable) is None
-        # and model_fields_set contains the field
-        if self.identifier is None and "identifier" in self.model_fields_set:
-            _dict['identifier'] = None
-
-        # set to None if owner_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.owner_id is None and "owner_id" in self.model_fields_set:
-            _dict['owner_id'] = None
-
-        # set to None if owner_type (nullable) is None
-        # and model_fields_set contains the field
-        if self.owner_type is None and "owner_type" in self.model_fields_set:
-            _dict['owner_type'] = None
-
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -125,13 +104,8 @@ class OrganizationCreate(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "resource_type": obj.get("resource_type"),
-            "identifier": obj.get("identifier"),
-            "owner_id": obj.get("owner_id"),
-            "owner_type": obj.get("owner_type"),
             "description": obj.get("description"),
-            "requests": obj.get("requests"),
-            "notifications": obj.get("notifications"),
+            "resource_type": obj.get("resource_type"),
             "subscription": obj.get("subscription"),
             "root_email": obj.get("root_email"),
             "okta_group_id": obj.get("okta_group_id"),
