@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import StrictInt, StrictStr
 from typing import Any, Dict, Optional
 from ambient_backend_api_client.models.list_results_response import ListResultsResponse
 from ambient_backend_api_client.models.node import Node
@@ -44,7 +44,7 @@ class NodesApi:
     @validate_call
     async def authorize_node_nodes_node_id_authorize_post(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         device_code: StrictStr,
         _request_timeout: Union[
             None,
@@ -63,7 +63,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param device_code: (required)
         :type device_code: str
         :param _request_timeout: timeout setting for this request. If one
@@ -115,7 +115,7 @@ class NodesApi:
     @validate_call
     async def authorize_node_nodes_node_id_authorize_post_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         device_code: StrictStr,
         _request_timeout: Union[
             None,
@@ -134,7 +134,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param device_code: (required)
         :type device_code: str
         :param _request_timeout: timeout setting for this request. If one
@@ -186,7 +186,7 @@ class NodesApi:
     @validate_call
     async def authorize_node_nodes_node_id_authorize_post_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         device_code: StrictStr,
         _request_timeout: Union[
             None,
@@ -205,7 +205,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param device_code: (required)
         :type device_code: str
         :param _request_timeout: timeout setting for this request. If one
@@ -592,7 +592,7 @@ class NodesApi:
     @validate_call
     async def delete_node_nodes_node_id_delete(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -610,7 +610,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -659,7 +659,7 @@ class NodesApi:
     @validate_call
     async def delete_node_nodes_node_id_delete_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -677,7 +677,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -726,7 +726,7 @@ class NodesApi:
     @validate_call
     async def delete_node_nodes_node_id_delete_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -744,7 +744,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -850,7 +850,7 @@ class NodesApi:
     @validate_call
     async def get_node_nodes_node_id_get(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -868,7 +868,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -917,7 +917,7 @@ class NodesApi:
     @validate_call
     async def get_node_nodes_node_id_get_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -935,7 +935,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -984,7 +984,7 @@ class NodesApi:
     @validate_call
     async def get_node_nodes_node_id_get_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1002,7 +1002,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1384,7 +1384,7 @@ class NodesApi:
     @validate_call
     async def refresh_node_token_nodes_node_id_refresh_token_post(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         refresh_token: StrictStr,
         _request_timeout: Union[
             None,
@@ -1403,7 +1403,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param refresh_token: (required)
         :type refresh_token: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1455,7 +1455,7 @@ class NodesApi:
     @validate_call
     async def refresh_node_token_nodes_node_id_refresh_token_post_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         refresh_token: StrictStr,
         _request_timeout: Union[
             None,
@@ -1474,7 +1474,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param refresh_token: (required)
         :type refresh_token: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1526,7 +1526,7 @@ class NodesApi:
     @validate_call
     async def refresh_node_token_nodes_node_id_refresh_token_post_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         refresh_token: StrictStr,
         _request_timeout: Union[
             None,
@@ -1545,7 +1545,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param refresh_token: (required)
         :type refresh_token: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1659,7 +1659,7 @@ class NodesApi:
     @validate_call
     async def request_new_auth_nodes_node_id_auth_post(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1677,7 +1677,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1726,7 +1726,7 @@ class NodesApi:
     @validate_call
     async def request_new_auth_nodes_node_id_auth_post_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1744,7 +1744,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1793,7 +1793,7 @@ class NodesApi:
     @validate_call
     async def request_new_auth_nodes_node_id_auth_post_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1811,7 +1811,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1917,7 +1917,7 @@ class NodesApi:
     @validate_call
     async def update_node_nodes_node_id_patch(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1936,7 +1936,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -1988,7 +1988,7 @@ class NodesApi:
     @validate_call
     async def update_node_nodes_node_id_patch_with_http_info(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -2007,7 +2007,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -2059,7 +2059,7 @@ class NodesApi:
     @validate_call
     async def update_node_nodes_node_id_patch_without_preload_content(
         self,
-        node_id: StrictStr,
+        node_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -2078,7 +2078,7 @@ class NodesApi:
 
 
         :param node_id: (required)
-        :type node_id: str
+        :type node_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one

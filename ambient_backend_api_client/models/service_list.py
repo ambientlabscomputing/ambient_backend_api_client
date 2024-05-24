@@ -28,7 +28,7 @@ class ServiceList(BaseModel):
     ServiceList
     """ # noqa: E501
     count: StrictInt
-    timestamp: Optional[StrictStr] = 'Fri May 10 21:28:39 2024'
+    timestamp: Optional[StrictStr] = '2024-05-24T12:36:49.790989'
     results: List[Service]
     __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
 
@@ -91,7 +91,7 @@ class ServiceList(BaseModel):
 
         _obj = cls.model_validate({
             "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else 'Fri May 10 21:28:39 2024',
+            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-05-24T12:36:49.790989',
             "results": [Service.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
