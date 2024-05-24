@@ -19,18 +19,19 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.notification import Notification
 from typing import Optional, Set
 from typing_extensions import Self
 
-class NotificationList(BaseModel):
+class RefreshTokenResponse(BaseModel):
     """
-    NotificationList
+    RefreshTokenResponse
     """ # noqa: E501
-    count: StrictInt
-    timestamp: Optional[StrictStr] = '2024-05-24T17:31:42.444659'
-    results: List[Notification]
-    __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
+    access_token: StrictStr
+    expires_in: StrictInt
+    scope: StrictStr
+    id_token: Optional[StrictStr] = None
+    token_type: StrictStr
+    __properties: ClassVar[List[str]] = ["access_token", "expires_in", "scope", "id_token", "token_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class NotificationList(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of NotificationList from a JSON string"""
+        """Create an instance of RefreshTokenResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,18 +72,16 @@ class NotificationList(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['results'] = _items
+        # set to None if id_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.id_token is None and "id_token" in self.model_fields_set:
+            _dict['id_token'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of NotificationList from a dict"""
+        """Create an instance of RefreshTokenResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,9 +89,11 @@ class NotificationList(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-05-24T17:31:42.444659',
-            "results": [Notification.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "access_token": obj.get("access_token"),
+            "expires_in": obj.get("expires_in"),
+            "scope": obj.get("scope"),
+            "id_token": obj.get("id_token"),
+            "token_type": obj.get("token_type")
         })
         return _obj
 
