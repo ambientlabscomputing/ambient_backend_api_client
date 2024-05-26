@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictStr
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from ambient_backend_api_client.models.post_service_response import PostServiceResponse
 from ambient_backend_api_client.models.service import Service
 from ambient_backend_api_client.models.service_create import ServiceCreate
@@ -579,7 +579,6 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get(
         self,
-        q: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -597,8 +596,6 @@ class ServicesApi:
 
         Get all services
 
-        :param q:
-        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -622,7 +619,6 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
-            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -631,7 +627,6 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
-            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -647,7 +642,6 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get_with_http_info(
         self,
-        q: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,8 +659,6 @@ class ServicesApi:
 
         Get all services
 
-        :param q:
-        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -690,7 +682,6 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
-            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -699,7 +690,6 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
-            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -715,7 +705,6 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get_without_preload_content(
         self,
-        q: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -733,8 +722,6 @@ class ServicesApi:
 
         Get all services
 
-        :param q:
-        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -758,7 +745,6 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
-            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -767,7 +753,6 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
-            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -778,7 +763,6 @@ class ServicesApi:
 
     def _get_services_services_get_serialize(
         self,
-        q,
         _request_auth,
         _content_type,
         _headers,
@@ -799,10 +783,6 @@ class ServicesApi:
 
         # process the path parameters
         # process the query parameters
-        if q is not None:
-            
-            _query_params.append(('q', q))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter

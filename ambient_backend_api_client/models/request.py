@@ -30,13 +30,13 @@ class Request(BaseModel):
     """ # noqa: E501
     id: StrictInt
     name: StrictStr
-    resource_type: Optional[ResourceTypeEnum] = None
+    resource_type: ResourceTypeEnum
     description: Optional[StrictStr] = None
     org_id: Optional[StrictInt] = None
     user_id: Optional[StrictInt] = None
     status: Optional[RequestStatusEnum] = None
     error: Optional[StrictStr] = None
-    requested_ts: Optional[Union[StrictFloat, StrictInt]] = 1.7165935024421928E9
+    requested_ts: Optional[Union[StrictFloat, StrictInt]] = 1.7167362329035609E9
     started_ts: Optional[Union[StrictFloat, StrictInt]] = None
     failed_ts: Optional[Union[StrictFloat, StrictInt]] = None
     completed_ts: Optional[Union[StrictFloat, StrictInt]] = None
@@ -138,7 +138,7 @@ class Request(BaseModel):
             "user_id": obj.get("user_id"),
             "status": obj.get("status"),
             "error": obj.get("error"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 1.7165935024421928E9,
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 1.7167362329035609E9,
             "started_ts": obj.get("started_ts"),
             "failed_ts": obj.get("failed_ts"),
             "completed_ts": obj.get("completed_ts"),
