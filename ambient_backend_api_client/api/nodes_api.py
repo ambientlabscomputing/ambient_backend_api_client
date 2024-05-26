@@ -1108,7 +1108,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get(
         self,
-        owner_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1126,8 +1126,8 @@ class NodesApi:
         """Get Nodes
 
 
-        :param owner_id:
-        :type owner_id: str
+        :param org_id:
+        :type org_id: str
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1153,7 +1153,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            owner_id=owner_id,
+            org_id=org_id,
             name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1179,7 +1179,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_with_http_info(
         self,
-        owner_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1197,8 +1197,8 @@ class NodesApi:
         """Get Nodes
 
 
-        :param owner_id:
-        :type owner_id: str
+        :param org_id:
+        :type org_id: str
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1224,7 +1224,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            owner_id=owner_id,
+            org_id=org_id,
             name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1250,7 +1250,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_without_preload_content(
         self,
-        owner_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictStr] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1268,8 +1268,8 @@ class NodesApi:
         """Get Nodes
 
 
-        :param owner_id:
-        :type owner_id: str
+        :param org_id:
+        :type org_id: str
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1295,7 +1295,7 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
-            owner_id=owner_id,
+            org_id=org_id,
             name=name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1316,7 +1316,7 @@ class NodesApi:
 
     def _get_nodes_nodes_get_serialize(
         self,
-        owner_id,
+        org_id,
         name,
         _request_auth,
         _content_type,
@@ -1338,9 +1338,9 @@ class NodesApi:
 
         # process the path parameters
         # process the query parameters
-        if owner_id is not None:
+        if org_id is not None:
             
-            _query_params.append(('owner_id', owner_id))
+            _query_params.append(('org_id', org_id))
             
         if name is not None:
             
