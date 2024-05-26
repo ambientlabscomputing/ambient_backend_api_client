@@ -16,7 +16,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import StrictInt
 from typing import Any, Dict
 from ambient_backend_api_client.models.post_service_response import PostServiceResponse
 from ambient_backend_api_client.models.service import Service
@@ -318,7 +318,7 @@ class ServicesApi:
     @validate_call
     async def get_service_services_service_id_get(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -337,7 +337,7 @@ class ServicesApi:
         Get a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -386,7 +386,7 @@ class ServicesApi:
     @validate_call
     async def get_service_services_service_id_get_with_http_info(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -405,7 +405,7 @@ class ServicesApi:
         Get a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -454,7 +454,7 @@ class ServicesApi:
     @validate_call
     async def get_service_services_service_id_get_without_preload_content(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -473,7 +473,7 @@ class ServicesApi:
         Get a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -822,7 +822,7 @@ class ServicesApi:
     @validate_call
     async def patch_service_services_service_id_patch(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -842,7 +842,7 @@ class ServicesApi:
         Patch a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -894,7 +894,7 @@ class ServicesApi:
     @validate_call
     async def patch_service_services_service_id_patch_with_http_info(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -914,7 +914,7 @@ class ServicesApi:
         Patch a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -966,7 +966,7 @@ class ServicesApi:
     @validate_call
     async def patch_service_services_service_id_patch_without_preload_content(
         self,
-        service_id: StrictStr,
+        service_id: StrictInt,
         body: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -986,7 +986,7 @@ class ServicesApi:
         Patch a service
 
         :param service_id: (required)
-        :type service_id: str
+        :type service_id: int
         :param body: (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
