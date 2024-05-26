@@ -1108,7 +1108,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get(
         self,
-        org_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1127,7 +1127,7 @@ class NodesApi:
 
 
         :param org_id:
-        :type org_id: str
+        :type org_id: int
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1179,7 +1179,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_with_http_info(
         self,
-        org_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1198,7 +1198,7 @@ class NodesApi:
 
 
         :param org_id:
-        :type org_id: str
+        :type org_id: int
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1250,7 +1250,7 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_without_preload_content(
         self,
-        org_id: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
         name: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1269,7 +1269,7 @@ class NodesApi:
 
 
         :param org_id:
-        :type org_id: str
+        :type org_id: int
         :param name:
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
