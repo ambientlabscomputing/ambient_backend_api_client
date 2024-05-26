@@ -44,7 +44,7 @@ class Cluster(BaseModel):
     manager_node: Optional[StrictStr] = None
     cluster_group: Optional[StrictStr] = 'default'
     tags: Optional[List[StrictStr]] = None
-    identifier: Optional[StrictStr] = '004dbd43-6c78-46b3-beae-a38694ed24cc'
+    identifier: Optional[StrictStr] = '1838f97e-5c02-49b7-a339-810aaf854caa'
     status: ModelsClusterStatusEnum
     __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "architecture", "nodes", "docker_swarm_attrs", "site", "manager_node", "cluster_group", "tags", "identifier", "status"]
 
@@ -143,7 +143,7 @@ class Cluster(BaseModel):
             "manager_node": obj.get("manager_node"),
             "cluster_group": obj.get("cluster_group") if obj.get("cluster_group") is not None else 'default',
             "tags": obj.get("tags"),
-            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '004dbd43-6c78-46b3-beae-a38694ed24cc',
+            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '1838f97e-5c02-49b7-a339-810aaf854caa',
             "status": obj.get("status")
         })
         return _obj
