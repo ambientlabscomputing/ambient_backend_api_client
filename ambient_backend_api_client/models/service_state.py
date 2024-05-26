@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class ServiceState(int, Enum):
+class ServiceState(str, Enum):
     """
     ServiceState
     """
@@ -26,10 +26,10 @@ class ServiceState(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_10 = 10
-    NUMBER_20 = 20
-    NUMBER_30 = 30
-    NUMBER_MINUS_10 = -10
+    REQUESTED = 'requested'
+    DEPLOYMENT_IN_PROGRESS = 'deployment_in_progress'
+    DEPLOYED = 'deployed'
+    DEPLOYMENT_FAILED = 'deployment_failed'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

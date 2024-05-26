@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.ambient_action_enum import AmbientActionEnum
 from ambient_backend_api_client.models.ambient_event_type_enum import AmbientEventTypeEnum
@@ -34,7 +34,7 @@ class EventTemplate(BaseModel):
     event_label: EventLabel
     event_type: AmbientEventTypeEnum
     resource_type: ResourceTypeEnum
-    resource_id: Optional[StrictStr] = None
+    resource_id: Optional[StrictInt] = None
     action: Optional[AmbientActionEnum] = None
     __properties: ClassVar[List[str]] = ["root", "event_label", "event_type", "resource_type", "resource_id", "action"]
 

@@ -34,11 +34,11 @@ class Event(BaseModel):
     event_label: EventLabel
     event_type: AmbientEventTypeEnum
     resource_type: ResourceTypeEnum
-    resource_id: StrictStr
+    resource_id: StrictInt
     action: Optional[AmbientActionEnum] = None
     timestamp: Union[StrictFloat, StrictInt]
     event_data: Dict[str, Any]
-    request_id: Optional[StrictStr] = None
+    request_id: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["root", "event_label", "event_type", "resource_type", "resource_id", "action", "timestamp", "event_data", "request_id"]
 
     model_config = ConfigDict(
