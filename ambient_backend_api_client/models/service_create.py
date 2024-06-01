@@ -40,7 +40,9 @@ class ServiceCreate(BaseModel):
     ports: Optional[List[StrictStr]] = None
     state: Optional[ServiceState] = None
     status: Optional[ServiceStatusEnum] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "image", "tags", "ports", "state", "status"]
+    replicas: Optional[StrictInt] = None
+    node_ids: List[StrictInt]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "image", "tags", "ports", "state", "status", "replicas", "node_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +113,11 @@ class ServiceCreate(BaseModel):
         if self.status is None and "status" in self.model_fields_set:
             _dict['status'] = None
 
+        # set to None if replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.replicas is None and "replicas" in self.model_fields_set:
+            _dict['replicas'] = None
+
         return _dict
 
     @classmethod
@@ -133,7 +140,9 @@ class ServiceCreate(BaseModel):
             "tags": obj.get("tags"),
             "ports": obj.get("ports"),
             "state": obj.get("state"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "replicas": obj.get("replicas"),
+            "node_ids": obj.get("node_ids")
         })
         return _obj
 
