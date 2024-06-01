@@ -28,7 +28,7 @@ class NotificationList(BaseModel):
     NotificationList
     """ # noqa: E501
     count: StrictInt
-    timestamp: Optional[StrictStr] = '2024-05-26T11:21:19.435014'
+    timestamp: Optional[StrictStr] = '2024-06-01T18:32:36.867168'
     results: List[Notification]
     __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
 
@@ -91,7 +91,7 @@ class NotificationList(BaseModel):
 
         _obj = cls.model_validate({
             "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-05-26T11:21:19.435014',
+            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-06-01T18:32:36.867168',
             "results": [Notification.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj

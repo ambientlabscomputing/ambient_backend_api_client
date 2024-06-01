@@ -28,8 +28,8 @@ class PostClustersResponse(BaseModel):
     PostClustersResponse
     """ # noqa: E501
     request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2024-05-26T11:21:19.435576'
-    location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
+    requested_ts: Optional[StrictStr] = '2024-06-01T18:32:36.872132'
+    location_root: Optional[StrictStr] = 'http://api.ambient-emp.svc.cluster.local:8001/requests/'
     refresh_interval: Optional[StrictInt] = 10
     cluster: Cluster
     __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "cluster"]
@@ -89,8 +89,8 @@ class PostClustersResponse(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-05-26T11:21:19.435576',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-06-01T18:32:36.872132',
+            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://api.ambient-emp.svc.cluster.local:8001/requests/',
             "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
             "cluster": Cluster.from_dict(obj["cluster"]) if obj.get("cluster") is not None else None
         })
