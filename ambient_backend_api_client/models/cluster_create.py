@@ -43,7 +43,7 @@ class ClusterCreate(BaseModel):
     manager_node: Optional[StrictStr] = None
     cluster_group: Optional[StrictStr] = 'default'
     tags: Optional[List[StrictStr]] = None
-    identifier: Optional[StrictStr] = '497c7b9e-94da-419c-bda5-b13e5174a319'
+    identifier: Optional[StrictStr] = 'dfd6e370-e72f-40c0-98df-974ef1ee395a'
     __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "architecture", "nodes", "docker_swarm_attrs", "site", "manager_node", "cluster_group", "tags", "identifier"]
 
     model_config = ConfigDict(
@@ -141,7 +141,7 @@ class ClusterCreate(BaseModel):
             "manager_node": obj.get("manager_node"),
             "cluster_group": obj.get("cluster_group") if obj.get("cluster_group") is not None else 'default',
             "tags": obj.get("tags"),
-            "identifier": obj.get("identifier") if obj.get("identifier") is not None else '497c7b9e-94da-419c-bda5-b13e5174a319'
+            "identifier": obj.get("identifier") if obj.get("identifier") is not None else 'dfd6e370-e72f-40c0-98df-974ef1ee395a'
         })
         return _obj
 
