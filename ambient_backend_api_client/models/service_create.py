@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.service_state import ServiceState
@@ -35,14 +35,19 @@ class ServiceCreate(BaseModel):
     description: Optional[StrictStr] = None
     org_id: Optional[StrictInt] = None
     user_id: Optional[StrictInt] = None
-    image: StrictStr
-    tags: Optional[List[StrictStr]] = None
-    ports: Optional[List[StrictStr]] = None
     state: Optional[ServiceState] = None
     status: Optional[ServiceStatusEnum] = None
+    image: StrictStr = Field(description="Docker image to deploy")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags to apply to the service")
+    ports: Optional[List[StrictStr]] = Field(default=None, description="List of ports to expose")
     replicas: Optional[StrictInt] = None
+    labels: Optional[List[StrictStr]] = None
+    env_vars: Optional[List[StrictStr]] = None
+    hostname: Optional[StrictStr] = None
+    mounts: Optional[List[StrictStr]] = None
+    networks: Optional[List[StrictStr]] = None
     node_ids: List[StrictInt]
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "image", "tags", "ports", "state", "status", "replicas", "node_ids"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "image", "tags", "ports", "replicas", "labels", "env_vars", "hostname", "mounts", "networks", "node_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,11 +108,6 @@ class ServiceCreate(BaseModel):
         if self.user_id is None and "user_id" in self.model_fields_set:
             _dict['user_id'] = None
 
-        # set to None if ports (nullable) is None
-        # and model_fields_set contains the field
-        if self.ports is None and "ports" in self.model_fields_set:
-            _dict['ports'] = None
-
         # set to None if status (nullable) is None
         # and model_fields_set contains the field
         if self.status is None and "status" in self.model_fields_set:
@@ -117,6 +117,31 @@ class ServiceCreate(BaseModel):
         # and model_fields_set contains the field
         if self.replicas is None and "replicas" in self.model_fields_set:
             _dict['replicas'] = None
+
+        # set to None if labels (nullable) is None
+        # and model_fields_set contains the field
+        if self.labels is None and "labels" in self.model_fields_set:
+            _dict['labels'] = None
+
+        # set to None if env_vars (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_vars is None and "env_vars" in self.model_fields_set:
+            _dict['env_vars'] = None
+
+        # set to None if hostname (nullable) is None
+        # and model_fields_set contains the field
+        if self.hostname is None and "hostname" in self.model_fields_set:
+            _dict['hostname'] = None
+
+        # set to None if mounts (nullable) is None
+        # and model_fields_set contains the field
+        if self.mounts is None and "mounts" in self.model_fields_set:
+            _dict['mounts'] = None
+
+        # set to None if networks (nullable) is None
+        # and model_fields_set contains the field
+        if self.networks is None and "networks" in self.model_fields_set:
+            _dict['networks'] = None
 
         return _dict
 
@@ -136,12 +161,17 @@ class ServiceCreate(BaseModel):
             "description": obj.get("description"),
             "org_id": obj.get("org_id"),
             "user_id": obj.get("user_id"),
+            "state": obj.get("state"),
+            "status": obj.get("status"),
             "image": obj.get("image"),
             "tags": obj.get("tags"),
             "ports": obj.get("ports"),
-            "state": obj.get("state"),
-            "status": obj.get("status"),
             "replicas": obj.get("replicas"),
+            "labels": obj.get("labels"),
+            "env_vars": obj.get("env_vars"),
+            "hostname": obj.get("hostname"),
+            "mounts": obj.get("mounts"),
+            "networks": obj.get("networks"),
             "node_ids": obj.get("node_ids")
         })
         return _obj
