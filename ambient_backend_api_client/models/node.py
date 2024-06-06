@@ -17,7 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.auth0_device_code_response import Auth0DeviceCodeResponse
 from ambient_backend_api_client.models.models_node_status_enum import ModelsNodeStatusEnum
@@ -39,14 +40,13 @@ class Node(BaseModel):
     org_id: StrictInt
     user_id: StrictInt
     role: NodeRoleEnum
-    architecture: NodeArchitectureEnum
+    architecture: NodeArchitectureEnum = Field(description="Node architecture")
     interfaces: Optional[List[NetworkInterface]] = None
-    last_seen: Optional[StrictStr] = None
+    last_seen: Optional[datetime] = None
+    error: Optional[StrictStr] = None
     status: ModelsNodeStatusEnum
-    identifier: Optional[StrictStr] = None
-    cluster: Optional[StrictStr] = None
     authorization: Optional[Auth0DeviceCodeResponse] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "architecture", "interfaces", "last_seen", "status", "identifier", "cluster", "authorization"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "architecture", "interfaces", "last_seen", "error", "status", "authorization"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,15 +117,10 @@ class Node(BaseModel):
         if self.last_seen is None and "last_seen" in self.model_fields_set:
             _dict['last_seen'] = None
 
-        # set to None if identifier (nullable) is None
+        # set to None if error (nullable) is None
         # and model_fields_set contains the field
-        if self.identifier is None and "identifier" in self.model_fields_set:
-            _dict['identifier'] = None
-
-        # set to None if cluster (nullable) is None
-        # and model_fields_set contains the field
-        if self.cluster is None and "cluster" in self.model_fields_set:
-            _dict['cluster'] = None
+        if self.error is None and "error" in self.model_fields_set:
+            _dict['error'] = None
 
         # set to None if authorization (nullable) is None
         # and model_fields_set contains the field
@@ -154,9 +149,8 @@ class Node(BaseModel):
             "architecture": obj.get("architecture"),
             "interfaces": [NetworkInterface.from_dict(_item) for _item in obj["interfaces"]] if obj.get("interfaces") is not None else None,
             "last_seen": obj.get("last_seen"),
+            "error": obj.get("error"),
             "status": obj.get("status"),
-            "identifier": obj.get("identifier"),
-            "cluster": obj.get("cluster"),
             "authorization": Auth0DeviceCodeResponse.from_dict(obj["authorization"]) if obj.get("authorization") is not None else None
         })
         return _obj
