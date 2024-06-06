@@ -17,8 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.data import Data
 from ambient_backend_api_client.models.request_status_enum import RequestStatusEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from typing import Optional, Set
@@ -36,12 +38,12 @@ class Request(BaseModel):
     user_id: Optional[StrictInt] = None
     status: Optional[RequestStatusEnum] = None
     error: Optional[StrictStr] = None
-    requested_ts: Optional[Union[StrictFloat, StrictInt]] = 1.717369191074626E9
-    started_ts: Optional[Union[StrictFloat, StrictInt]] = None
-    failed_ts: Optional[Union[StrictFloat, StrictInt]] = None
-    completed_ts: Optional[Union[StrictFloat, StrictInt]] = None
+    requested_ts: Optional[datetime] = None
+    started_ts: Optional[StrictStr] = None
+    failed_ts: Optional[StrictStr] = None
+    completed_ts: Optional[StrictStr] = None
     notes: Optional[List[StrictStr]] = None
-    data: Optional[Dict[str, Any]] = None
+    data: Optional[Data] = None
     __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data"]
 
     model_config = ConfigDict(
@@ -83,6 +85,9 @@ class Request(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -138,12 +143,12 @@ class Request(BaseModel):
             "user_id": obj.get("user_id"),
             "status": obj.get("status"),
             "error": obj.get("error"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else 1.717369191074626E9,
+            "requested_ts": obj.get("requested_ts"),
             "started_ts": obj.get("started_ts"),
             "failed_ts": obj.get("failed_ts"),
             "completed_ts": obj.get("completed_ts"),
             "notes": obj.get("notes"),
-            "data": obj.get("data")
+            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None
         })
         return _obj
 

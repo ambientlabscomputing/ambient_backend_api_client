@@ -37,6 +37,7 @@ class Service(BaseModel):
     user_id: Optional[StrictInt] = None
     state: Optional[ServiceState] = None
     status: ServiceStatusEnum
+    error: Optional[StrictStr] = None
     image: StrictStr = Field(description="Docker image to deploy")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags to apply to the service")
     ports: Optional[List[StrictStr]] = Field(default=None, description="List of ports to expose")
@@ -46,7 +47,7 @@ class Service(BaseModel):
     hostname: Optional[StrictStr] = None
     mounts: Optional[List[StrictStr]] = None
     networks: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "image", "tags", "ports", "replicas", "labels", "env_vars", "hostname", "mounts", "networks"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "error", "image", "tags", "ports", "replicas", "labels", "env_vars", "hostname", "mounts", "networks"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +108,11 @@ class Service(BaseModel):
         if self.user_id is None and "user_id" in self.model_fields_set:
             _dict['user_id'] = None
 
+        # set to None if error (nullable) is None
+        # and model_fields_set contains the field
+        if self.error is None and "error" in self.model_fields_set:
+            _dict['error'] = None
+
         # set to None if replicas (nullable) is None
         # and model_fields_set contains the field
         if self.replicas is None and "replicas" in self.model_fields_set:
@@ -157,6 +163,7 @@ class Service(BaseModel):
             "user_id": obj.get("user_id"),
             "state": obj.get("state"),
             "status": obj.get("status"),
+            "error": obj.get("error"),
             "image": obj.get("image"),
             "tags": obj.get("tags"),
             "ports": obj.get("ports"),

@@ -37,6 +37,7 @@ class ServiceCreate(BaseModel):
     user_id: Optional[StrictInt] = None
     state: Optional[ServiceState] = None
     status: Optional[ServiceStatusEnum] = None
+    error: Optional[StrictStr] = None
     image: StrictStr = Field(description="Docker image to deploy")
     tags: Optional[List[StrictStr]] = Field(default=None, description="List of tags to apply to the service")
     ports: Optional[List[StrictStr]] = Field(default=None, description="List of ports to expose")
@@ -47,7 +48,7 @@ class ServiceCreate(BaseModel):
     mounts: Optional[List[StrictStr]] = None
     networks: Optional[List[StrictStr]] = None
     node_ids: List[StrictInt]
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "image", "tags", "ports", "replicas", "labels", "env_vars", "hostname", "mounts", "networks", "node_ids"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "error", "image", "tags", "ports", "replicas", "labels", "env_vars", "hostname", "mounts", "networks", "node_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +114,11 @@ class ServiceCreate(BaseModel):
         if self.status is None and "status" in self.model_fields_set:
             _dict['status'] = None
 
+        # set to None if error (nullable) is None
+        # and model_fields_set contains the field
+        if self.error is None and "error" in self.model_fields_set:
+            _dict['error'] = None
+
         # set to None if replicas (nullable) is None
         # and model_fields_set contains the field
         if self.replicas is None and "replicas" in self.model_fields_set:
@@ -163,6 +169,7 @@ class ServiceCreate(BaseModel):
             "user_id": obj.get("user_id"),
             "state": obj.get("state"),
             "status": obj.get("status"),
+            "error": obj.get("error"),
             "image": obj.get("image"),
             "tags": obj.get("tags"),
             "ports": obj.get("ports"),
