@@ -20,19 +20,24 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.event import Event
+from ambient_backend_api_client.models.request import Request
+from ambient_backend_api_client.models.service import Service
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RefreshTokenResponse(BaseModel):
+class DeployServiceResponse(BaseModel):
     """
-    RefreshTokenResponse
+    DeployServiceResponse
     """ # noqa: E501
-    access_token: StrictStr
-    expires_in: StrictInt
-    scope: StrictStr
-    id_token: Optional[StrictStr] = None
-    token_type: StrictStr
-    __properties: ClassVar[List[str]] = ["access_token", "expires_in", "scope", "id_token", "token_type"]
+    request_id: StrictInt
+    requested_ts: Optional[StrictStr] = '2024-07-03T02:24:33.518411'
+    location_root: Optional[StrictStr] = 'http://api.ambient-emp.svc.cluster.local:8001/requests/'
+    refresh_interval: Optional[StrictInt] = 10
+    service: Service
+    request: Request
+    event: Event
+    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "service", "request", "event"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +57,7 @@ class RefreshTokenResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a JSON string"""
+        """Create an instance of DeployServiceResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,16 +78,20 @@ class RefreshTokenResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if id_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.id_token is None and "id_token" in self.model_fields_set:
-            _dict['id_token'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of service
+        if self.service:
+            _dict['service'] = self.service.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of request
+        if self.request:
+            _dict['request'] = self.request.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of event
+        if self.event:
+            _dict['event'] = self.event.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a dict"""
+        """Create an instance of DeployServiceResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +99,13 @@ class RefreshTokenResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "expires_in": obj.get("expires_in"),
-            "scope": obj.get("scope"),
-            "id_token": obj.get("id_token"),
-            "token_type": obj.get("token_type")
+            "request_id": obj.get("request_id"),
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-07-03T02:24:33.518411',
+            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://api.ambient-emp.svc.cluster.local:8001/requests/',
+            "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
+            "service": Service.from_dict(obj["service"]) if obj.get("service") is not None else None,
+            "request": Request.from_dict(obj["request"]) if obj.get("request") is not None else None,
+            "event": Event.from_dict(obj["event"]) if obj.get("event") is not None else None
         })
         return _obj
 

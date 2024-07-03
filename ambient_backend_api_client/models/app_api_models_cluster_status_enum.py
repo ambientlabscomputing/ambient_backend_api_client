@@ -19,22 +19,26 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class ServiceState(str, Enum):
+class AppApiModelsClusterStatusEnum(str, Enum):
     """
-    ServiceState
+    AppApiModelsClusterStatusEnum
     """
 
     """
     allowed enum values
     """
-    REQUESTED = 'requested'
-    DEPLOYMENT_IN_PROGRESS = 'deployment_in_progress'
-    DEPLOYED = 'deployed'
-    DEPLOYMENT_FAILED = 'deployment_failed'
+    ACTIVE = 'active'
+    INACTIVE = 'inactive'
+    DELETED = 'deleted'
+    CREATED = 'created'
+    HEALTHY = 'healthy'
+    ERROR = 'error'
+    PENDING = 'pending'
+    INITIALIZING = 'initializing'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ServiceState from a JSON string"""
+        """Create an instance of AppApiModelsClusterStatusEnum from a JSON string"""
         return cls(json.loads(json_str))
 
 
