@@ -18,21 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.container_registry import ContainerRegistry
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RefreshTokenResponse(BaseModel):
+class ListResponseContainerRegistry(BaseModel):
     """
-    RefreshTokenResponse
+    ListResponseContainerRegistry
     """ # noqa: E501
-    access_token: StrictStr
-    expires_in: StrictInt
-    scope: StrictStr
-    id_token: Optional[StrictStr] = None
-    token_type: StrictStr
-    __properties: ClassVar[List[str]] = ["access_token", "expires_in", "scope", "id_token", "token_type"]
+    timestamp: Optional[Any] = None
+    results: List[ContainerRegistry]
+    count: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["timestamp", "results", "count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +51,7 @@ class RefreshTokenResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a JSON string"""
+        """Create an instance of ListResponseContainerRegistry from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,16 +72,28 @@ class RefreshTokenResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if id_token (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['results'] = _items
+        # set to None if timestamp (nullable) is None
         # and model_fields_set contains the field
-        if self.id_token is None and "id_token" in self.model_fields_set:
-            _dict['id_token'] = None
+        if self.timestamp is None and "timestamp" in self.model_fields_set:
+            _dict['timestamp'] = None
+
+        # set to None if count (nullable) is None
+        # and model_fields_set contains the field
+        if self.count is None and "count" in self.model_fields_set:
+            _dict['count'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a dict"""
+        """Create an instance of ListResponseContainerRegistry from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +101,9 @@ class RefreshTokenResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "expires_in": obj.get("expires_in"),
-            "scope": obj.get("scope"),
-            "id_token": obj.get("id_token"),
-            "token_type": obj.get("token_type")
+            "timestamp": obj.get("timestamp"),
+            "results": [ContainerRegistry.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "count": obj.get("count")
         })
         return _obj
 
