@@ -18,21 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RefreshTokenResponse(BaseModel):
+class ContainerRegistryAuthCreate(BaseModel):
     """
-    RefreshTokenResponse
+    ContainerRegistryAuthCreate
     """ # noqa: E501
-    access_token: StrictStr
-    expires_in: StrictInt
-    scope: StrictStr
-    id_token: Optional[StrictStr] = None
-    token_type: StrictStr
-    __properties: ClassVar[List[str]] = ["access_token", "expires_in", "scope", "id_token", "token_type"]
+    username: StrictStr
+    password: StrictStr
+    __properties: ClassVar[List[str]] = ["username", "password"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +49,7 @@ class RefreshTokenResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a JSON string"""
+        """Create an instance of ContainerRegistryAuthCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,16 +70,11 @@ class RefreshTokenResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if id_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.id_token is None and "id_token" in self.model_fields_set:
-            _dict['id_token'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RefreshTokenResponse from a dict"""
+        """Create an instance of ContainerRegistryAuthCreate from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +82,8 @@ class RefreshTokenResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "expires_in": obj.get("expires_in"),
-            "scope": obj.get("scope"),
-            "id_token": obj.get("id_token"),
-            "token_type": obj.get("token_type")
+            "username": obj.get("username"),
+            "password": obj.get("password")
         })
         return _obj
 

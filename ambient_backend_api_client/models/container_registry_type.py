@@ -19,24 +19,24 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class AmbientEventTypeEnum(str, Enum):
+class ContainerRegistryType(str, Enum):
     """
-    AmbientEventTypeEnum
+    ContainerRegistryType
     """
 
     """
     allowed enum values
     """
-    NOTIFICATION = 'notification'
-    ALERT = 'alert'
-    INFO = 'info'
-    LOG = 'log'
-    REQUEST = 'request'
-    RESPONSE = 'response'
+    AMBIENT_REGISTRY = 'ambient_registry'
+    DOCKER_HUB = 'docker_hub'
+    AWS_ECR = 'aws_ecr'
+    GCP_GCR = 'gcp_gcr'
+    AZURE_ACR = 'azure_acr'
+    OTHER = 'other'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of AmbientEventTypeEnum from a JSON string"""
+        """Create an instance of ContainerRegistryType from a JSON string"""
         return cls(json.loads(json_str))
 
 

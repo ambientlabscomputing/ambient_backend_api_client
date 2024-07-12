@@ -20,25 +20,25 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.container_registry_auth import ContainerRegistryAuth
 from ambient_backend_api_client.models.event import Event
 from ambient_backend_api_client.models.request import Request
-from ambient_backend_api_client.models.service import Service
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeployServiceResponse(BaseModel):
+class PostRegistriesCredsTriggerResponse(BaseModel):
     """
-    DeployServiceResponse
+    PostRegistriesCredsTriggerResponse
     """ # noqa: E501
     request_id: StrictInt
     requested_ts: Optional[StrictStr] = '2024-07-12T10:50:56.843156'
     location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
     refresh_interval: Optional[StrictInt] = 10
     location: Optional[StrictStr] = None
-    service: Service
+    creds: ContainerRegistryAuth
     request: Request
     event: Event
-    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "service", "request", "event"]
+    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "creds", "request", "event"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +58,7 @@ class DeployServiceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a JSON string"""
+        """Create an instance of PostRegistriesCredsTriggerResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -79,9 +79,9 @@ class DeployServiceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of service
-        if self.service:
-            _dict['service'] = self.service.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of creds
+        if self.creds:
+            _dict['creds'] = self.creds.to_dict()
         # override the default output from pydantic by calling `to_dict()` of request
         if self.request:
             _dict['request'] = self.request.to_dict()
@@ -97,7 +97,7 @@ class DeployServiceResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a dict"""
+        """Create an instance of PostRegistriesCredsTriggerResponse from a dict"""
         if obj is None:
             return None
 
@@ -110,7 +110,7 @@ class DeployServiceResponse(BaseModel):
             "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
             "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
             "location": obj.get("location"),
-            "service": Service.from_dict(obj["service"]) if obj.get("service") is not None else None,
+            "creds": ContainerRegistryAuth.from_dict(obj["creds"]) if obj.get("creds") is not None else None,
             "request": Request.from_dict(obj["request"]) if obj.get("request") is not None else None,
             "event": Event.from_dict(obj["event"]) if obj.get("event") is not None else None
         })
