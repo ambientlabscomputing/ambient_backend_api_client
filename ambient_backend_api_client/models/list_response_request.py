@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.request import Request
@@ -28,7 +29,7 @@ class ListResponseRequest(BaseModel):
     """
     ListResponseRequest
     """ # noqa: E501
-    timestamp: Optional[Any] = None
+    timestamp: Optional[datetime] = None
     results: List[Request]
     count: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["timestamp", "results", "count"]
@@ -79,11 +80,6 @@ class ListResponseRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['results'] = _items
-        # set to None if timestamp (nullable) is None
-        # and model_fields_set contains the field
-        if self.timestamp is None and "timestamp" in self.model_fields_set:
-            _dict['timestamp'] = None
-
         # set to None if count (nullable) is None
         # and model_fields_set contains the field
         if self.count is None and "count" in self.model_fields_set:

@@ -21,18 +21,18 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.request import Request
+from ambient_backend_api_client.models.node_with_registries import NodeWithRegistries
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RequestList(BaseModel):
+class ListResponseNodeWithRegistries(BaseModel):
     """
-    RequestList
+    ListResponseNodeWithRegistries
     """ # noqa: E501
-    count: StrictInt
     timestamp: Optional[datetime] = None
-    results: List[Request]
-    __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
+    results: List[NodeWithRegistries]
+    count: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["timestamp", "results", "count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +52,7 @@ class RequestList(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RequestList from a JSON string"""
+        """Create an instance of ListResponseNodeWithRegistries from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,11 +80,16 @@ class RequestList(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['results'] = _items
+        # set to None if count (nullable) is None
+        # and model_fields_set contains the field
+        if self.count is None and "count" in self.model_fields_set:
+            _dict['count'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RequestList from a dict"""
+        """Create an instance of ListResponseNodeWithRegistries from a dict"""
         if obj is None:
             return None
 
@@ -92,9 +97,9 @@ class RequestList(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
             "timestamp": obj.get("timestamp"),
-            "results": [Request.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "results": [NodeWithRegistries.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "count": obj.get("count")
         })
         return _obj
 
