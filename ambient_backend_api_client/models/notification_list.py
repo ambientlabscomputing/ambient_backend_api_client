@@ -18,7 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.notification import Notification
 from typing import Optional, Set
@@ -29,7 +30,7 @@ class NotificationList(BaseModel):
     NotificationList
     """ # noqa: E501
     count: StrictInt
-    timestamp: Optional[StrictStr] = '2024-07-12T10:50:56.842401'
+    timestamp: Optional[datetime] = None
     results: List[Notification]
     __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
 
@@ -92,7 +93,7 @@ class NotificationList(BaseModel):
 
         _obj = cls.model_validate({
             "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-07-12T10:50:56.842401',
+            "timestamp": obj.get("timestamp"),
             "results": [Notification.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj

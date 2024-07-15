@@ -40,12 +40,13 @@ class Request(BaseModel):
     status: Optional[RequestStatusEnum] = None
     error: Optional[StrictStr] = None
     requested_ts: Optional[datetime] = None
-    started_ts: Optional[StrictStr] = None
-    failed_ts: Optional[StrictStr] = None
-    completed_ts: Optional[StrictStr] = None
+    started_ts: Optional[datetime] = None
+    failed_ts: Optional[datetime] = None
+    completed_ts: Optional[datetime] = None
     notes: Optional[List[StrictStr]] = None
     data: Optional[Data] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data"]
+    registry_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data", "registry_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,6 +125,11 @@ class Request(BaseModel):
         if self.completed_ts is None and "completed_ts" in self.model_fields_set:
             _dict['completed_ts'] = None
 
+        # set to None if registry_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.registry_id is None and "registry_id" in self.model_fields_set:
+            _dict['registry_id'] = None
+
         return _dict
 
     @classmethod
@@ -149,7 +155,8 @@ class Request(BaseModel):
             "failed_ts": obj.get("failed_ts"),
             "completed_ts": obj.get("completed_ts"),
             "notes": obj.get("notes"),
-            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "registry_id": obj.get("registry_id")
         })
         return _obj
 

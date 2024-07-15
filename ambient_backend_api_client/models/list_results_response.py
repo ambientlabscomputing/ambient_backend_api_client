@@ -18,7 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class ListResultsResponse(BaseModel):
     ListResultsResponse
     """ # noqa: E501
     count: StrictInt
-    timestamp: Optional[StrictStr] = '2024-07-12T10:50:56.842401'
+    timestamp: Optional[datetime] = None
     results: List[Any]
     __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
 
@@ -84,7 +85,7 @@ class ListResultsResponse(BaseModel):
 
         _obj = cls.model_validate({
             "count": obj.get("count"),
-            "timestamp": obj.get("timestamp") if obj.get("timestamp") is not None else '2024-07-12T10:50:56.842401',
+            "timestamp": obj.get("timestamp"),
             "results": obj.get("results")
         })
         return _obj
