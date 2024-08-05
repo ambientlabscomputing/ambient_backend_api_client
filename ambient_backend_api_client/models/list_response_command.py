@@ -18,23 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.cluster import Cluster
+from ambient_backend_api_client.models.command import Command
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PostClustersResponse(BaseModel):
+class ListResponseCommand(BaseModel):
     """
-    PostClustersResponse
+    ListResponseCommand
     """ # noqa: E501
-    request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2024-08-04T18:21:36.154590'
-    location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
-    refresh_interval: Optional[StrictInt] = 10
-    location: Optional[StrictStr] = None
-    cluster: Cluster
-    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "cluster"]
+    timestamp: Optional[datetime] = None
+    results: List[Command]
+    count: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["timestamp", "results", "count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +52,7 @@ class PostClustersResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PostClustersResponse from a JSON string"""
+        """Create an instance of ListResponseCommand from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,19 +73,23 @@ class PostClustersResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of cluster
-        if self.cluster:
-            _dict['cluster'] = self.cluster.to_dict()
-        # set to None if location (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['results'] = _items
+        # set to None if count (nullable) is None
         # and model_fields_set contains the field
-        if self.location is None and "location" in self.model_fields_set:
-            _dict['location'] = None
+        if self.count is None and "count" in self.model_fields_set:
+            _dict['count'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PostClustersResponse from a dict"""
+        """Create an instance of ListResponseCommand from a dict"""
         if obj is None:
             return None
 
@@ -95,12 +97,9 @@ class PostClustersResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-08-04T18:21:36.154590',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
-            "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
-            "location": obj.get("location"),
-            "cluster": Cluster.from_dict(obj["cluster"]) if obj.get("cluster") is not None else None
+            "timestamp": obj.get("timestamp"),
+            "results": [Command.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "count": obj.get("count")
         })
         return _obj
 
