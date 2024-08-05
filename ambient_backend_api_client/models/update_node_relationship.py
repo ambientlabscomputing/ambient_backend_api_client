@@ -20,21 +20,20 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.cluster import Cluster
+from ambient_backend_api_client.models.command_status_enum import CommandStatusEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PostClustersResponse(BaseModel):
+class UpdateNodeRelationship(BaseModel):
     """
-    PostClustersResponse
+    UpdateNodeRelationship
     """ # noqa: E501
-    request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2024-08-04T18:21:36.154590'
-    location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
-    refresh_interval: Optional[StrictInt] = 10
-    location: Optional[StrictStr] = None
-    cluster: Cluster
-    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "cluster"]
+    command_id: StrictInt
+    node_id: StrictInt
+    status: Optional[CommandStatusEnum] = None
+    error: Optional[StrictStr] = None
+    output: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["command_id", "node_id", "status", "error", "output"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +53,7 @@ class PostClustersResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PostClustersResponse from a JSON string"""
+        """Create an instance of UpdateNodeRelationship from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,19 +74,26 @@ class PostClustersResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of cluster
-        if self.cluster:
-            _dict['cluster'] = self.cluster.to_dict()
-        # set to None if location (nullable) is None
+        # set to None if status (nullable) is None
         # and model_fields_set contains the field
-        if self.location is None and "location" in self.model_fields_set:
-            _dict['location'] = None
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
+        # set to None if error (nullable) is None
+        # and model_fields_set contains the field
+        if self.error is None and "error" in self.model_fields_set:
+            _dict['error'] = None
+
+        # set to None if output (nullable) is None
+        # and model_fields_set contains the field
+        if self.output is None and "output" in self.model_fields_set:
+            _dict['output'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PostClustersResponse from a dict"""
+        """Create an instance of UpdateNodeRelationship from a dict"""
         if obj is None:
             return None
 
@@ -95,12 +101,11 @@ class PostClustersResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-08-04T18:21:36.154590',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
-            "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
-            "location": obj.get("location"),
-            "cluster": Cluster.from_dict(obj["cluster"]) if obj.get("cluster") is not None else None
+            "command_id": obj.get("command_id"),
+            "node_id": obj.get("node_id"),
+            "status": obj.get("status"),
+            "error": obj.get("error"),
+            "output": obj.get("output")
         })
         return _obj
 

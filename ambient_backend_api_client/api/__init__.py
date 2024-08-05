@@ -2,6 +2,7 @@
 
 # import apis into api package
 from ambient_backend_api_client.api.clusters_api import ClustersApi
+from ambient_backend_api_client.api.commands_api import CommandsApi
 from ambient_backend_api_client.api.health_api import HealthApi
 from ambient_backend_api_client.api.nodes_api import NodesApi
 from ambient_backend_api_client.api.notifications_api import NotificationsApi
