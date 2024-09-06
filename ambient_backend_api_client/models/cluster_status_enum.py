@@ -19,21 +19,21 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class NotificationSeverityEnum(str, Enum):
+class ClusterStatusEnum(str, Enum):
     """
-    NotificationSeverityEnum
+    ClusterStatusEnum
     """
 
     """
     allowed enum values
     """
-    INFO = 'info'
-    WARNING = 'warning'
+    CREATED = 'created'
+    ACTIVE = 'active'
     ERROR = 'error'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of NotificationSeverityEnum from a JSON string"""
+        """Create an instance of ClusterStatusEnum from a JSON string"""
         return cls(json.loads(json_str))
 
 
