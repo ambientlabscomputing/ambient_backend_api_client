@@ -18,21 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.notification import Notification
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class NotificationList(BaseModel):
+class NodePagePanelData(BaseModel):
     """
-    NotificationList
+    NodePagePanelData
     """ # noqa: E501
-    count: StrictInt
-    timestamp: Optional[datetime] = None
-    results: List[Notification]
-    __properties: ClassVar[List[str]] = ["count", "timestamp", "results"]
+    all: StrictInt
+    active: StrictInt
+    inactive: StrictInt
+    error: StrictInt
+    live: StrictInt
+    __properties: ClassVar[List[str]] = ["all", "active", "inactive", "error", "live"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +52,7 @@ class NotificationList(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of NotificationList from a JSON string"""
+        """Create an instance of NodePagePanelData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +73,11 @@ class NotificationList(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item in self.results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['results'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of NotificationList from a dict"""
+        """Create an instance of NodePagePanelData from a dict"""
         if obj is None:
             return None
 
@@ -92,9 +85,11 @@ class NotificationList(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "timestamp": obj.get("timestamp"),
-            "results": [Notification.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "all": obj.get("all"),
+            "active": obj.get("active"),
+            "inactive": obj.get("inactive"),
+            "error": obj.get("error"),
+            "live": obj.get("live")
         })
         return _obj
 
