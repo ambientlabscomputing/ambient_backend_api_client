@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.auth0_device_code_response import Auth0DeviceCodeResponse
+from ambient_backend_api_client.models.docker_swarm_info import DockerSwarmInfo
 from ambient_backend_api_client.models.network_interface import NetworkInterface
 from ambient_backend_api_client.models.node_architecture_enum import NodeArchitectureEnum
 from ambient_backend_api_client.models.node_role_enum import NodeRoleEnum
@@ -50,7 +51,8 @@ class Node(BaseModel):
     status: StatusEnum
     authorization: Optional[Auth0DeviceCodeResponse] = None
     cluster_id: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "live", "architecture", "interfaces", "tags", "last_seen", "error", "status", "authorization", "cluster_id"]
+    docker_swarm_info: Optional[DockerSwarmInfo] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "live", "architecture", "interfaces", "tags", "last_seen", "error", "status", "authorization", "cluster_id", "docker_swarm_info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +103,9 @@ class Node(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of authorization
         if self.authorization:
             _dict['authorization'] = self.authorization.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of docker_swarm_info
+        if self.docker_swarm_info:
+            _dict['docker_swarm_info'] = self.docker_swarm_info.to_dict()
         # set to None if id (nullable) is None
         # and model_fields_set contains the field
         if self.id is None and "id" in self.model_fields_set:
@@ -141,6 +146,11 @@ class Node(BaseModel):
         if self.cluster_id is None and "cluster_id" in self.model_fields_set:
             _dict['cluster_id'] = None
 
+        # set to None if docker_swarm_info (nullable) is None
+        # and model_fields_set contains the field
+        if self.docker_swarm_info is None and "docker_swarm_info" in self.model_fields_set:
+            _dict['docker_swarm_info'] = None
+
         return _dict
 
     @classmethod
@@ -168,7 +178,8 @@ class Node(BaseModel):
             "error": obj.get("error"),
             "status": obj.get("status"),
             "authorization": Auth0DeviceCodeResponse.from_dict(obj["authorization"]) if obj.get("authorization") is not None else None,
-            "cluster_id": obj.get("cluster_id")
+            "cluster_id": obj.get("cluster_id"),
+            "docker_swarm_info": DockerSwarmInfo.from_dict(obj["docker_swarm_info"]) if obj.get("docker_swarm_info") is not None else None
         })
         return _obj
 
