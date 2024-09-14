@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.cluster_status_enum import ClusterStatusEnum
+from ambient_backend_api_client.models.docker_cluster_data import DockerClusterData
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,8 @@ class Cluster(BaseModel):
     user_id: Optional[StrictInt] = None
     tags: Optional[List[StrictStr]] = None
     status: ClusterStatusEnum
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "tags", "status"]
+    docker_data: Optional[DockerClusterData] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "tags", "status", "docker_data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,9 @@ class Cluster(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of docker_data
+        if self.docker_data:
+            _dict['docker_data'] = self.docker_data.to_dict()
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -92,6 +97,11 @@ class Cluster(BaseModel):
         # and model_fields_set contains the field
         if self.user_id is None and "user_id" in self.model_fields_set:
             _dict['user_id'] = None
+
+        # set to None if docker_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.docker_data is None and "docker_data" in self.model_fields_set:
+            _dict['docker_data'] = None
 
         return _dict
 
@@ -112,7 +122,8 @@ class Cluster(BaseModel):
             "org_id": obj.get("org_id"),
             "user_id": obj.get("user_id"),
             "tags": obj.get("tags"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "docker_data": DockerClusterData.from_dict(obj["docker_data"]) if obj.get("docker_data") is not None else None
         })
         return _obj
 
