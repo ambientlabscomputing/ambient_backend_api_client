@@ -63,6 +63,7 @@ from ambient_backend_api_client.models.create_service_acct_request import Create
 from ambient_backend_api_client.models.creation_method import CreationMethod
 from ambient_backend_api_client.models.data import Data
 from ambient_backend_api_client.models.deploy_service_response import DeployServiceResponse
+from ambient_backend_api_client.models.docker_cluster_data import DockerClusterData
 from ambient_backend_api_client.models.docker_swarm_info import DockerSwarmInfo
 from ambient_backend_api_client.models.event import Event
 from ambient_backend_api_client.models.event_label import EventLabel
