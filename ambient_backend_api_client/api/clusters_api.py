@@ -20,10 +20,10 @@ from typing_extensions import Annotated
 from pydantic import StrictInt, StrictStr
 from typing import List, Optional
 from ambient_backend_api_client.models.cluster import Cluster
-from ambient_backend_api_client.models.cluster_create import ClusterCreate
 from ambient_backend_api_client.models.create_custer_request import CreateCusterRequest
 from ambient_backend_api_client.models.list_response_cluster import ListResponseCluster
 from ambient_backend_api_client.models.list_response_node import ListResponseNode
+from ambient_backend_api_client.models.update_cluster import UpdateCluster
 
 from ambient_backend_api_client.api_client import ApiClient, RequestSerialized
 from ambient_backend_api_client.api_response import ApiResponse
@@ -2091,7 +2091,7 @@ class ClustersApi:
     async def update_cluster_clusters_cluster_id_put(
         self,
         cluster_id: StrictInt,
-        cluster_create: ClusterCreate,
+        update_cluster: UpdateCluster,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2110,8 +2110,8 @@ class ClustersApi:
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_create: (required)
-        :type cluster_create: ClusterCreate
+        :param update_cluster: (required)
+        :type update_cluster: UpdateCluster
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2136,7 +2136,7 @@ class ClustersApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_create=cluster_create,
+            update_cluster=update_cluster,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2162,7 +2162,7 @@ class ClustersApi:
     async def update_cluster_clusters_cluster_id_put_with_http_info(
         self,
         cluster_id: StrictInt,
-        cluster_create: ClusterCreate,
+        update_cluster: UpdateCluster,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2181,8 +2181,8 @@ class ClustersApi:
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_create: (required)
-        :type cluster_create: ClusterCreate
+        :param update_cluster: (required)
+        :type update_cluster: UpdateCluster
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2207,7 +2207,7 @@ class ClustersApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_create=cluster_create,
+            update_cluster=update_cluster,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2233,7 +2233,7 @@ class ClustersApi:
     async def update_cluster_clusters_cluster_id_put_without_preload_content(
         self,
         cluster_id: StrictInt,
-        cluster_create: ClusterCreate,
+        update_cluster: UpdateCluster,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2252,8 +2252,8 @@ class ClustersApi:
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_create: (required)
-        :type cluster_create: ClusterCreate
+        :param update_cluster: (required)
+        :type update_cluster: UpdateCluster
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2278,7 +2278,7 @@ class ClustersApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_create=cluster_create,
+            update_cluster=update_cluster,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2299,7 +2299,7 @@ class ClustersApi:
     def _update_cluster_clusters_cluster_id_put_serialize(
         self,
         cluster_id,
-        cluster_create,
+        update_cluster,
         _request_auth,
         _content_type,
         _headers,
@@ -2325,8 +2325,8 @@ class ClustersApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if cluster_create is not None:
-            _body_params = cluster_create
+        if update_cluster is not None:
+            _body_params = update_cluster
 
 
         # set the HTTP header `Accept`
