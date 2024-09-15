@@ -108,6 +108,7 @@ from ambient_backend_api_client.models.service_status_enum import ServiceStatusE
 from ambient_backend_api_client.models.status_enum import StatusEnum
 from ambient_backend_api_client.models.subscription_model_enum import SubscriptionModelEnum
 from ambient_backend_api_client.models.token_response import TokenResponse
+from ambient_backend_api_client.models.update_cluster import UpdateCluster
 from ambient_backend_api_client.models.update_node_relationship import UpdateNodeRelationship
 from ambient_backend_api_client.models.user import User
 from ambient_backend_api_client.models.user_preferences import UserPreferences

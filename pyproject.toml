@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ambient_backend_api_client"
-version = "0.8.1"
+version = "0.8.2"
 description = "FastAPI"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"

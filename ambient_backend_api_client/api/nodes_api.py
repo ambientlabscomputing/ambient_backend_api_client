@@ -17,8 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
-from typing import Any, Dict
+from pydantic import StrictBool, StrictInt, StrictStr
+from typing import Any, Dict, List, Optional
 from ambient_backend_api_client.models.list_response_node import ListResponseNode
 from ambient_backend_api_client.models.node import Node
 from ambient_backend_api_client.models.node_create import NodeCreate
@@ -1350,6 +1350,20 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        sort: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        name_starts_with: Optional[StrictStr] = None,
+        role: Optional[StrictStr] = None,
+        status: Optional[StrictStr] = None,
+        architecture: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
+        user_id: Optional[StrictInt] = None,
+        live: Optional[StrictBool] = None,
+        cluster_id: Optional[StrictInt] = None,
+        request_body: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1366,6 +1380,34 @@ class NodesApi:
         """Get Nodes
 
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param sort:
+        :type sort: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param name_starts_with:
+        :type name_starts_with: str
+        :param role:
+        :type role: str
+        :param status:
+        :type status: str
+        :param architecture:
+        :type architecture: str
+        :param org_id:
+        :type org_id: int
+        :param user_id:
+        :type user_id: int
+        :param live:
+        :type live: bool
+        :param cluster_id:
+        :type cluster_id: int
+        :param request_body:
+        :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1389,6 +1431,20 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            order=order,
+            name=name,
+            name_starts_with=name_starts_with,
+            role=role,
+            status=status,
+            architecture=architecture,
+            org_id=org_id,
+            user_id=user_id,
+            live=live,
+            cluster_id=cluster_id,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1397,6 +1453,7 @@ class NodesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListResponseNode",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1412,6 +1469,20 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_with_http_info(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        sort: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        name_starts_with: Optional[StrictStr] = None,
+        role: Optional[StrictStr] = None,
+        status: Optional[StrictStr] = None,
+        architecture: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
+        user_id: Optional[StrictInt] = None,
+        live: Optional[StrictBool] = None,
+        cluster_id: Optional[StrictInt] = None,
+        request_body: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1428,6 +1499,34 @@ class NodesApi:
         """Get Nodes
 
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param sort:
+        :type sort: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param name_starts_with:
+        :type name_starts_with: str
+        :param role:
+        :type role: str
+        :param status:
+        :type status: str
+        :param architecture:
+        :type architecture: str
+        :param org_id:
+        :type org_id: int
+        :param user_id:
+        :type user_id: int
+        :param live:
+        :type live: bool
+        :param cluster_id:
+        :type cluster_id: int
+        :param request_body:
+        :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1451,6 +1550,20 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            order=order,
+            name=name,
+            name_starts_with=name_starts_with,
+            role=role,
+            status=status,
+            architecture=architecture,
+            org_id=org_id,
+            user_id=user_id,
+            live=live,
+            cluster_id=cluster_id,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1459,6 +1572,7 @@ class NodesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListResponseNode",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1474,6 +1588,20 @@ class NodesApi:
     @validate_call
     async def get_nodes_nodes_get_without_preload_content(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        sort: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        name_starts_with: Optional[StrictStr] = None,
+        role: Optional[StrictStr] = None,
+        status: Optional[StrictStr] = None,
+        architecture: Optional[StrictStr] = None,
+        org_id: Optional[StrictInt] = None,
+        user_id: Optional[StrictInt] = None,
+        live: Optional[StrictBool] = None,
+        cluster_id: Optional[StrictInt] = None,
+        request_body: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1490,6 +1618,34 @@ class NodesApi:
         """Get Nodes
 
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param sort:
+        :type sort: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param name_starts_with:
+        :type name_starts_with: str
+        :param role:
+        :type role: str
+        :param status:
+        :type status: str
+        :param architecture:
+        :type architecture: str
+        :param org_id:
+        :type org_id: int
+        :param user_id:
+        :type user_id: int
+        :param live:
+        :type live: bool
+        :param cluster_id:
+        :type cluster_id: int
+        :param request_body:
+        :type request_body: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1513,6 +1669,20 @@ class NodesApi:
         """ # noqa: E501
 
         _param = self._get_nodes_nodes_get_serialize(
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            order=order,
+            name=name,
+            name_starts_with=name_starts_with,
+            role=role,
+            status=status,
+            architecture=architecture,
+            org_id=org_id,
+            user_id=user_id,
+            live=live,
+            cluster_id=cluster_id,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1521,6 +1691,7 @@ class NodesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListResponseNode",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1531,6 +1702,20 @@ class NodesApi:
 
     def _get_nodes_nodes_get_serialize(
         self,
+        limit,
+        offset,
+        sort,
+        order,
+        name,
+        name_starts_with,
+        role,
+        status,
+        architecture,
+        org_id,
+        user_id,
+        live,
+        cluster_id,
+        request_body,
         _request_auth,
         _content_type,
         _headers,
@@ -1540,6 +1725,7 @@ class NodesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'request_body': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1551,9 +1737,63 @@ class NodesApi:
 
         # process the path parameters
         # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if sort is not None:
+            
+            _query_params.append(('sort', sort))
+            
+        if order is not None:
+            
+            _query_params.append(('order', order))
+            
+        if name is not None:
+            
+            _query_params.append(('name', name))
+            
+        if name_starts_with is not None:
+            
+            _query_params.append(('name_starts_with', name_starts_with))
+            
+        if role is not None:
+            
+            _query_params.append(('role', role))
+            
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if architecture is not None:
+            
+            _query_params.append(('architecture', architecture))
+            
+        if org_id is not None:
+            
+            _query_params.append(('org_id', org_id))
+            
+        if user_id is not None:
+            
+            _query_params.append(('user_id', user_id))
+            
+        if live is not None:
+            
+            _query_params.append(('live', live))
+            
+        if cluster_id is not None:
+            
+            _query_params.append(('cluster_id', cluster_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if request_body is not None:
+            _body_params = request_body
 
 
         # set the HTTP header `Accept`
@@ -1563,6 +1803,19 @@ class NodesApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
