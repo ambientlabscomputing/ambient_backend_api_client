@@ -18,19 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DockerClusterData(BaseModel):
+class AppApiModelsTokenTokenResponse(BaseModel):
     """
-    DockerClusterData
+    AppApiModelsTokenTokenResponse
     """ # noqa: E501
-    initiated: Optional[StrictBool] = False
-    cluster_id: Optional[StrictStr] = ''
-    remote_managers: Optional[List[Dict[str, Any]]] = None
-    __properties: ClassVar[List[str]] = ["initiated", "cluster_id", "remote_managers"]
+    access_token: StrictStr
+    refresh_token: StrictStr
+    token_type: StrictStr
+    expires_in: StrictInt
+    __properties: ClassVar[List[str]] = ["access_token", "refresh_token", "token_type", "expires_in"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class DockerClusterData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a JSON string"""
+        """Create an instance of AppApiModelsTokenTokenResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +76,7 @@ class DockerClusterData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a dict"""
+        """Create an instance of AppApiModelsTokenTokenResponse from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +84,10 @@ class DockerClusterData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "initiated": obj.get("initiated") if obj.get("initiated") is not None else False,
-            "cluster_id": obj.get("cluster_id") if obj.get("cluster_id") is not None else '',
-            "remote_managers": obj.get("remote_managers")
+            "access_token": obj.get("access_token"),
+            "refresh_token": obj.get("refresh_token"),
+            "token_type": obj.get("token_type"),
+            "expires_in": obj.get("expires_in")
         })
         return _obj
 

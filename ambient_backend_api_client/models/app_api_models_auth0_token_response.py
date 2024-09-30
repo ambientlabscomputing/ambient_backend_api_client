@@ -18,19 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DockerClusterData(BaseModel):
+class AppApiModelsAuth0TokenResponse(BaseModel):
     """
-    DockerClusterData
+    AppApiModelsAuth0TokenResponse
     """ # noqa: E501
-    initiated: Optional[StrictBool] = False
-    cluster_id: Optional[StrictStr] = ''
-    remote_managers: Optional[List[Dict[str, Any]]] = None
-    __properties: ClassVar[List[str]] = ["initiated", "cluster_id", "remote_managers"]
+    access_token: StrictStr
+    refresh_token: StrictStr
+    id_token: Optional[StrictStr] = None
+    token_type: StrictStr
+    expires_in: StrictInt
+    __properties: ClassVar[List[str]] = ["access_token", "refresh_token", "id_token", "token_type", "expires_in"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +52,7 @@ class DockerClusterData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a JSON string"""
+        """Create an instance of AppApiModelsAuth0TokenResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,11 +73,16 @@ class DockerClusterData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if id_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.id_token is None and "id_token" in self.model_fields_set:
+            _dict['id_token'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a dict"""
+        """Create an instance of AppApiModelsAuth0TokenResponse from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +90,11 @@ class DockerClusterData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "initiated": obj.get("initiated") if obj.get("initiated") is not None else False,
-            "cluster_id": obj.get("cluster_id") if obj.get("cluster_id") is not None else '',
-            "remote_managers": obj.get("remote_managers")
+            "access_token": obj.get("access_token"),
+            "refresh_token": obj.get("refresh_token"),
+            "id_token": obj.get("id_token"),
+            "token_type": obj.get("token_type"),
+            "expires_in": obj.get("expires_in")
         })
         return _obj
 
