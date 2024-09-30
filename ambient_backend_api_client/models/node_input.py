@@ -19,34 +19,38 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.data import Data
-from ambient_backend_api_client.models.request_status_enum import RequestStatusEnum
+from ambient_backend_api_client.models.docker_swarm_info import DockerSwarmInfo
+from ambient_backend_api_client.models.network_interface import NetworkInterface
+from ambient_backend_api_client.models.node_architecture_enum import NodeArchitectureEnum
+from ambient_backend_api_client.models.node_role_enum import NodeRoleEnum
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
+from ambient_backend_api_client.models.status_enum import StatusEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Request(BaseModel):
+class NodeInput(BaseModel):
     """
-    Request
+    NodeInput
     """ # noqa: E501
-    id: StrictInt
+    id: Optional[StrictInt] = None
     name: StrictStr
     resource_type: Optional[ResourceTypeEnum] = None
     description: Optional[StrictStr] = None
-    org_id: Optional[StrictInt] = None
-    user_id: Optional[StrictInt] = None
-    status: Optional[RequestStatusEnum] = None
+    org_id: StrictInt
+    user_id: StrictInt
+    role: NodeRoleEnum
+    live: Optional[StrictBool] = Field(default=False, description="Node is live and will respond immediately to commands")
+    architecture: NodeArchitectureEnum = Field(description="Node architecture")
+    interfaces: Optional[List[NetworkInterface]] = None
+    tags: Optional[List[StrictStr]] = None
+    last_seen: Optional[datetime] = None
     error: Optional[StrictStr] = None
-    requested_ts: Optional[datetime] = None
-    started_ts: Optional[datetime] = None
-    failed_ts: Optional[datetime] = None
-    completed_ts: Optional[datetime] = None
-    notes: Optional[List[StrictStr]] = None
-    data: Optional[Data] = None
-    registry_id: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "status", "error", "requested_ts", "started_ts", "failed_ts", "completed_ts", "notes", "data", "registry_id"]
+    status: StatusEnum
+    cluster_id: Optional[StrictInt] = None
+    docker_swarm_info: Optional[DockerSwarmInfo] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "live", "architecture", "interfaces", "tags", "last_seen", "error", "status", "cluster_id", "docker_swarm_info"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,7 +70,7 @@ class Request(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Request from a JSON string"""
+        """Create an instance of NodeInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -87,54 +91,51 @@ class Request(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in interfaces (list)
+        _items = []
+        if self.interfaces:
+            for _item in self.interfaces:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['interfaces'] = _items
+        # override the default output from pydantic by calling `to_dict()` of docker_swarm_info
+        if self.docker_swarm_info:
+            _dict['docker_swarm_info'] = self.docker_swarm_info.to_dict()
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
-        # set to None if org_id (nullable) is None
+        # set to None if last_seen (nullable) is None
         # and model_fields_set contains the field
-        if self.org_id is None and "org_id" in self.model_fields_set:
-            _dict['org_id'] = None
-
-        # set to None if user_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.user_id is None and "user_id" in self.model_fields_set:
-            _dict['user_id'] = None
+        if self.last_seen is None and "last_seen" in self.model_fields_set:
+            _dict['last_seen'] = None
 
         # set to None if error (nullable) is None
         # and model_fields_set contains the field
         if self.error is None and "error" in self.model_fields_set:
             _dict['error'] = None
 
-        # set to None if started_ts (nullable) is None
+        # set to None if cluster_id (nullable) is None
         # and model_fields_set contains the field
-        if self.started_ts is None and "started_ts" in self.model_fields_set:
-            _dict['started_ts'] = None
+        if self.cluster_id is None and "cluster_id" in self.model_fields_set:
+            _dict['cluster_id'] = None
 
-        # set to None if failed_ts (nullable) is None
+        # set to None if docker_swarm_info (nullable) is None
         # and model_fields_set contains the field
-        if self.failed_ts is None and "failed_ts" in self.model_fields_set:
-            _dict['failed_ts'] = None
-
-        # set to None if completed_ts (nullable) is None
-        # and model_fields_set contains the field
-        if self.completed_ts is None and "completed_ts" in self.model_fields_set:
-            _dict['completed_ts'] = None
-
-        # set to None if registry_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.registry_id is None and "registry_id" in self.model_fields_set:
-            _dict['registry_id'] = None
+        if self.docker_swarm_info is None and "docker_swarm_info" in self.model_fields_set:
+            _dict['docker_swarm_info'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Request from a dict"""
+        """Create an instance of NodeInput from a dict"""
         if obj is None:
             return None
 
@@ -148,15 +149,16 @@ class Request(BaseModel):
             "description": obj.get("description"),
             "org_id": obj.get("org_id"),
             "user_id": obj.get("user_id"),
-            "status": obj.get("status"),
+            "role": obj.get("role"),
+            "live": obj.get("live") if obj.get("live") is not None else False,
+            "architecture": obj.get("architecture"),
+            "interfaces": [NetworkInterface.from_dict(_item) for _item in obj["interfaces"]] if obj.get("interfaces") is not None else None,
+            "tags": obj.get("tags"),
+            "last_seen": obj.get("last_seen"),
             "error": obj.get("error"),
-            "requested_ts": obj.get("requested_ts"),
-            "started_ts": obj.get("started_ts"),
-            "failed_ts": obj.get("failed_ts"),
-            "completed_ts": obj.get("completed_ts"),
-            "notes": obj.get("notes"),
-            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "registry_id": obj.get("registry_id")
+            "status": obj.get("status"),
+            "cluster_id": obj.get("cluster_id"),
+            "docker_swarm_info": DockerSwarmInfo.from_dict(obj["docker_swarm_info"]) if obj.get("docker_swarm_info") is not None else None
         })
         return _obj
 
