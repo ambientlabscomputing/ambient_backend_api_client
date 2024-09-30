@@ -18,19 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.token_request_type import TokenRequestType
+from ambient_backend_api_client.models.token_type import TokenType
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DockerClusterData(BaseModel):
+class CreateTokenRequest(BaseModel):
     """
-    DockerClusterData
+    CreateTokenRequest
     """ # noqa: E501
-    initiated: Optional[StrictBool] = False
-    cluster_id: Optional[StrictStr] = ''
-    remote_managers: Optional[List[Dict[str, Any]]] = None
-    __properties: ClassVar[List[str]] = ["initiated", "cluster_id", "remote_managers"]
+    token_type: TokenType
+    duration: Optional[StrictInt] = 3600
+    user_id: Optional[StrictInt] = None
+    org_id: Optional[StrictInt] = None
+    node_id: Optional[StrictInt] = None
+    request_type: TokenRequestType
+    __properties: ClassVar[List[str]] = ["token_type", "duration", "user_id", "org_id", "node_id", "request_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +55,7 @@ class DockerClusterData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a JSON string"""
+        """Create an instance of CreateTokenRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,11 +76,26 @@ class DockerClusterData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if org_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.org_id is None and "org_id" in self.model_fields_set:
+            _dict['org_id'] = None
+
+        # set to None if node_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.node_id is None and "node_id" in self.model_fields_set:
+            _dict['node_id'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DockerClusterData from a dict"""
+        """Create an instance of CreateTokenRequest from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +103,12 @@ class DockerClusterData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "initiated": obj.get("initiated") if obj.get("initiated") is not None else False,
-            "cluster_id": obj.get("cluster_id") if obj.get("cluster_id") is not None else '',
-            "remote_managers": obj.get("remote_managers")
+            "token_type": obj.get("token_type"),
+            "duration": obj.get("duration") if obj.get("duration") is not None else 3600,
+            "user_id": obj.get("user_id"),
+            "org_id": obj.get("org_id"),
+            "node_id": obj.get("node_id"),
+            "request_type": obj.get("request_type")
         })
         return _obj
 

@@ -19,36 +19,21 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class ResourceTypeEnum(str, Enum):
+class TokenRequestType(str, Enum):
     """
-    ResourceTypeEnum
+    TokenRequestType
     """
 
     """
     allowed enum values
     """
-    CLUSTER = 'cluster'
-    CONTAINER = 'container'
-    IMAGE = 'image'
-    INTERNAL = 'internal'
-    NETWORK = 'network'
-    NODE = 'node'
-    NOTIFICATION = 'notification'
-    ORGANIZATION = 'organization'
-    REPOSITORY = 'repository'
-    REQUEST = 'request'
-    SERVICE = 'service'
-    TEST = 'test'
-    USER = 'user'
-    VOLUME = 'volume'
-    SITE = 'site'
-    SESSION = 'session'
-    SECRET = 'secret'
-    CONTAINER_REGISTRY = 'container_registry'
+    NODE_REFRESH_TOKEN = 'node_refresh_token'
+    NODE_ACCESS_TOKEN = 'node_access_token'
+    USER_API_TOKEN = 'user_api_token'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of ResourceTypeEnum from a JSON string"""
+        """Create an instance of TokenRequestType from a JSON string"""
         return cls(json.loads(json_str))
 
 

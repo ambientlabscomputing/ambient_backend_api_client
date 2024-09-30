@@ -1,6 +1,7 @@
 # flake8: noqa
 
 # import apis into api package
+from ambient_backend_api_client.api.auth_api import AuthApi
 from ambient_backend_api_client.api.clusters_api import ClustersApi
 from ambient_backend_api_client.api.commands_api import CommandsApi
 from ambient_backend_api_client.api.health_api import HealthApi
