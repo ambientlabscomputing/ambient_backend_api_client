@@ -21,7 +21,7 @@ from pydantic import StrictInt, StrictStr
 from typing import Any, List, Optional
 from ambient_backend_api_client.models.create_token_request import CreateTokenRequest
 from ambient_backend_api_client.models.token import Token
-from ambient_backend_api_client.models.token_response_input import TokenResponseInput
+from ambient_backend_api_client.models.token_response import TokenResponse
 
 from ambient_backend_api_client.api_client import ApiClient, RequestSerialized
 from ambient_backend_api_client.api_response import ApiResponse
@@ -1258,7 +1258,7 @@ class AuthApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TokenResponseInput:
+    ) -> TokenResponse:
         """Handle Token Refresh
 
         Handle token refresh
@@ -1296,7 +1296,7 @@ class AuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponseInput",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1326,7 +1326,7 @@ class AuthApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TokenResponseInput]:
+    ) -> ApiResponse[TokenResponse]:
         """Handle Token Refresh
 
         Handle token refresh
@@ -1364,7 +1364,7 @@ class AuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponseInput",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -1432,7 +1432,7 @@ class AuthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenResponseInput",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
