@@ -19,12 +19,12 @@ from typing_extensions import Annotated
 
 from pydantic import StrictBool, StrictInt, StrictStr
 from typing import Any, Dict, List, Optional
-from ambient_backend_api_client.models.app_api_models_auth0_token_response import AppApiModelsAuth0TokenResponse
 from ambient_backend_api_client.models.list_response_node import ListResponseNode
 from ambient_backend_api_client.models.node_create import NodeCreate
 from ambient_backend_api_client.models.node_input import NodeInput
 from ambient_backend_api_client.models.node_output import NodeOutput
 from ambient_backend_api_client.models.node_page_panel_data import NodePagePanelData
+from ambient_backend_api_client.models.token_response import TokenResponse
 
 from ambient_backend_api_client.api_client import ApiClient, RequestSerialized
 from ambient_backend_api_client.api_response import ApiResponse
@@ -61,7 +61,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppApiModelsAuth0TokenResponse:
+    ) -> TokenResponse:
         """Authorize Node
 
 
@@ -101,7 +101,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -132,7 +132,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AppApiModelsAuth0TokenResponse]:
+    ) -> ApiResponse[TokenResponse]:
         """Authorize Node
 
 
@@ -172,7 +172,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -243,7 +243,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2144,7 +2144,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppApiModelsAuth0TokenResponse:
+    ) -> TokenResponse:
         """Refresh Node Token
 
 
@@ -2184,7 +2184,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2215,7 +2215,7 @@ class NodesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AppApiModelsAuth0TokenResponse]:
+    ) -> ApiResponse[TokenResponse]:
         """Refresh Node Token
 
 
@@ -2255,7 +2255,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
@@ -2326,7 +2326,7 @@ class NodesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppApiModelsAuth0TokenResponse",
+            '200': "TokenResponse",
             '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
