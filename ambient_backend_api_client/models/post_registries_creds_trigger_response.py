@@ -31,8 +31,8 @@ class PostRegistriesCredsTriggerResponse(BaseModel):
     PostRegistriesCredsTriggerResponse
     """ # noqa: E501
     request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2024-10-26T00:37:03.122936'
-    location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
+    requested_ts: Optional[StrictStr] = '2024-10-29T02:28:30.260855'
+    location_root: Optional[StrictStr] = 'http://api.ambient-emp.svc.cluster.local:8001/requests/'
     refresh_interval: Optional[StrictInt] = 10
     location: Optional[StrictStr] = None
     creds: ContainerRegistryAuth
@@ -106,8 +106,8 @@ class PostRegistriesCredsTriggerResponse(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-10-26T00:37:03.122936',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-10-29T02:28:30.260855',
+            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://api.ambient-emp.svc.cluster.local:8001/requests/',
             "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
             "location": obj.get("location"),
             "creds": ContainerRegistryAuth.from_dict(obj["creds"]) if obj.get("creds") is not None else None,
