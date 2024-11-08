@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.docker_service_attrs_input import DockerServiceAttrsInput
 from ambient_backend_api_client.models.requested_service_spec import RequestedServiceSpec
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.service_state import ServiceState
@@ -42,7 +41,7 @@ class ServiceCreate(BaseModel):
     status: Optional[ServiceStatusEnum] = None
     error: Optional[StrictStr] = None
     requested_service_spec: RequestedServiceSpec
-    docker_service_attrs: Optional[DockerServiceAttrsInput] = None
+    docker_service_attrs: Optional[Dict[str, Any]] = None
     node_ids: Optional[List[StrictInt]] = None
     __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "error", "requested_service_spec", "docker_service_attrs", "node_ids"]
 
@@ -88,9 +87,6 @@ class ServiceCreate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of requested_service_spec
         if self.requested_service_spec:
             _dict['requested_service_spec'] = self.requested_service_spec.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of docker_service_attrs
-        if self.docker_service_attrs:
-            _dict['docker_service_attrs'] = self.docker_service_attrs.to_dict()
         # set to None if id (nullable) is None
         # and model_fields_set contains the field
         if self.id is None and "id" in self.model_fields_set:
@@ -148,7 +144,7 @@ class ServiceCreate(BaseModel):
             "status": obj.get("status"),
             "error": obj.get("error"),
             "requested_service_spec": RequestedServiceSpec.from_dict(obj["requested_service_spec"]) if obj.get("requested_service_spec") is not None else None,
-            "docker_service_attrs": DockerServiceAttrsInput.from_dict(obj["docker_service_attrs"]) if obj.get("docker_service_attrs") is not None else None,
+            "docker_service_attrs": obj.get("docker_service_attrs"),
             "node_ids": obj.get("node_ids")
         })
         return _obj
