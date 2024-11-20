@@ -45,6 +45,7 @@ class ResourceTypeEnum(str, Enum):
     SESSION = 'session'
     SECRET = 'secret'
     CONTAINER_REGISTRY = 'container_registry'
+    OTHER = 'other'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
