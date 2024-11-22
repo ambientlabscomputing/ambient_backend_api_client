@@ -17,8 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt
-from typing import Any, Dict
+from pydantic import StrictInt, StrictStr
+from typing import Any, Dict, Optional
 from ambient_backend_api_client.models.deploy_service_response import DeployServiceResponse
 from ambient_backend_api_client.models.node_list import NodeList
 from ambient_backend_api_client.models.request import Request
@@ -1905,6 +1905,13 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        order_by: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        user_id: Optional[StrictInt] = None,
+        org_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1922,6 +1929,20 @@ class ServicesApi:
 
         Get all services
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param user_id:
+        :type user_id: int
+        :param org_id:
+        :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1945,6 +1966,13 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            order=order,
+            name=name,
+            user_id=user_id,
+            org_id=org_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1953,6 +1981,7 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1968,6 +1997,13 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get_with_http_info(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        order_by: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        user_id: Optional[StrictInt] = None,
+        org_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1985,6 +2021,20 @@ class ServicesApi:
 
         Get all services
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param user_id:
+        :type user_id: int
+        :param org_id:
+        :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2008,6 +2058,13 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            order=order,
+            name=name,
+            user_id=user_id,
+            org_id=org_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2016,6 +2073,7 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2031,6 +2089,13 @@ class ServicesApi:
     @validate_call
     async def get_services_services_get_without_preload_content(
         self,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        order_by: Optional[StrictStr] = None,
+        order: Optional[StrictStr] = None,
+        name: Optional[StrictStr] = None,
+        user_id: Optional[StrictInt] = None,
+        org_id: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2048,6 +2113,20 @@ class ServicesApi:
 
         Get all services
 
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param order_by:
+        :type order_by: str
+        :param order:
+        :type order: str
+        :param name:
+        :type name: str
+        :param user_id:
+        :type user_id: int
+        :param org_id:
+        :type org_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2071,6 +2150,13 @@ class ServicesApi:
         """ # noqa: E501
 
         _param = self._get_services_services_get_serialize(
+            limit=limit,
+            offset=offset,
+            order_by=order_by,
+            order=order,
+            name=name,
+            user_id=user_id,
+            org_id=org_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2079,6 +2165,7 @@ class ServicesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ServiceList",
+            '422': "HTTPValidationError",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2089,6 +2176,13 @@ class ServicesApi:
 
     def _get_services_services_get_serialize(
         self,
+        limit,
+        offset,
+        order_by,
+        order,
+        name,
+        user_id,
+        org_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2109,6 +2203,34 @@ class ServicesApi:
 
         # process the path parameters
         # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if order_by is not None:
+            
+            _query_params.append(('order_by', order_by))
+            
+        if order is not None:
+            
+            _query_params.append(('order', order))
+            
+        if name is not None:
+            
+            _query_params.append(('name', name))
+            
+        if user_id is not None:
+            
+            _query_params.append(('user_id', user_id))
+            
+        if org_id is not None:
+            
+            _query_params.append(('org_id', org_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
