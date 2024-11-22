@@ -1387,7 +1387,7 @@ class ClustersApi:
         status: Optional[StrictStr] = None,
         org_id: Optional[StrictInt] = None,
         user_id: Optional[StrictInt] = None,
-        request_body: Optional[List[StrictStr]] = None,
+        request_body: Optional[List[Optional[StrictStr]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1423,7 +1423,7 @@ class ClustersApi:
         :param user_id:
         :type user_id: int
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1490,7 +1490,7 @@ class ClustersApi:
         status: Optional[StrictStr] = None,
         org_id: Optional[StrictInt] = None,
         user_id: Optional[StrictInt] = None,
-        request_body: Optional[List[StrictStr]] = None,
+        request_body: Optional[List[Optional[StrictStr]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1526,7 +1526,7 @@ class ClustersApi:
         :param user_id:
         :type user_id: int
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1593,7 +1593,7 @@ class ClustersApi:
         status: Optional[StrictStr] = None,
         org_id: Optional[StrictInt] = None,
         user_id: Optional[StrictInt] = None,
-        request_body: Optional[List[StrictStr]] = None,
+        request_body: Optional[List[Optional[StrictStr]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1629,7 +1629,7 @@ class ClustersApi:
         :param user_id:
         :type user_id: int
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[Optional[str]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

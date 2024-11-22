@@ -27,10 +27,9 @@ class ServiceState(str, Enum):
     """
     allowed enum values
     """
-    REQUESTED = 'requested'
-    DEPLOYMENT_IN_PROGRESS = 'deployment_in_progress'
+    CREATED = 'created'
     DEPLOYED = 'deployed'
-    DEPLOYMENT_FAILED = 'deployment_failed'
+    DELETED = 'deleted'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

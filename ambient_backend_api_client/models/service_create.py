@@ -18,12 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.requested_service_spec import RequestedServiceSpec
 from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
 from ambient_backend_api_client.models.service_state import ServiceState
-from ambient_backend_api_client.models.service_status_enum import ServiceStatusEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,13 +36,10 @@ class ServiceCreate(BaseModel):
     description: Optional[StrictStr] = None
     org_id: Optional[StrictInt] = None
     user_id: Optional[StrictInt] = None
-    state: Optional[ServiceState] = None
-    status: Optional[ServiceStatusEnum] = None
-    error: Optional[StrictStr] = None
+    desired_state: Optional[ServiceState] = Field(default=None, description="Desired state of the service")
     requested_service_spec: RequestedServiceSpec
-    docker_service_attrs: Optional[Dict[str, Any]] = None
     node_ids: Optional[List[StrictInt]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "state", "status", "error", "requested_service_spec", "docker_service_attrs", "node_ids"]
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "desired_state", "requested_service_spec", "node_ids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,21 +103,6 @@ class ServiceCreate(BaseModel):
         if self.user_id is None and "user_id" in self.model_fields_set:
             _dict['user_id'] = None
 
-        # set to None if status (nullable) is None
-        # and model_fields_set contains the field
-        if self.status is None and "status" in self.model_fields_set:
-            _dict['status'] = None
-
-        # set to None if error (nullable) is None
-        # and model_fields_set contains the field
-        if self.error is None and "error" in self.model_fields_set:
-            _dict['error'] = None
-
-        # set to None if docker_service_attrs (nullable) is None
-        # and model_fields_set contains the field
-        if self.docker_service_attrs is None and "docker_service_attrs" in self.model_fields_set:
-            _dict['docker_service_attrs'] = None
-
         return _dict
 
     @classmethod
@@ -140,11 +121,8 @@ class ServiceCreate(BaseModel):
             "description": obj.get("description"),
             "org_id": obj.get("org_id"),
             "user_id": obj.get("user_id"),
-            "state": obj.get("state"),
-            "status": obj.get("status"),
-            "error": obj.get("error"),
+            "desired_state": obj.get("desired_state"),
             "requested_service_spec": RequestedServiceSpec.from_dict(obj["requested_service_spec"]) if obj.get("requested_service_spec") is not None else None,
-            "docker_service_attrs": obj.get("docker_service_attrs"),
             "node_ids": obj.get("node_ids")
         })
         return _obj

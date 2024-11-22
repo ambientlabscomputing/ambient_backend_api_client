@@ -107,7 +107,6 @@ from ambient_backend_api_client.models.service import Service
 from ambient_backend_api_client.models.service_create import ServiceCreate
 from ambient_backend_api_client.models.service_list import ServiceList
 from ambient_backend_api_client.models.service_state import ServiceState
-from ambient_backend_api_client.models.service_status_enum import ServiceStatusEnum
 from ambient_backend_api_client.models.status_enum import StatusEnum
 from ambient_backend_api_client.models.subscription_model_enum import SubscriptionModelEnum
 from ambient_backend_api_client.models.token import Token
