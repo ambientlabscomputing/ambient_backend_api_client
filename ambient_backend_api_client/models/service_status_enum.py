@@ -30,7 +30,6 @@ class ServiceStatusEnum(str, Enum):
     SUCCESS = 'success'
     PENDING = 'pending'
     FAILURE = 'failure'
-    DELETED = 'deleted'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
