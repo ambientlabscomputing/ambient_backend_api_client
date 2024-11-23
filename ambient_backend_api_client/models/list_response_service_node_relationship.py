@@ -18,25 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.request import Request
-from ambient_backend_api_client.models.service import Service
+from ambient_backend_api_client.models.service_node_relationship import ServiceNodeRelationship
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeployServiceResponse(BaseModel):
+class ListResponseServiceNodeRelationship(BaseModel):
     """
-    DeployServiceResponse
+    ListResponseServiceNodeRelationship
     """ # noqa: E501
-    request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2024-11-23T01:03:43.840441'
-    location_root: Optional[StrictStr] = 'http://api.ambient-emp.svc.cluster.local:8001/requests/'
-    refresh_interval: Optional[StrictInt] = 10
-    location: Optional[StrictStr] = None
-    service: Service
-    request: Request
-    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "service", "request"]
+    timestamp: Optional[datetime] = None
+    count: Optional[StrictInt] = None
+    results: List[ServiceNodeRelationship]
+    __properties: ClassVar[List[str]] = ["timestamp", "count", "results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +52,7 @@ class DeployServiceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a JSON string"""
+        """Create an instance of ListResponseServiceNodeRelationship from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,22 +73,23 @@ class DeployServiceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of service
-        if self.service:
-            _dict['service'] = self.service.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of request
-        if self.request:
-            _dict['request'] = self.request.to_dict()
-        # set to None if location (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['results'] = _items
+        # set to None if count (nullable) is None
         # and model_fields_set contains the field
-        if self.location is None and "location" in self.model_fields_set:
-            _dict['location'] = None
+        if self.count is None and "count" in self.model_fields_set:
+            _dict['count'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a dict"""
+        """Create an instance of ListResponseServiceNodeRelationship from a dict"""
         if obj is None:
             return None
 
@@ -100,13 +97,9 @@ class DeployServiceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2024-11-23T01:03:43.840441',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://api.ambient-emp.svc.cluster.local:8001/requests/',
-            "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
-            "location": obj.get("location"),
-            "service": Service.from_dict(obj["service"]) if obj.get("service") is not None else None,
-            "request": Request.from_dict(obj["request"]) if obj.get("request") is not None else None
+            "timestamp": obj.get("timestamp"),
+            "count": obj.get("count"),
+            "results": [ServiceNodeRelationship.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 
