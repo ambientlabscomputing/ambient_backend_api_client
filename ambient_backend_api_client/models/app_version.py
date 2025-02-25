@@ -18,26 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.container_registry_type import ContainerRegistryType
-from ambient_backend_api_client.models.resource_type_enum import ResourceTypeEnum
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
+from ambient_backend_api_client.models.target_enum import TargetEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ContainerRegistry(BaseModel):
+class AppVersion(BaseModel):
     """
-    ContainerRegistry
+    AppVersion
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    name: StrictStr
-    resource_type: Optional[ResourceTypeEnum] = None
-    description: Optional[StrictStr] = None
-    org_id: Optional[StrictInt] = None
-    user_id: Optional[StrictInt] = None
-    url: StrictStr
-    registry_type: ContainerRegistryType
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "url", "registry_type"]
+    target: TargetEnum
+    version: StrictStr
+    __properties: ClassVar[List[str]] = ["target", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +50,7 @@ class ContainerRegistry(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ContainerRegistry from a JSON string"""
+        """Create an instance of AppVersion from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,31 +71,11 @@ class ContainerRegistry(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if id (nullable) is None
-        # and model_fields_set contains the field
-        if self.id is None and "id" in self.model_fields_set:
-            _dict['id'] = None
-
-        # set to None if description (nullable) is None
-        # and model_fields_set contains the field
-        if self.description is None and "description" in self.model_fields_set:
-            _dict['description'] = None
-
-        # set to None if org_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.org_id is None and "org_id" in self.model_fields_set:
-            _dict['org_id'] = None
-
-        # set to None if user_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.user_id is None and "user_id" in self.model_fields_set:
-            _dict['user_id'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ContainerRegistry from a dict"""
+        """Create an instance of AppVersion from a dict"""
         if obj is None:
             return None
 
@@ -110,14 +83,8 @@ class ContainerRegistry(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "resource_type": obj.get("resource_type"),
-            "description": obj.get("description"),
-            "org_id": obj.get("org_id"),
-            "user_id": obj.get("user_id"),
-            "url": obj.get("url"),
-            "registry_type": obj.get("registry_type")
+            "target": obj.get("target"),
+            "version": obj.get("version")
         })
         return _obj
 
