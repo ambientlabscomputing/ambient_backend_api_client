@@ -19,20 +19,21 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class TokenType(str, Enum):
+class TargetEnum(str, Enum):
     """
-    TokenType
+    TargetEnum
     """
 
     """
     allowed enum values
     """
-    ACCESS = 'access'
-    REFRESH = 'refresh'
+    PROD = 'prod'
+    DEV = 'dev'
+    UNASSIGNED = 'unassigned'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TokenType from a JSON string"""
+        """Create an instance of TargetEnum from a JSON string"""
         return cls(json.loads(json_str))
 
 

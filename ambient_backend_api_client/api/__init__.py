@@ -12,5 +12,6 @@ from ambient_backend_api_client.api.registries_api import RegistriesApi
 from ambient_backend_api_client.api.requests_api import RequestsApi
 from ambient_backend_api_client.api.services_api import ServicesApi
 from ambient_backend_api_client.api.unimplemented_api import UnimplementedApi
+from ambient_backend_api_client.api.upgrade_software_api import UpgradeSoftwareApi
 from ambient_backend_api_client.api.users_api import UsersApi
 
