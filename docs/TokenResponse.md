@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_token** | **str** |  | 
 **refresh_token** | **str** |  | 
-**id_token** | **str** |  | [optional] 
 **token_type** | **str** |  | 
 **expires_in** | **int** |  | 
 

@@ -5,14 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | 
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | 
-**owner_id** | **str** |  | 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
+**org_id** | **int** |  | 
+**user_id** | **int** |  | [optional] 
 **account_type** | [**AccountType**](AccountType.md) |  | [optional] 
 **creation_method** | [**CreationMethod**](CreationMethod.md) |  | [optional] 
 **email** | **str** |  | 

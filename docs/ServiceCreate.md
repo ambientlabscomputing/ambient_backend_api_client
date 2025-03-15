@@ -5,19 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | [optional] 
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | [optional] 
-**owner_id** | **str** |  | [optional] 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | [optional] 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
-**image** | **str** |  | 
-**tags** | **List[str]** |  | [optional] [default to []]
-**ports** | **List[str]** |  | [optional] 
-**state** | [**ServiceState**](ServiceState.md) |  | [optional] 
-**status** | [**ServiceStatusEnum**](ServiceStatusEnum.md) |  | [optional] 
+**org_id** | **int** |  | [optional] 
+**user_id** | **int** |  | [optional] 
+**desired_state** | [**ServiceState**](ServiceState.md) | Desired state of the service | [optional] 
+**requested_service_spec** | [**RequestedServiceSpec**](RequestedServiceSpec.md) |  | 
+**node_ids** | **List[int]** |  | [optional] [default to []]
 
 ## Example
 
