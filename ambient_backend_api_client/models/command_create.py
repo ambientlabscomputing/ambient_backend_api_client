@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from ambient_backend_api_client.models.cluster_select_options import ClusterSelectOptions
+from ambient_backend_api_client.models.command1 import Command1
 from ambient_backend_api_client.models.node_select_options import NodeSelectOptions
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +30,8 @@ class CommandCreate(BaseModel):
     """
     CommandCreate
     """ # noqa: E501
-    command: List[StrictStr]
+    command_list: Optional[List[StrictStr]] = None
+    command_str: Optional[StrictStr] = None
     timeout: Optional[StrictInt] = None
     store_output: Optional[StrictBool] = False
     workdir: Optional[StrictStr] = None
@@ -38,7 +40,8 @@ class CommandCreate(BaseModel):
     shell: Optional[StrictBool] = False
     node_options: Optional[NodeSelectOptions] = None
     cluster_options: Optional[ClusterSelectOptions] = None
-    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "node_options", "cluster_options"]
+    command: Command1
+    __properties: ClassVar[List[str]] = ["command_list", "command_str", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "node_options", "cluster_options", "command"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +88,19 @@ class CommandCreate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cluster_options
         if self.cluster_options:
             _dict['cluster_options'] = self.cluster_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of command
+        if self.command:
+            _dict['command'] = self.command.to_dict()
+        # set to None if command_list (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_list is None and "command_list" in self.model_fields_set:
+            _dict['command_list'] = None
+
+        # set to None if command_str (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_str is None and "command_str" in self.model_fields_set:
+            _dict['command_str'] = None
+
         # set to None if timeout (nullable) is None
         # and model_fields_set contains the field
         if self.timeout is None and "timeout" in self.model_fields_set:
@@ -127,14 +143,16 @@ class CommandCreate(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "command": obj.get("command"),
+            "command_list": obj.get("command_list"),
+            "command_str": obj.get("command_str"),
             "timeout": obj.get("timeout"),
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),
             "os_user": obj.get("os_user"),
             "shell": obj.get("shell") if obj.get("shell") is not None else False,
             "node_options": NodeSelectOptions.from_dict(obj["node_options"]) if obj.get("node_options") is not None else None,
-            "cluster_options": ClusterSelectOptions.from_dict(obj["cluster_options"]) if obj.get("cluster_options") is not None else None
+            "cluster_options": ClusterSelectOptions.from_dict(obj["cluster_options"]) if obj.get("cluster_options") is not None else None,
+            "command": Command1.from_dict(obj["command"]) if obj.get("command") is not None else None
         })
         return _obj
 

@@ -28,7 +28,8 @@ class Command(BaseModel):
     """
     Command
     """ # noqa: E501
-    command: List[StrictStr]
+    command_list: Optional[List[StrictStr]] = None
+    command_str: Optional[StrictStr] = None
     timeout: Optional[StrictInt] = None
     store_output: Optional[StrictBool] = False
     workdir: Optional[StrictStr] = None
@@ -39,7 +40,7 @@ class Command(BaseModel):
     user_id: StrictInt
     org_id: StrictInt
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "id", "user_id", "org_id", "timestamp"]
+    __properties: ClassVar[List[str]] = ["command_list", "command_str", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "id", "user_id", "org_id", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +81,16 @@ class Command(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if command_list (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_list is None and "command_list" in self.model_fields_set:
+            _dict['command_list'] = None
+
+        # set to None if command_str (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_str is None and "command_str" in self.model_fields_set:
+            _dict['command_str'] = None
+
         # set to None if timeout (nullable) is None
         # and model_fields_set contains the field
         if self.timeout is None and "timeout" in self.model_fields_set:
@@ -112,7 +123,8 @@ class Command(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "command": obj.get("command"),
+            "command_list": obj.get("command_list"),
+            "command_str": obj.get("command_str"),
             "timeout": obj.get("timeout"),
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),

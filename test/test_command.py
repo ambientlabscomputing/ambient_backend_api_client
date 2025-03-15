@@ -36,9 +36,10 @@ class TestCommand(unittest.TestCase):
         model = Command()
         if include_optional:
             return Command(
-                command = [
+                command_list = [
                     ''
                     ],
+                command_str = '',
                 timeout = 56,
                 store_output = True,
                 workdir = '',
@@ -54,9 +55,6 @@ class TestCommand(unittest.TestCase):
             )
         else:
             return Command(
-                command = [
-                    ''
-                    ],
                 id = 56,
                 user_id = 56,
                 org_id = 56,
