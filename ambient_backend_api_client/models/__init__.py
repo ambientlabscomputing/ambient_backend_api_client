@@ -25,6 +25,7 @@ from ambient_backend_api_client.models.cluster_run_type import ClusterRunType
 from ambient_backend_api_client.models.cluster_select_options import ClusterSelectOptions
 from ambient_backend_api_client.models.cluster_status_enum import ClusterStatusEnum
 from ambient_backend_api_client.models.command import Command
+from ambient_backend_api_client.models.command1 import Command1
 from ambient_backend_api_client.models.command_create import CommandCreate
 from ambient_backend_api_client.models.command_node_relationship import CommandNodeRelationship
 from ambient_backend_api_client.models.command_status_enum import CommandStatusEnum
