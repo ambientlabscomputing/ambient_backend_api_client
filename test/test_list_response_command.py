@@ -40,9 +40,10 @@ class TestListResponseCommand(unittest.TestCase):
                 count = 56,
                 results = [
                     ambient_backend_api_client.models.command.Command(
-                        command = [
+                        command_list = [
                             ''
                             ], 
+                        command_str = '', 
                         timeout = 56, 
                         store_output = True, 
                         workdir = '', 
@@ -61,9 +62,10 @@ class TestListResponseCommand(unittest.TestCase):
             return ListResponseCommand(
                 results = [
                     ambient_backend_api_client.models.command.Command(
-                        command = [
+                        command_list = [
                             ''
                             ], 
+                        command_str = '', 
                         timeout = 56, 
                         store_output = True, 
                         workdir = '', 

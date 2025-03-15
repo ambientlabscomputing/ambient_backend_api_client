@@ -36,9 +36,10 @@ class TestCommandCreate(unittest.TestCase):
         model = CommandCreate()
         if include_optional:
             return CommandCreate(
-                command = [
+                command_list = [
                     ''
                     ],
+                command_str = '',
                 timeout = 56,
                 store_output = True,
                 workdir = '',
@@ -67,13 +68,12 @@ class TestCommandCreate(unittest.TestCase):
                     tags = [
                         ''
                         ], 
-                    run_type = null, )
+                    run_type = null, ),
+                command = None
             )
         else:
             return CommandCreate(
-                command = [
-                    ''
-                    ],
+                command = None,
         )
         """
 

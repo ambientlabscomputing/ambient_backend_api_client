@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**command** | **List[str]** |  | 
+**command_list** | **List[str]** |  | [optional] 
+**command_str** | **str** |  | [optional] 
 **timeout** | **int** |  | [optional] 
 **store_output** | **bool** |  | [optional] [default to False]
 **workdir** | **str** |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **shell** | **bool** |  | [optional] [default to False]
 **node_options** | [**NodeSelectOptions**](NodeSelectOptions.md) |  | [optional] 
 **cluster_options** | [**ClusterSelectOptions**](ClusterSelectOptions.md) |  | [optional] 
+**command** | [**Command1**](Command1.md) |  | 
 
 ## Example
 

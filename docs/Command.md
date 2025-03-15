@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**command** | **List[str]** |  | 
+**command_list** | **List[str]** |  | [optional] 
+**command_str** | **str** |  | [optional] 
 **timeout** | **int** |  | [optional] 
 **store_output** | **bool** |  | [optional] [default to False]
 **workdir** | **str** |  | [optional] 
