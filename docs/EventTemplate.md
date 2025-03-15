@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **event_label** | [**EventLabel**](EventLabel.md) |  | 
 **event_type** | [**AmbientEventTypeEnum**](AmbientEventTypeEnum.md) |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | 
-**resource_id** | **str** |  | [optional] 
+**resource_id** | **int** |  | [optional] 
 **action** | [**AmbientActionEnum**](AmbientActionEnum.md) |  | [optional] 
 
 ## Example

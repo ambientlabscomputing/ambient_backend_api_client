@@ -5,22 +5,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | 
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | 
-**owner_id** | **str** |  | 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
+**org_id** | **int** |  | [optional] 
+**user_id** | **int** |  | [optional] 
 **status** | [**RequestStatusEnum**](RequestStatusEnum.md) |  | [optional] 
 **error** | **str** |  | [optional] 
-**requested_ts** | **float** |  | [optional] [default to 1.715390426038406E9]
-**started_ts** | **float** |  | [optional] 
-**failed_ts** | **float** |  | [optional] 
-**completed_ts** | **float** |  | [optional] 
+**requested_ts** | **str** |  | [optional] 
+**started_ts** | **str** |  | [optional] 
+**failed_ts** | **str** |  | [optional] 
+**completed_ts** | **str** |  | [optional] 
 **notes** | **List[str]** |  | [optional] [default to []]
-**data** | **object** |  | [optional] 
+**data** | [**Data**](Data.md) |  | [optional] 
+**registry_id** | **int** |  | [optional] 
 
 ## Example
 

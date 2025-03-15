@@ -5,21 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | [optional] 
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | [optional] [default to '0956813f-647c-49af-a983-cc590a5cf901']
-**owner_id** | **str** |  | [optional] 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | [optional] 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
-**role** | [**RoleEnum**](RoleEnum.md) |  | 
-**architecture** | [**ArchitectureEnum**](ArchitectureEnum.md) |  | 
-**nodes** | **List[str]** |  | 
-**docker_swarm_attrs** | **object** |  | [optional] 
-**site** | **str** |  | [optional] [default to '']
-**manager_node** | **str** |  | [optional] 
-**cluster_group** | **str** |  | [optional] [default to 'default']
+**org_id** | **int** |  | [optional] 
+**user_id** | **int** |  | [optional] 
 **tags** | **List[str]** |  | [optional] [default to []]
 
 ## Example
