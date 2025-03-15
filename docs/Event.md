@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **event_label** | [**EventLabel**](EventLabel.md) |  | 
 **event_type** | [**AmbientEventTypeEnum**](AmbientEventTypeEnum.md) |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | 
-**resource_id** | **str** |  | 
+**resource_id** | **int** |  | 
 **action** | [**AmbientActionEnum**](AmbientActionEnum.md) |  | [optional] 
 **timestamp** | **float** |  | 
 **event_data** | **object** |  | 
-**request_id** | **str** |  | [optional] 
+**request_id** | **int** |  | [optional] 
 
 ## Example
 

@@ -6,13 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
-**resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | [optional] 
-**owner_id** | **str** |  | [optional] 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | [optional] 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
+**resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
 **subscription** | [**SubscriptionModelEnum**](SubscriptionModelEnum.md) |  | 
 **root_email** | **str** |  | 
 **okta_group_id** | **str** |  | [optional] 

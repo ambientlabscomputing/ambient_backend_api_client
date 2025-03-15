@@ -35,9 +35,10 @@ class CommandCreate(BaseModel):
     workdir: Optional[StrictStr] = None
     os_user: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    shell: Optional[StrictBool] = False
     node_options: Optional[NodeSelectOptions] = None
     cluster_options: Optional[ClusterSelectOptions] = None
-    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "node_options", "cluster_options"]
+    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "node_options", "cluster_options"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,6 +132,7 @@ class CommandCreate(BaseModel):
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),
             "os_user": obj.get("os_user"),
+            "shell": obj.get("shell") if obj.get("shell") is not None else False,
             "node_options": NodeSelectOptions.from_dict(obj["node_options"]) if obj.get("node_options") is not None else None,
             "cluster_options": ClusterSelectOptions.from_dict(obj["cluster_options"]) if obj.get("cluster_options") is not None else None
         })

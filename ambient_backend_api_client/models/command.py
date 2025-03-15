@@ -34,11 +34,12 @@ class Command(BaseModel):
     workdir: Optional[StrictStr] = None
     os_user: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    shell: Optional[StrictBool] = False
     id: StrictInt
     user_id: StrictInt
     org_id: StrictInt
     timestamp: datetime
-    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "id", "user_id", "org_id", "timestamp"]
+    __properties: ClassVar[List[str]] = ["command", "timeout", "store_output", "workdir", "os_user", "env_vars", "shell", "id", "user_id", "org_id", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,6 +117,7 @@ class Command(BaseModel):
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),
             "os_user": obj.get("os_user"),
+            "shell": obj.get("shell") if obj.get("shell") is not None else False,
             "id": obj.get("id"),
             "user_id": obj.get("user_id"),
             "org_id": obj.get("org_id"),

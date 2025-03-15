@@ -4,13 +4,84 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_refresh_token_users_api_token_post**](UsersApi.md#create_refresh_token_users_api_token_post) | **POST** /users/api_token | Create Refresh Token
 [**create_service_account_users_service_accounts_post**](UsersApi.md#create_service_account_users_service_accounts_post) | **POST** /users/service_accounts | Create Service Account
 [**create_user_users_post**](UsersApi.md#create_user_users_post) | **POST** /users | Create User
 [**delete_user_users_user_id_delete**](UsersApi.md#delete_user_users_user_id_delete) | **DELETE** /users/{user_id} | Delete User
+[**get_current_user_users_whoami_get**](UsersApi.md#get_current_user_users_whoami_get) | **GET** /users/whoami | Get Current User
 [**get_user_users_user_id_get**](UsersApi.md#get_user_users_user_id_get) | **GET** /users/{user_id} | Get User
 [**login_user_users_login_post**](UsersApi.md#login_user_users_login_post) | **POST** /users/login | Login User
 [**update_user_users_user_id_patch**](UsersApi.md#update_user_users_user_id_patch) | **PATCH** /users/{user_id} | Update User
 
+
+# **create_refresh_token_users_api_token_post**
+> PostAPITokenResponse create_refresh_token_users_api_token_post()
+
+Create Refresh Token
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.post_api_token_response import PostAPITokenResponse
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.UsersApi(api_client)
+
+    try:
+        # Create Refresh Token
+        api_response = await api_instance.create_refresh_token_users_api_token_post()
+        print("The response of UsersApi->create_refresh_token_users_api_token_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->create_refresh_token_users_api_token_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PostAPITokenResponse**](PostAPITokenResponse.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_service_account_users_service_accounts_post**
 > User create_service_account_users_service_accounts_post(create_service_acct_request)
@@ -232,6 +303,75 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_current_user_users_whoami_get**
+> User get_current_user_users_whoami_get()
+
+Get Current User
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.user import User
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.UsersApi(api_client)
+
+    try:
+        # Get Current User
+        api_response = await api_instance.get_current_user_users_whoami_get()
+        print("The response of UsersApi->get_current_user_users_whoami_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->get_current_user_users_whoami_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

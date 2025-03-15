@@ -7,15 +7,21 @@ Method | HTTP request | Description
 [**authorize_node_nodes_node_id_authorize_post**](NodesApi.md#authorize_node_nodes_node_id_authorize_post) | **POST** /nodes/{node_id}/authorize | Authorize Node
 [**create_node_nodes_post**](NodesApi.md#create_node_nodes_post) | **POST** /nodes | Create Node
 [**delete_node_nodes_node_id_delete**](NodesApi.md#delete_node_nodes_node_id_delete) | **DELETE** /nodes/{node_id} | Delete Node
+[**get_node_advertised_interface_nodes_node_id_interfaces_advertised_get**](NodesApi.md#get_node_advertised_interface_nodes_node_id_interfaces_advertised_get) | **GET** /nodes/{node_id}/interfaces/advertised | Get Node Advertised Interface
+[**get_node_certificate_nodes_node_id_certificate_get**](NodesApi.md#get_node_certificate_nodes_node_id_certificate_get) | **GET** /nodes/{node_id}/certificate | Get Node Certificate
+[**get_node_interfaces_nodes_node_id_interfaces_get**](NodesApi.md#get_node_interfaces_nodes_node_id_interfaces_get) | **GET** /nodes/{node_id}/interfaces | Get Node Interfaces
 [**get_node_nodes_node_id_get**](NodesApi.md#get_node_nodes_node_id_get) | **GET** /nodes/{node_id} | Get Node
+[**get_node_panel_data_nodes_panel_data_get**](NodesApi.md#get_node_panel_data_nodes_panel_data_get) | **GET** /nodes/panel_data | Get Node Panel Data
+[**get_node_services_nodes_node_id_services_get**](NodesApi.md#get_node_services_nodes_node_id_services_get) | **GET** /nodes/{node_id}/services | Get Node Services
 [**get_nodes_nodes_get**](NodesApi.md#get_nodes_nodes_get) | **GET** /nodes | Get Nodes
+[**put_node_nodes_node_id_put**](NodesApi.md#put_node_nodes_node_id_put) | **PUT** /nodes/{node_id} | Put Node
 [**refresh_node_token_nodes_node_id_refresh_token_post**](NodesApi.md#refresh_node_token_nodes_node_id_refresh_token_post) | **POST** /nodes/{node_id}/refresh_token | Refresh Node Token
-[**request_new_auth_nodes_node_id_auth_post**](NodesApi.md#request_new_auth_nodes_node_id_auth_post) | **POST** /nodes/{node_id}/auth | Request New Auth
+[**set_node_advertised_interface_nodes_set_advertised_interface_post**](NodesApi.md#set_node_advertised_interface_nodes_set_advertised_interface_post) | **POST** /nodes/set_advertised_interface | Set Node Advertised Interface
 [**update_node_nodes_node_id_patch**](NodesApi.md#update_node_nodes_node_id_patch) | **PATCH** /nodes/{node_id} | Update Node
 
 
 # **authorize_node_nodes_node_id_authorize_post**
-> TokenResponse authorize_node_nodes_node_id_authorize_post(node_id, device_code)
+> TokenResponse authorize_node_nodes_node_id_authorize_post(node_id, refresh_token)
 
 Authorize Node
 
@@ -39,12 +45,12 @@ configuration = ambient_backend_api_client.Configuration(
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
-    device_code = 'device_code_example' # str | 
+    node_id = 56 # int | 
+    refresh_token = 'refresh_token_example' # str | 
 
     try:
         # Authorize Node
-        api_response = await api_instance.authorize_node_nodes_node_id_authorize_post(node_id, device_code)
+        api_response = await api_instance.authorize_node_nodes_node_id_authorize_post(node_id, refresh_token)
         print("The response of NodesApi->authorize_node_nodes_node_id_authorize_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,8 +64,8 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
- **device_code** | **str**|  | 
+ **node_id** | **int**|  | 
+ **refresh_token** | **str**|  | 
 
 ### Return type
 
@@ -84,7 +90,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_node_nodes_post**
-> Node create_node_nodes_post(node_create)
+> NodeOutput create_node_nodes_post(node_create)
 
 Create Node
 
@@ -96,8 +102,8 @@ Create a new node
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.node import Node
 from ambient_backend_api_client.models.node_create import NodeCreate
+from ambient_backend_api_client.models.node_output import NodeOutput
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -140,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Node**](Node.md)
+[**NodeOutput**](NodeOutput.md)
 
 ### Authorization
 
@@ -191,7 +197,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
+    node_id = 56 # int | 
 
     try:
         # Delete Node
@@ -207,7 +213,7 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
+ **node_id** | **int**|  | 
 
 ### Return type
 
@@ -231,77 +237,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_node_nodes_node_id_get**
-> Node get_node_nodes_node_id_get(node_id)
+# **get_node_advertised_interface_nodes_node_id_interfaces_advertised_get**
+> NetworkInterface get_node_advertised_interface_nodes_node_id_interfaces_advertised_get(node_id)
 
-Get Node
-
-### Example
-
-
-```python
-import ambient_backend_api_client
-from ambient_backend_api_client.models.node import Node
-from ambient_backend_api_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = ambient_backend_api_client.Configuration(
-    host = "http://localhost"
-)
-
-
-# Enter a context with an instance of the API client
-async with ambient_backend_api_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
-
-    try:
-        # Get Node
-        api_response = await api_instance.get_node_nodes_node_id_get(node_id)
-        print("The response of NodesApi->get_node_nodes_node_id_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling NodesApi->get_node_nodes_node_id_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
-
-### Return type
-
-[**Node**](Node.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_nodes_nodes_get**
-> ListResultsResponse get_nodes_nodes_get(q=q)
-
-Get Nodes
+Get Node Advertised Interface
 
 ### Example
 
@@ -309,7 +248,7 @@ Get Nodes
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.list_results_response import ListResultsResponse
+from ambient_backend_api_client.models.network_interface import NetworkInterface
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -330,11 +269,462 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    q = '' # str |  (optional) (default to '')
+    node_id = 56 # int | 
+
+    try:
+        # Get Node Advertised Interface
+        api_response = await api_instance.get_node_advertised_interface_nodes_node_id_interfaces_advertised_get(node_id)
+        print("The response of NodesApi->get_node_advertised_interface_nodes_node_id_interfaces_advertised_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_advertised_interface_nodes_node_id_interfaces_advertised_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+
+### Return type
+
+[**NetworkInterface**](NetworkInterface.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_node_certificate_nodes_node_id_certificate_get**
+> object get_node_certificate_nodes_node_id_certificate_get(node_id)
+
+Get Node Certificate
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    node_id = 56 # int | 
+
+    try:
+        # Get Node Certificate
+        api_response = await api_instance.get_node_certificate_nodes_node_id_certificate_get(node_id)
+        print("The response of NodesApi->get_node_certificate_nodes_node_id_certificate_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_certificate_nodes_node_id_certificate_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_node_interfaces_nodes_node_id_interfaces_get**
+> ListResponseNetworkInterface get_node_interfaces_nodes_node_id_interfaces_get(node_id)
+
+Get Node Interfaces
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.list_response_network_interface import ListResponseNetworkInterface
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    node_id = 56 # int | 
+
+    try:
+        # Get Node Interfaces
+        api_response = await api_instance.get_node_interfaces_nodes_node_id_interfaces_get(node_id)
+        print("The response of NodesApi->get_node_interfaces_nodes_node_id_interfaces_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_interfaces_nodes_node_id_interfaces_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+
+### Return type
+
+[**ListResponseNetworkInterface**](ListResponseNetworkInterface.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_node_nodes_node_id_get**
+> NodeOutput get_node_nodes_node_id_get(node_id)
+
+Get Node
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.node_output import NodeOutput
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    node_id = 56 # int | 
+
+    try:
+        # Get Node
+        api_response = await api_instance.get_node_nodes_node_id_get(node_id)
+        print("The response of NodesApi->get_node_nodes_node_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_nodes_node_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+
+### Return type
+
+[**NodeOutput**](NodeOutput.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_node_panel_data_nodes_panel_data_get**
+> NodePagePanelData get_node_panel_data_nodes_panel_data_get()
+
+Get Node Panel Data
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.node_page_panel_data import NodePagePanelData
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+
+    try:
+        # Get Node Panel Data
+        api_response = await api_instance.get_node_panel_data_nodes_panel_data_get()
+        print("The response of NodesApi->get_node_panel_data_nodes_panel_data_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_panel_data_nodes_panel_data_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**NodePagePanelData**](NodePagePanelData.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_node_services_nodes_node_id_services_get**
+> ListResponseService get_node_services_nodes_node_id_services_get(node_id)
+
+Get Node Services
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.list_response_service import ListResponseService
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    node_id = 56 # int | 
+
+    try:
+        # Get Node Services
+        api_response = await api_instance.get_node_services_nodes_node_id_services_get(node_id)
+        print("The response of NodesApi->get_node_services_nodes_node_id_services_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->get_node_services_nodes_node_id_services_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+
+### Return type
+
+[**ListResponseService**](ListResponseService.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_nodes_nodes_get**
+> ListResponseNode get_nodes_nodes_get(limit=limit, offset=offset, sort=sort, order=order, name=name, name_starts_with=name_starts_with, role=role, status=status, architecture=architecture, org_id=org_id, user_id=user_id, live=live, cluster_id=cluster_id, request_body=request_body)
+
+Get Nodes
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.list_response_node import ListResponseNode
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    limit = 100 # int |  (optional) (default to 100)
+    offset = 0 # int |  (optional) (default to 0)
+    sort = 'last_seen' # str |  (optional) (default to 'last_seen')
+    order = 'desc' # str |  (optional) (default to 'desc')
+    name = '' # str |  (optional) (default to '')
+    name_starts_with = '' # str |  (optional) (default to '')
+    role = '' # str |  (optional) (default to '')
+    status = '' # str |  (optional) (default to '')
+    architecture = '' # str |  (optional) (default to '')
+    org_id = 0 # int |  (optional) (default to 0)
+    user_id = 0 # int |  (optional) (default to 0)
+    live = False # bool |  (optional) (default to False)
+    cluster_id = 0 # int |  (optional) (default to 0)
+    request_body = ['request_body_example'] # List[str] |  (optional)
 
     try:
         # Get Nodes
-        api_response = await api_instance.get_nodes_nodes_get(q=q)
+        api_response = await api_instance.get_nodes_nodes_get(limit=limit, offset=offset, sort=sort, order=order, name=name, name_starts_with=name_starts_with, role=role, status=status, architecture=architecture, org_id=org_id, user_id=user_id, live=live, cluster_id=cluster_id, request_body=request_body)
         print("The response of NodesApi->get_nodes_nodes_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -348,11 +738,24 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **q** | **str**|  | [optional] [default to &#39;&#39;]
+ **limit** | **int**|  | [optional] [default to 100]
+ **offset** | **int**|  | [optional] [default to 0]
+ **sort** | **str**|  | [optional] [default to &#39;last_seen&#39;]
+ **order** | **str**|  | [optional] [default to &#39;desc&#39;]
+ **name** | **str**|  | [optional] [default to &#39;&#39;]
+ **name_starts_with** | **str**|  | [optional] [default to &#39;&#39;]
+ **role** | **str**|  | [optional] [default to &#39;&#39;]
+ **status** | **str**|  | [optional] [default to &#39;&#39;]
+ **architecture** | **str**|  | [optional] [default to &#39;&#39;]
+ **org_id** | **int**|  | [optional] [default to 0]
+ **user_id** | **int**|  | [optional] [default to 0]
+ **live** | **bool**|  | [optional] [default to False]
+ **cluster_id** | **int**|  | [optional] [default to 0]
+ **request_body** | [**List[str]**](str.md)|  | [optional] 
 
 ### Return type
 
-[**ListResultsResponse**](ListResultsResponse.md)
+[**ListResponseNode**](ListResponseNode.md)
 
 ### Authorization
 
@@ -360,7 +763,84 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **put_node_nodes_node_id_put**
+> NodeOutput put_node_nodes_node_id_put(node_id, node_input)
+
+Put Node
+
+### Example
+
+* OAuth Authentication (OAuth2PasswordBearer):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.node_input import NodeInput
+from ambient_backend_api_client.models.node_output import NodeOutput
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.NodesApi(api_client)
+    node_id = 56 # int | 
+    node_input = ambient_backend_api_client.NodeInput() # NodeInput | 
+
+    try:
+        # Put Node
+        api_response = await api_instance.put_node_nodes_node_id_put(node_id, node_input)
+        print("The response of NodesApi->put_node_nodes_node_id_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NodesApi->put_node_nodes_node_id_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **node_id** | **int**|  | 
+ **node_input** | [**NodeInput**](NodeInput.md)|  | 
+
+### Return type
+
+[**NodeOutput**](NodeOutput.md)
+
+### Authorization
+
+[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -404,7 +884,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
+    node_id = 56 # int | 
     refresh_token = 'refresh_token_example' # str | 
 
     try:
@@ -423,7 +903,7 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
+ **node_id** | **int**|  | 
  **refresh_token** | **str**|  | 
 
 ### Return type
@@ -448,10 +928,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **request_new_auth_nodes_node_id_auth_post**
-> Node request_new_auth_nodes_node_id_auth_post(node_id)
+# **set_node_advertised_interface_nodes_set_advertised_interface_post**
+> NodeOutput set_node_advertised_interface_nodes_set_advertised_interface_post(set_node_advertised_interface_request)
 
-Request New Auth
+Set Node Advertised Interface
 
 ### Example
 
@@ -459,7 +939,8 @@ Request New Auth
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.node import Node
+from ambient_backend_api_client.models.node_output import NodeOutput
+from ambient_backend_api_client.models.set_node_advertised_interface_request import SetNodeAdvertisedInterfaceRequest
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -480,15 +961,15 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
+    set_node_advertised_interface_request = ambient_backend_api_client.SetNodeAdvertisedInterfaceRequest() # SetNodeAdvertisedInterfaceRequest | 
 
     try:
-        # Request New Auth
-        api_response = await api_instance.request_new_auth_nodes_node_id_auth_post(node_id)
-        print("The response of NodesApi->request_new_auth_nodes_node_id_auth_post:\n")
+        # Set Node Advertised Interface
+        api_response = await api_instance.set_node_advertised_interface_nodes_set_advertised_interface_post(set_node_advertised_interface_request)
+        print("The response of NodesApi->set_node_advertised_interface_nodes_set_advertised_interface_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling NodesApi->request_new_auth_nodes_node_id_auth_post: %s\n" % e)
+        print("Exception when calling NodesApi->set_node_advertised_interface_nodes_set_advertised_interface_post: %s\n" % e)
 ```
 
 
@@ -498,11 +979,11 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
+ **set_node_advertised_interface_request** | [**SetNodeAdvertisedInterfaceRequest**](SetNodeAdvertisedInterfaceRequest.md)|  | 
 
 ### Return type
 
-[**Node**](Node.md)
+[**NodeOutput**](NodeOutput.md)
 
 ### Authorization
 
@@ -510,7 +991,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -523,7 +1004,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_node_nodes_node_id_patch**
-> Node update_node_nodes_node_id_patch(node_id, body)
+> NodeOutput update_node_nodes_node_id_patch(node_id, body)
 
 Update Node
 
@@ -533,7 +1014,7 @@ Update Node
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.node import Node
+from ambient_backend_api_client.models.node_output import NodeOutput
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -554,7 +1035,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ambient_backend_api_client.NodesApi(api_client)
-    node_id = 'node_id_example' # str | 
+    node_id = 56 # int | 
     body = None # object | 
 
     try:
@@ -573,12 +1054,12 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**|  | 
+ **node_id** | **int**|  | 
  **body** | **object**|  | 
 
 ### Return type
 
-[**Node**](Node.md)
+[**NodeOutput**](NodeOutput.md)
 
 ### Authorization
 

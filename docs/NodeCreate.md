@@ -5,21 +5,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | [optional] 
 **name** | **str** |  | 
 **resource_type** | [**ResourceTypeEnum**](ResourceTypeEnum.md) |  | [optional] 
-**identifier** | **str** |  | [optional] 
-**owner_id** | **str** |  | [optional] 
-**owner_type** | [**OwnerTypeEnum**](OwnerTypeEnum.md) |  | [optional] 
 **description** | **str** |  | [optional] 
-**requests** | **List[str]** |  | [optional] [default to []]
-**notifications** | **List[str]** |  | [optional] [default to []]
+**org_id** | **int** |  | [optional] 
+**user_id** | **int** |  | [optional] 
 **role** | [**NodeRoleEnum**](NodeRoleEnum.md) |  | 
-**architecture** | [**NodeArchitectureEnum**](NodeArchitectureEnum.md) |  | 
+**live** | **bool** | Node is live and will respond immediately to commands | [optional] [default to False]
+**architecture** | [**NodeArchitectureEnum**](NodeArchitectureEnum.md) | Node architecture | 
 **interfaces** | [**List[NetworkInterface]**](NetworkInterface.md) |  | [optional] 
-**last_seen** | **str** |  | [optional] 
-**status** | [**StatusEnumInput**](StatusEnumInput.md) |  | [optional] 
-**cluster** | **str** |  | [optional] 
-**authorization** | [**Auth0DeviceCodeResponse**](Auth0DeviceCodeResponse.md) |  | [optional] 
+**advertised_interface** | **int** |  | [optional] 
+**tags** | **List[str]** |  | [optional] 
+**last_seen** | **datetime** |  | [optional] 
+**error** | **str** |  | [optional] 
+**certificate** | **str** |  | [optional] 
+**status** | [**StatusEnum**](StatusEnum.md) | Node status | [optional] 
 
 ## Example
 

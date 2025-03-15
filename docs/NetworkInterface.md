@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**InterfaceTypeEnum**](InterfaceTypeEnum.md) |  | 
 **name** | **str** |  | 
+**id** | **int** |  | [optional] 
 **ipv4_address** | **str** |  | [optional] 
 **ipv6_address** | **str** |  | [optional] 
 **mac_address** | **str** |  | [optional] 
