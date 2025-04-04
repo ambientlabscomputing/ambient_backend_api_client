@@ -6,12 +6,12 @@
 README.md
 ambient_backend_api_client/__init__.py
 ambient_backend_api_client/api/__init__.py
-ambient_backend_api_client/api/auth_api.py
 ambient_backend_api_client/api/clusters_api.py
 ambient_backend_api_client/api/commands_api.py
 ambient_backend_api_client/api/health_api.py
 ambient_backend_api_client/api/nodes_api.py
 ambient_backend_api_client/api/notifications_api.py
+ambient_backend_api_client/api/oauth_api.py
 ambient_backend_api_client/api/ping_api.py
 ambient_backend_api_client/api/registries_api.py
 ambient_backend_api_client/api/requests_api.py
@@ -45,7 +45,6 @@ ambient_backend_api_client/models/container_registry_create.py
 ambient_backend_api_client/models/container_registry_type.py
 ambient_backend_api_client/models/create_custer_request.py
 ambient_backend_api_client/models/create_service_acct_request.py
-ambient_backend_api_client/models/create_token_request.py
 ambient_backend_api_client/models/creation_method.py
 ambient_backend_api_client/models/data.py
 ambient_backend_api_client/models/deploy_service_response.py
@@ -54,6 +53,8 @@ ambient_backend_api_client/models/docker_swarm_info.py
 ambient_backend_api_client/models/event.py
 ambient_backend_api_client/models/event_label.py
 ambient_backend_api_client/models/event_template.py
+ambient_backend_api_client/models/get_users_response.py
+ambient_backend_api_client/models/grant_type.py
 ambient_backend_api_client/models/http_validation_error.py
 ambient_backend_api_client/models/interface_type_enum.py
 ambient_backend_api_client/models/list_response_cluster.py
@@ -67,9 +68,11 @@ ambient_backend_api_client/models/list_response_node_with_registries.py
 ambient_backend_api_client/models/list_response_request.py
 ambient_backend_api_client/models/list_response_service.py
 ambient_backend_api_client/models/list_response_service_node_relationship.py
+ambient_backend_api_client/models/list_response_token.py
 ambient_backend_api_client/models/network_interface.py
 ambient_backend_api_client/models/node_architecture_enum.py
 ambient_backend_api_client/models/node_create.py
+ambient_backend_api_client/models/node_id.py
 ambient_backend_api_client/models/node_input.py
 ambient_backend_api_client/models/node_list.py
 ambient_backend_api_client/models/node_output.py
@@ -102,9 +105,9 @@ ambient_backend_api_client/models/status_enum.py
 ambient_backend_api_client/models/subscription_model_enum.py
 ambient_backend_api_client/models/target_enum.py
 ambient_backend_api_client/models/token.py
+ambient_backend_api_client/models/token_request.py
 ambient_backend_api_client/models/token_request_type.py
 ambient_backend_api_client/models/token_response.py
-ambient_backend_api_client/models/token_type.py
 ambient_backend_api_client/models/update_cluster.py
 ambient_backend_api_client/models/update_node_relationship.py
 ambient_backend_api_client/models/user.py
@@ -118,7 +121,6 @@ docs/AccountType.md
 docs/AmbientActionEnum.md
 docs/AmbientEventTypeEnum.md
 docs/AppVersion.md
-docs/AuthApi.md
 docs/Cluster.md
 docs/ClusterCreate.md
 docs/ClusterRunType.md
@@ -138,7 +140,6 @@ docs/ContainerRegistryCreate.md
 docs/ContainerRegistryType.md
 docs/CreateCusterRequest.md
 docs/CreateServiceAcctRequest.md
-docs/CreateTokenRequest.md
 docs/CreationMethod.md
 docs/Data.md
 docs/DeployServiceResponse.md
@@ -147,6 +148,8 @@ docs/DockerSwarmInfo.md
 docs/Event.md
 docs/EventLabel.md
 docs/EventTemplate.md
+docs/GetUsersResponse.md
+docs/GrantType.md
 docs/HTTPValidationError.md
 docs/HealthApi.md
 docs/InterfaceTypeEnum.md
@@ -161,9 +164,11 @@ docs/ListResponseNodeWithRegistries.md
 docs/ListResponseRequest.md
 docs/ListResponseService.md
 docs/ListResponseServiceNodeRelationship.md
+docs/ListResponseToken.md
 docs/NetworkInterface.md
 docs/NodeArchitectureEnum.md
 docs/NodeCreate.md
+docs/NodeId.md
 docs/NodeInput.md
 docs/NodeList.md
 docs/NodeOutput.md
@@ -177,6 +182,7 @@ docs/NotificationList.md
 docs/NotificationRequest.md
 docs/NotificationSeverityEnum.md
 docs/NotificationsApi.md
+docs/OauthApi.md
 docs/OrganizationCreate.md
 docs/PingApi.md
 docs/PostAPITokenResponse.md
@@ -202,9 +208,9 @@ docs/StatusEnum.md
 docs/SubscriptionModelEnum.md
 docs/TargetEnum.md
 docs/Token.md
+docs/TokenRequest.md
 docs/TokenRequestType.md
 docs/TokenResponse.md
-docs/TokenType.md
 docs/UnimplementedApi.md
 docs/UpdateCluster.md
 docs/UpdateNodeRelationship.md
@@ -226,7 +232,6 @@ test/test_account_type.py
 test/test_ambient_action_enum.py
 test/test_ambient_event_type_enum.py
 test/test_app_version.py
-test/test_auth_api.py
 test/test_cluster.py
 test/test_cluster_create.py
 test/test_cluster_run_type.py
@@ -246,7 +251,6 @@ test/test_container_registry_create.py
 test/test_container_registry_type.py
 test/test_create_custer_request.py
 test/test_create_service_acct_request.py
-test/test_create_token_request.py
 test/test_creation_method.py
 test/test_data.py
 test/test_deploy_service_response.py
@@ -255,6 +259,8 @@ test/test_docker_swarm_info.py
 test/test_event.py
 test/test_event_label.py
 test/test_event_template.py
+test/test_get_users_response.py
+test/test_grant_type.py
 test/test_health_api.py
 test/test_http_validation_error.py
 test/test_interface_type_enum.py
@@ -269,9 +275,11 @@ test/test_list_response_node_with_registries.py
 test/test_list_response_request.py
 test/test_list_response_service.py
 test/test_list_response_service_node_relationship.py
+test/test_list_response_token.py
 test/test_network_interface.py
 test/test_node_architecture_enum.py
 test/test_node_create.py
+test/test_node_id.py
 test/test_node_input.py
 test/test_node_list.py
 test/test_node_output.py
@@ -285,6 +293,7 @@ test/test_notification_list.py
 test/test_notification_request.py
 test/test_notification_severity_enum.py
 test/test_notifications_api.py
+test/test_oauth_api.py
 test/test_organization_create.py
 test/test_ping_api.py
 test/test_post_api_token_response.py
@@ -310,9 +319,9 @@ test/test_status_enum.py
 test/test_subscription_model_enum.py
 test/test_target_enum.py
 test/test_token.py
+test/test_token_request.py
 test/test_token_request_type.py
 test/test_token_response.py
-test/test_token_type.py
 test/test_unimplemented_api.py
 test/test_update_cluster.py
 test/test_update_node_relationship.py

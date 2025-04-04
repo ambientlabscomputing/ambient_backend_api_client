@@ -15,10 +15,10 @@
 
 import unittest
 
-from ambient_backend_api_client.models.token_response import TokenResponse
+from ambient_backend_api_client.models.node_id import NodeId
 
-class TestTokenResponse(unittest.TestCase):
-    """TokenResponse unit test stubs"""
+class TestNodeId(unittest.TestCase):
+    """NodeId unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,30 +26,24 @@ class TestTokenResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> TokenResponse:
-        """Test TokenResponse
+    def make_instance(self, include_optional) -> NodeId:
+        """Test NodeId
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `TokenResponse`
+        # uncomment below to create an instance of `NodeId`
         """
-        model = TokenResponse()
+        model = NodeId()
         if include_optional:
-            return TokenResponse(
-                access_token = '',
-                refresh_token = '',
-                expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            return NodeId(
             )
         else:
-            return TokenResponse(
-                access_token = '',
-                refresh_token = '',
-                expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+            return NodeId(
         )
         """
 
-    def testTokenResponse(self):
-        """Test TokenResponse"""
+    def testNodeId(self):
+        """Test NodeId"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

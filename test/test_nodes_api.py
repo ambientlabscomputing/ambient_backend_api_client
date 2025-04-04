@@ -27,13 +27,6 @@ class TestNodesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_authorize_node_nodes_node_id_authorize_post(self) -> None:
-        """Test case for authorize_node_nodes_node_id_authorize_post
-
-        Authorize Node
-        """
-        pass
-
     def test_create_node_nodes_post(self) -> None:
         """Test case for create_node_nodes_post
 
@@ -101,13 +94,6 @@ class TestNodesApi(unittest.TestCase):
         """Test case for put_node_nodes_node_id_put
 
         Put Node
-        """
-        pass
-
-    def test_refresh_node_token_nodes_node_id_refresh_token_post(self) -> None:
-        """Test case for refresh_node_token_nodes_node_id_refresh_token_post
-
-        Refresh Node Token
         """
         pass
 

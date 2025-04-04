@@ -1,23 +1,25 @@
-# ambient_backend_api_client.ClustersApi
+# ambient_backend_api_client.OauthApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_nodes_to_cluster_clusters_cluster_id_nodes_post**](ClustersApi.md#add_nodes_to_cluster_clusters_cluster_id_nodes_post) | **POST** /clusters/{cluster_id}/nodes | Add Nodes To Cluster
-[**create_cluster_clusters_post**](ClustersApi.md#create_cluster_clusters_post) | **POST** /clusters | Create Cluster
-[**delete_cluster_clusters_cluster_id_delete**](ClustersApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
-[**get_cluster_clusters_cluster_id_get**](ClustersApi.md#get_cluster_clusters_cluster_id_get) | **GET** /clusters/{cluster_id} | Get Cluster
-[**get_cluster_nodes_clusters_cluster_id_nodes_get**](ClustersApi.md#get_cluster_nodes_clusters_cluster_id_nodes_get) | **GET** /clusters/{cluster_id}/nodes | Get Cluster Nodes
-[**get_clusters_clusters_get**](ClustersApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
-[**remove_nodes_from_cluster_clusters_cluster_id_nodes_delete**](ClustersApi.md#remove_nodes_from_cluster_clusters_cluster_id_nodes_delete) | **DELETE** /clusters/{cluster_id}/nodes | Remove Nodes From Cluster
-[**update_cluster_clusters_cluster_id_put**](ClustersApi.md#update_cluster_clusters_cluster_id_put) | **PUT** /clusters/{cluster_id} | Update Cluster
+[**delete_token_oauth_tokens_token_id_delete**](OauthApi.md#delete_token_oauth_tokens_token_id_delete) | **DELETE** /oauth/tokens/{token_id} | Delete Token
+[**delete_token_oauth_tokens_token_id_delete_0**](OauthApi.md#delete_token_oauth_tokens_token_id_delete_0) | **DELETE** /oauth/tokens/{token_id} | Delete Token
+[**get_token_oauth_tokens_token_id_get**](OauthApi.md#get_token_oauth_tokens_token_id_get) | **GET** /oauth/tokens/{token_id} | Get Token
+[**get_token_oauth_tokens_token_id_get_0**](OauthApi.md#get_token_oauth_tokens_token_id_get_0) | **GET** /oauth/tokens/{token_id} | Get Token
+[**get_tokens_oauth_tokens_get**](OauthApi.md#get_tokens_oauth_tokens_get) | **GET** /oauth/tokens | Get Tokens
+[**get_tokens_oauth_tokens_get_0**](OauthApi.md#get_tokens_oauth_tokens_get_0) | **GET** /oauth/tokens | Get Tokens
+[**handle_token_refresh_oauth_token_post**](OauthApi.md#handle_token_refresh_oauth_token_post) | **POST** /oauth/token | Handle Token Refresh
+[**handle_token_refresh_oauth_token_post_0**](OauthApi.md#handle_token_refresh_oauth_token_post_0) | **POST** /oauth/token | Handle Token Refresh
 
 
-# **add_nodes_to_cluster_clusters_cluster_id_nodes_post**
-> add_nodes_to_cluster_clusters_cluster_id_nodes_post(cluster_id, request_body)
+# **delete_token_oauth_tokens_token_id_delete**
+> object delete_token_oauth_tokens_token_id_delete(token_id)
 
-Add Nodes To Cluster
+Delete Token
+
+Delete token by ID
 
 ### Example
 
@@ -48,95 +50,16 @@ configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
-    request_body = [56] # List[int] | 
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_id = 56 # int | 
 
     try:
-        # Add Nodes To Cluster
-        await api_instance.add_nodes_to_cluster_clusters_cluster_id_nodes_post(cluster_id, request_body)
-    except Exception as e:
-        print("Exception when calling ClustersApi->add_nodes_to_cluster_clusters_cluster_id_nodes_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
- **request_body** | [**List[int]**](int.md)|  | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_cluster_clusters_post**
-> Cluster create_cluster_clusters_post(create_custer_request)
-
-Create Cluster
-
-### Example
-
-* Api Key Authentication (APIKeyHeader):
-
-```python
-import ambient_backend_api_client
-from ambient_backend_api_client.models.cluster import Cluster
-from ambient_backend_api_client.models.create_custer_request import CreateCusterRequest
-from ambient_backend_api_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = ambient_backend_api_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with ambient_backend_api_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    create_custer_request = ambient_backend_api_client.CreateCusterRequest() # CreateCusterRequest | 
-
-    try:
-        # Create Cluster
-        api_response = await api_instance.create_cluster_clusters_post(create_custer_request)
-        print("The response of ClustersApi->create_cluster_clusters_post:\n")
+        # Delete Token
+        api_response = await api_instance.delete_token_oauth_tokens_token_id_delete(token_id)
+        print("The response of OauthApi->delete_token_oauth_tokens_token_id_delete:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->create_cluster_clusters_post: %s\n" % e)
+        print("Exception when calling OauthApi->delete_token_oauth_tokens_token_id_delete: %s\n" % e)
 ```
 
 
@@ -146,86 +69,11 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_custer_request** | [**CreateCusterRequest**](CreateCusterRequest.md)|  | 
+ **token_id** | **int**|  | 
 
 ### Return type
 
-[**Cluster**](Cluster.md)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_cluster_clusters_cluster_id_delete**
-> delete_cluster_clusters_cluster_id_delete(cluster_id)
-
-Delete Cluster
-
-### Example
-
-* Api Key Authentication (APIKeyHeader):
-
-```python
-import ambient_backend_api_client
-from ambient_backend_api_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = ambient_backend_api_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with ambient_backend_api_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
-
-    try:
-        # Delete Cluster
-        await api_instance.delete_cluster_clusters_cluster_id_delete(cluster_id)
-    except Exception as e:
-        print("Exception when calling ClustersApi->delete_cluster_clusters_cluster_id_delete: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
-
-### Return type
-
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -240,15 +88,18 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Successful Response |  -  |
+**200** | Successful Response |  -  |
+**204** | No Content |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_cluster_clusters_cluster_id_get**
-> Cluster get_cluster_clusters_cluster_id_get(cluster_id)
+# **delete_token_oauth_tokens_token_id_delete_0**
+> object delete_token_oauth_tokens_token_id_delete_0(token_id)
 
-Get Cluster
+Delete Token
+
+Delete token by ID
 
 ### Example
 
@@ -256,7 +107,6 @@ Get Cluster
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.cluster import Cluster
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -280,16 +130,16 @@ configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_id = 56 # int | 
 
     try:
-        # Get Cluster
-        api_response = await api_instance.get_cluster_clusters_cluster_id_get(cluster_id)
-        print("The response of ClustersApi->get_cluster_clusters_cluster_id_get:\n")
+        # Delete Token
+        api_response = await api_instance.delete_token_oauth_tokens_token_id_delete_0(token_id)
+        print("The response of OauthApi->delete_token_oauth_tokens_token_id_delete_0:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->get_cluster_clusters_cluster_id_get: %s\n" % e)
+        print("Exception when calling OauthApi->delete_token_oauth_tokens_token_id_delete_0: %s\n" % e)
 ```
 
 
@@ -299,11 +149,92 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
+ **token_id** | **int**|  | 
 
 ### Return type
 
-[**Cluster**](Cluster.md)
+**object**
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**204** | No Content |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_token_oauth_tokens_token_id_get**
+> Token get_token_oauth_tokens_token_id_get(token_id)
+
+Get Token
+
+Get token by ID
+
+### Example
+
+* Api Key Authentication (APIKeyHeader):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.token import Token
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_id = 56 # int | 
+
+    try:
+        # Get Token
+        api_response = await api_instance.get_token_oauth_tokens_token_id_get(token_id)
+        print("The response of OauthApi->get_token_oauth_tokens_token_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OauthApi->get_token_oauth_tokens_token_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_id** | **int**|  | 
+
+### Return type
+
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -323,10 +254,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_cluster_nodes_clusters_cluster_id_nodes_get**
-> ListResponseNode get_cluster_nodes_clusters_cluster_id_nodes_get(cluster_id)
+# **get_token_oauth_tokens_token_id_get_0**
+> Token get_token_oauth_tokens_token_id_get_0(token_id)
 
-Get Cluster Nodes
+Get Token
+
+Get token by ID
 
 ### Example
 
@@ -334,7 +267,7 @@ Get Cluster Nodes
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.list_response_node import ListResponseNode
+from ambient_backend_api_client.models.token import Token
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -358,16 +291,16 @@ configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_id = 56 # int | 
 
     try:
-        # Get Cluster Nodes
-        api_response = await api_instance.get_cluster_nodes_clusters_cluster_id_nodes_get(cluster_id)
-        print("The response of ClustersApi->get_cluster_nodes_clusters_cluster_id_nodes_get:\n")
+        # Get Token
+        api_response = await api_instance.get_token_oauth_tokens_token_id_get_0(token_id)
+        print("The response of OauthApi->get_token_oauth_tokens_token_id_get_0:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->get_cluster_nodes_clusters_cluster_id_nodes_get: %s\n" % e)
+        print("Exception when calling OauthApi->get_token_oauth_tokens_token_id_get_0: %s\n" % e)
 ```
 
 
@@ -377,11 +310,11 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
+ **token_id** | **int**|  | 
 
 ### Return type
 
-[**ListResponseNode**](ListResponseNode.md)
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -401,10 +334,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_clusters_clusters_get**
-> ListResponseCluster get_clusters_clusters_get(limit=limit, offset=offset, sort=sort, order=order, name=name, name_starts_with=name_starts_with, status=status, org_id=org_id, user_id=user_id, request_body=request_body)
+# **get_tokens_oauth_tokens_get**
+> ListResponseToken get_tokens_oauth_tokens_get(limit=limit, offset=offset, order_by=order_by, order=order, user_id=user_id, org_id=org_id, node_id=node_id, tombstoned=tombstoned, uid=uid, search=search)
 
-Get Clusters
+Get Tokens
+
+Get all tokens
 
 ### Example
 
@@ -412,7 +347,7 @@ Get Clusters
 
 ```python
 import ambient_backend_api_client
-from ambient_backend_api_client.models.list_response_cluster import ListResponseCluster
+from ambient_backend_api_client.models.list_response_token import ListResponseToken
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -436,25 +371,25 @@ configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
     limit = 100 # int |  (optional) (default to 100)
     offset = 0 # int |  (optional) (default to 0)
-    sort = 'id' # str |  (optional) (default to 'id')
+    order_by = 'id' # str |  (optional) (default to 'id')
     order = 'desc' # str |  (optional) (default to 'desc')
-    name = '' # str |  (optional) (default to '')
-    name_starts_with = '' # str |  (optional) (default to '')
-    status = '' # str |  (optional) (default to '')
-    org_id = 0 # int |  (optional) (default to 0)
     user_id = 0 # int |  (optional) (default to 0)
-    request_body = ['request_body_example'] # List[Optional[str]] |  (optional)
+    org_id = 0 # int |  (optional) (default to 0)
+    node_id = ambient_backend_api_client.NodeId() # NodeId |  (optional)
+    tombstoned = True # bool |  (optional)
+    uid = 'uid_example' # str |  (optional)
+    search = 'search_example' # str |  (optional)
 
     try:
-        # Get Clusters
-        api_response = await api_instance.get_clusters_clusters_get(limit=limit, offset=offset, sort=sort, order=order, name=name, name_starts_with=name_starts_with, status=status, org_id=org_id, user_id=user_id, request_body=request_body)
-        print("The response of ClustersApi->get_clusters_clusters_get:\n")
+        # Get Tokens
+        api_response = await api_instance.get_tokens_oauth_tokens_get(limit=limit, offset=offset, order_by=order_by, order=order, user_id=user_id, org_id=org_id, node_id=node_id, tombstoned=tombstoned, uid=uid, search=search)
+        print("The response of OauthApi->get_tokens_oauth_tokens_get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->get_clusters_clusters_get: %s\n" % e)
+        print("Exception when calling OauthApi->get_tokens_oauth_tokens_get: %s\n" % e)
 ```
 
 
@@ -466,22 +401,190 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] [default to 100]
  **offset** | **int**|  | [optional] [default to 0]
- **sort** | **str**|  | [optional] [default to &#39;id&#39;]
+ **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
  **order** | **str**|  | [optional] [default to &#39;desc&#39;]
- **name** | **str**|  | [optional] [default to &#39;&#39;]
- **name_starts_with** | **str**|  | [optional] [default to &#39;&#39;]
- **status** | **str**|  | [optional] [default to &#39;&#39;]
- **org_id** | **int**|  | [optional] [default to 0]
  **user_id** | **int**|  | [optional] [default to 0]
- **request_body** | [**List[Optional[str]]**](str.md)|  | [optional] 
+ **org_id** | **int**|  | [optional] [default to 0]
+ **node_id** | [**NodeId**](.md)|  | [optional] 
+ **tombstoned** | **bool**|  | [optional] 
+ **uid** | **str**|  | [optional] 
+ **search** | **str**|  | [optional] 
 
 ### Return type
 
-[**ListResponseCluster**](ListResponseCluster.md)
+[**ListResponseToken**](ListResponseToken.md)
 
 ### Authorization
 
 [APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tokens_oauth_tokens_get_0**
+> ListResponseToken get_tokens_oauth_tokens_get_0(limit=limit, offset=offset, order_by=order_by, order=order, user_id=user_id, org_id=org_id, node_id=node_id, tombstoned=tombstoned, uid=uid, search=search)
+
+Get Tokens
+
+Get all tokens
+
+### Example
+
+* Api Key Authentication (APIKeyHeader):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.list_response_token import ListResponseToken
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    limit = 100 # int |  (optional) (default to 100)
+    offset = 0 # int |  (optional) (default to 0)
+    order_by = 'id' # str |  (optional) (default to 'id')
+    order = 'desc' # str |  (optional) (default to 'desc')
+    user_id = 0 # int |  (optional) (default to 0)
+    org_id = 0 # int |  (optional) (default to 0)
+    node_id = ambient_backend_api_client.NodeId() # NodeId |  (optional)
+    tombstoned = True # bool |  (optional)
+    uid = 'uid_example' # str |  (optional)
+    search = 'search_example' # str |  (optional)
+
+    try:
+        # Get Tokens
+        api_response = await api_instance.get_tokens_oauth_tokens_get_0(limit=limit, offset=offset, order_by=order_by, order=order, user_id=user_id, org_id=org_id, node_id=node_id, tombstoned=tombstoned, uid=uid, search=search)
+        print("The response of OauthApi->get_tokens_oauth_tokens_get_0:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OauthApi->get_tokens_oauth_tokens_get_0: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**|  | [optional] [default to 100]
+ **offset** | **int**|  | [optional] [default to 0]
+ **order_by** | **str**|  | [optional] [default to &#39;id&#39;]
+ **order** | **str**|  | [optional] [default to &#39;desc&#39;]
+ **user_id** | **int**|  | [optional] [default to 0]
+ **org_id** | **int**|  | [optional] [default to 0]
+ **node_id** | [**NodeId**](.md)|  | [optional] 
+ **tombstoned** | **bool**|  | [optional] 
+ **uid** | **str**|  | [optional] 
+ **search** | **str**|  | [optional] 
+
+### Return type
+
+[**ListResponseToken**](ListResponseToken.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **handle_token_refresh_oauth_token_post**
+> TokenResponse handle_token_refresh_oauth_token_post(token_request)
+
+Handle Token Refresh
+
+Handle token refresh
+
+### Example
+
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.token_request import TokenRequest
+from ambient_backend_api_client.models.token_response import TokenResponse
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_request = ambient_backend_api_client.TokenRequest() # TokenRequest | 
+
+    try:
+        # Handle Token Refresh
+        api_response = await api_instance.handle_token_refresh_oauth_token_post(token_request)
+        print("The response of OauthApi->handle_token_refresh_oauth_token_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OauthApi->handle_token_refresh_oauth_token_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token_request** | [**TokenRequest**](TokenRequest.md)|  | 
+
+### Return type
+
+[**TokenResponse**](TokenResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -497,17 +600,20 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **remove_nodes_from_cluster_clusters_cluster_id_nodes_delete**
-> remove_nodes_from_cluster_clusters_cluster_id_nodes_delete(cluster_id, request_body)
+# **handle_token_refresh_oauth_token_post_0**
+> TokenResponse handle_token_refresh_oauth_token_post_0(token_request)
 
-Remove Nodes From Cluster
+Handle Token Refresh
+
+Handle token refresh
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
+from ambient_backend_api_client.models.token_request import TokenRequest
+from ambient_backend_api_client.models.token_response import TokenResponse
 from ambient_backend_api_client.rest import ApiException
 from pprint import pprint
 
@@ -517,110 +623,20 @@ configuration = ambient_backend_api_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
-    request_body = [56] # List[Optional[int]] | 
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    token_request = ambient_backend_api_client.TokenRequest() # TokenRequest | 
 
     try:
-        # Remove Nodes From Cluster
-        await api_instance.remove_nodes_from_cluster_clusters_cluster_id_nodes_delete(cluster_id, request_body)
-    except Exception as e:
-        print("Exception when calling ClustersApi->remove_nodes_from_cluster_clusters_cluster_id_nodes_delete: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
- **request_body** | [**List[Optional[int]]**](int.md)|  | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[APIKeyHeader](../README.md#APIKeyHeader)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_cluster_clusters_cluster_id_put**
-> Cluster update_cluster_clusters_cluster_id_put(cluster_id, update_cluster)
-
-Update Cluster
-
-### Example
-
-* Api Key Authentication (APIKeyHeader):
-
-```python
-import ambient_backend_api_client
-from ambient_backend_api_client.models.cluster import Cluster
-from ambient_backend_api_client.models.update_cluster import UpdateCluster
-from ambient_backend_api_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = ambient_backend_api_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with ambient_backend_api_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = ambient_backend_api_client.ClustersApi(api_client)
-    cluster_id = 56 # int | 
-    update_cluster = ambient_backend_api_client.UpdateCluster() # UpdateCluster | 
-
-    try:
-        # Update Cluster
-        api_response = await api_instance.update_cluster_clusters_cluster_id_put(cluster_id, update_cluster)
-        print("The response of ClustersApi->update_cluster_clusters_cluster_id_put:\n")
+        # Handle Token Refresh
+        api_response = await api_instance.handle_token_refresh_oauth_token_post_0(token_request)
+        print("The response of OauthApi->handle_token_refresh_oauth_token_post_0:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->update_cluster_clusters_cluster_id_put: %s\n" % e)
+        print("Exception when calling OauthApi->handle_token_refresh_oauth_token_post_0: %s\n" % e)
 ```
 
 
@@ -630,16 +646,15 @@ async with ambient_backend_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
- **update_cluster** | [**UpdateCluster**](UpdateCluster.md)|  | 
+ **token_request** | [**TokenRequest**](TokenRequest.md)|  | 
 
 ### Return type
 
-[**Cluster**](Cluster.md)
+[**TokenResponse**](TokenResponse.md)
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+No authorization required
 
 ### HTTP request headers
 

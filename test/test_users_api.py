@@ -69,6 +69,13 @@ class TestUsersApi(unittest.TestCase):
         """
         pass
 
+    def test_get_users_users_get(self) -> None:
+        """Test case for get_users_users_get
+
+        Get Users
+        """
+        pass
+
     def test_login_user_users_login_post(self) -> None:
         """Test case for login_user_users_login_post
 
