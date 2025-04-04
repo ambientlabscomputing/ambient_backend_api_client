@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.device_authorization import DeviceAuthorization
 from ambient_backend_api_client.models.docker_swarm_info import DockerSwarmInfo
 from ambient_backend_api_client.models.network_interface import NetworkInterface
 from ambient_backend_api_client.models.node_architecture_enum import NodeArchitectureEnum
@@ -52,7 +53,8 @@ class NodeInput(BaseModel):
     status: StatusEnum
     cluster_id: Optional[StrictInt] = None
     docker_swarm_info: Optional[DockerSwarmInfo] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "live", "architecture", "interfaces", "advertised_interface", "tags", "last_seen", "error", "certificate", "status", "cluster_id", "docker_swarm_info"]
+    device_authorization: Optional[DeviceAuthorization] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "resource_type", "description", "org_id", "user_id", "role", "live", "architecture", "interfaces", "advertised_interface", "tags", "last_seen", "error", "certificate", "status", "cluster_id", "docker_swarm_info", "device_authorization"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +105,9 @@ class NodeInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of docker_swarm_info
         if self.docker_swarm_info:
             _dict['docker_swarm_info'] = self.docker_swarm_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of device_authorization
+        if self.device_authorization:
+            _dict['device_authorization'] = self.device_authorization.to_dict()
         # set to None if id (nullable) is None
         # and model_fields_set contains the field
         if self.id is None and "id" in self.model_fields_set:
@@ -143,6 +148,11 @@ class NodeInput(BaseModel):
         if self.docker_swarm_info is None and "docker_swarm_info" in self.model_fields_set:
             _dict['docker_swarm_info'] = None
 
+        # set to None if device_authorization (nullable) is None
+        # and model_fields_set contains the field
+        if self.device_authorization is None and "device_authorization" in self.model_fields_set:
+            _dict['device_authorization'] = None
+
         return _dict
 
     @classmethod
@@ -172,7 +182,8 @@ class NodeInput(BaseModel):
             "certificate": obj.get("certificate"),
             "status": obj.get("status"),
             "cluster_id": obj.get("cluster_id"),
-            "docker_swarm_info": DockerSwarmInfo.from_dict(obj["docker_swarm_info"]) if obj.get("docker_swarm_info") is not None else None
+            "docker_swarm_info": DockerSwarmInfo.from_dict(obj["docker_swarm_info"]) if obj.get("docker_swarm_info") is not None else None,
+            "device_authorization": DeviceAuthorization.from_dict(obj["device_authorization"]) if obj.get("device_authorization") is not None else None
         })
         return _obj
 

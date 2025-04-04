@@ -18,25 +18,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from ambient_backend_api_client.models.request import Request
-from ambient_backend_api_client.models.service import Service
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeployServiceResponse(BaseModel):
+class DeviceAuthorization(BaseModel):
     """
-    DeployServiceResponse
+    DeviceAuthorization
     """ # noqa: E501
-    request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2025-04-03T21:01:12.078425'
-    location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
-    refresh_interval: Optional[StrictInt] = 10
-    location: Optional[StrictStr] = None
-    service: Service
-    request: Request
-    __properties: ClassVar[List[str]] = ["request_id", "requested_ts", "location_root", "refresh_interval", "location", "service", "request"]
+    device_code: StrictStr
+    user_code: StrictStr
+    created_at: Optional[datetime] = Field(default=None, description="Time when the device authorization was created")
+    expires_in: Optional[StrictInt] = Field(default=600, description="Time in seconds until the device authorization expires")
+    interval: Optional[StrictInt] = Field(default=5, description="Interval in seconds to poll for the device authorization")
+    node_id: StrictInt
+    user_id: StrictInt
+    org_id: StrictInt
+    id: StrictInt
+    __properties: ClassVar[List[str]] = ["device_code", "user_code", "created_at", "expires_in", "interval", "node_id", "user_id", "org_id", "id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +57,7 @@ class DeployServiceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a JSON string"""
+        """Create an instance of DeviceAuthorization from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,22 +78,11 @@ class DeployServiceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of service
-        if self.service:
-            _dict['service'] = self.service.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of request
-        if self.request:
-            _dict['request'] = self.request.to_dict()
-        # set to None if location (nullable) is None
-        # and model_fields_set contains the field
-        if self.location is None and "location" in self.model_fields_set:
-            _dict['location'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeployServiceResponse from a dict"""
+        """Create an instance of DeviceAuthorization from a dict"""
         if obj is None:
             return None
 
@@ -100,13 +90,15 @@ class DeployServiceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2025-04-03T21:01:12.078425',
-            "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
-            "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
-            "location": obj.get("location"),
-            "service": Service.from_dict(obj["service"]) if obj.get("service") is not None else None,
-            "request": Request.from_dict(obj["request"]) if obj.get("request") is not None else None
+            "device_code": obj.get("device_code"),
+            "user_code": obj.get("user_code"),
+            "created_at": obj.get("created_at"),
+            "expires_in": obj.get("expires_in") if obj.get("expires_in") is not None else 600,
+            "interval": obj.get("interval") if obj.get("interval") is not None else 5,
+            "node_id": obj.get("node_id"),
+            "user_id": obj.get("user_id"),
+            "org_id": obj.get("org_id"),
+            "id": obj.get("id")
         })
         return _obj
 

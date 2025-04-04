@@ -37,7 +37,7 @@ class TestPostRegistriesCredsTriggerResponse(unittest.TestCase):
         if include_optional:
             return PostRegistriesCredsTriggerResponse(
                 request_id = 56,
-                requested_ts = '2025-04-01T02:28:19.439985',
+                requested_ts = '2025-04-03T21:01:12.078425',
                 location_root = 'http://localhost:8001/requests/',
                 refresh_interval = 56,
                 location = '',

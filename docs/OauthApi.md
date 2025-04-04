@@ -4,6 +4,8 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_device_authorization_oauth_device_authorization_post**](OauthApi.md#create_device_authorization_oauth_device_authorization_post) | **POST** /oauth/device_authorization | Create Device Authorization
+[**create_device_authorization_oauth_device_authorization_post_0**](OauthApi.md#create_device_authorization_oauth_device_authorization_post_0) | **POST** /oauth/device_authorization | Create Device Authorization
 [**delete_token_oauth_tokens_token_id_delete**](OauthApi.md#delete_token_oauth_tokens_token_id_delete) | **DELETE** /oauth/tokens/{token_id} | Delete Token
 [**delete_token_oauth_tokens_token_id_delete_0**](OauthApi.md#delete_token_oauth_tokens_token_id_delete_0) | **DELETE** /oauth/tokens/{token_id} | Delete Token
 [**get_token_oauth_tokens_token_id_get**](OauthApi.md#get_token_oauth_tokens_token_id_get) | **GET** /oauth/tokens/{token_id} | Get Token
@@ -13,6 +15,170 @@ Method | HTTP request | Description
 [**handle_token_refresh_oauth_token_post**](OauthApi.md#handle_token_refresh_oauth_token_post) | **POST** /oauth/token | Handle Token Refresh
 [**handle_token_refresh_oauth_token_post_0**](OauthApi.md#handle_token_refresh_oauth_token_post_0) | **POST** /oauth/token | Handle Token Refresh
 
+
+# **create_device_authorization_oauth_device_authorization_post**
+> DeviceAuthorization create_device_authorization_oauth_device_authorization_post(device_authorization_create)
+
+Create Device Authorization
+
+Create device authorization
+
+### Example
+
+* Api Key Authentication (APIKeyHeader):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.device_authorization import DeviceAuthorization
+from ambient_backend_api_client.models.device_authorization_create import DeviceAuthorizationCreate
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    device_authorization_create = ambient_backend_api_client.DeviceAuthorizationCreate() # DeviceAuthorizationCreate | 
+
+    try:
+        # Create Device Authorization
+        api_response = await api_instance.create_device_authorization_oauth_device_authorization_post(device_authorization_create)
+        print("The response of OauthApi->create_device_authorization_oauth_device_authorization_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OauthApi->create_device_authorization_oauth_device_authorization_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_authorization_create** | [**DeviceAuthorizationCreate**](DeviceAuthorizationCreate.md)|  | 
+
+### Return type
+
+[**DeviceAuthorization**](DeviceAuthorization.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**201** | Created |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_device_authorization_oauth_device_authorization_post_0**
+> DeviceAuthorization create_device_authorization_oauth_device_authorization_post_0(device_authorization_create)
+
+Create Device Authorization
+
+Create device authorization
+
+### Example
+
+* Api Key Authentication (APIKeyHeader):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.device_authorization import DeviceAuthorization
+from ambient_backend_api_client.models.device_authorization_create import DeviceAuthorizationCreate
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.OauthApi(api_client)
+    device_authorization_create = ambient_backend_api_client.DeviceAuthorizationCreate() # DeviceAuthorizationCreate | 
+
+    try:
+        # Create Device Authorization
+        api_response = await api_instance.create_device_authorization_oauth_device_authorization_post_0(device_authorization_create)
+        print("The response of OauthApi->create_device_authorization_oauth_device_authorization_post_0:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OauthApi->create_device_authorization_oauth_device_authorization_post_0: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_authorization_create** | [**DeviceAuthorizationCreate**](DeviceAuthorizationCreate.md)|  | 
+
+### Return type
+
+[**DeviceAuthorization**](DeviceAuthorization.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**201** | Created |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_token_oauth_tokens_token_id_delete**
 > object delete_token_oauth_tokens_token_id_delete(token_id)

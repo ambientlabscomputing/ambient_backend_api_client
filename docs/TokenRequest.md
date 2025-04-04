@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **access_token** | **str** |  | [optional] 
 **refresh_token** | **str** |  | [optional] 
 **node_id** | **int** |  | [optional] 
+**device_code** | **str** |  | [optional] 
+**user_code** | **str** |  | [optional] 
 
 ## Example
 
