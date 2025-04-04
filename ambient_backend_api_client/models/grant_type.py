@@ -19,20 +19,20 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class TokenRequestType(str, Enum):
+class GrantType(str, Enum):
     """
-    TokenRequestType
+    GrantType
     """
 
     """
     allowed enum values
     """
-    NODE = 'node'
-    API = 'api'
+    REFRESH_TOKEN = 'refresh_token'
+    CREATE_TOKEN = 'create_token'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of TokenRequestType from a JSON string"""
+        """Create an instance of GrantType from a JSON string"""
         return cls(json.loads(json_str))
 
 

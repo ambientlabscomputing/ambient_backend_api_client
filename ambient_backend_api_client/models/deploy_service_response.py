@@ -30,7 +30,7 @@ class DeployServiceResponse(BaseModel):
     DeployServiceResponse
     """ # noqa: E501
     request_id: StrictInt
-    requested_ts: Optional[StrictStr] = '2025-03-15T06:34:03.620273'
+    requested_ts: Optional[StrictStr] = '2025-04-01T02:28:19.439985'
     location_root: Optional[StrictStr] = 'http://localhost:8001/requests/'
     refresh_interval: Optional[StrictInt] = 10
     location: Optional[StrictStr] = None
@@ -101,7 +101,7 @@ class DeployServiceResponse(BaseModel):
 
         _obj = cls.model_validate({
             "request_id": obj.get("request_id"),
-            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2025-03-15T06:34:03.620273',
+            "requested_ts": obj.get("requested_ts") if obj.get("requested_ts") is not None else '2025-04-01T02:28:19.439985',
             "location_root": obj.get("location_root") if obj.get("location_root") is not None else 'http://localhost:8001/requests/',
             "refresh_interval": obj.get("refresh_interval") if obj.get("refresh_interval") is not None else 10,
             "location": obj.get("location"),

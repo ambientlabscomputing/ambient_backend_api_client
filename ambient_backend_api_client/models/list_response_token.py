@@ -19,19 +19,20 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.token import Token
 from typing import Optional, Set
 from typing_extensions import Self
 
-class TokenResponse(BaseModel):
+class ListResponseToken(BaseModel):
     """
-    TokenResponse
+    ListResponseToken
     """ # noqa: E501
-    access_token: StrictStr
-    refresh_token: StrictStr
-    expires_at: datetime
-    __properties: ClassVar[List[str]] = ["access_token", "refresh_token", "expires_at"]
+    timestamp: Optional[datetime] = None
+    count: Optional[StrictInt] = None
+    results: List[Token]
+    __properties: ClassVar[List[str]] = ["timestamp", "count", "results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +52,7 @@ class TokenResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of TokenResponse from a JSON string"""
+        """Create an instance of ListResponseToken from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +73,23 @@ class TokenResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item in self.results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['results'] = _items
+        # set to None if count (nullable) is None
+        # and model_fields_set contains the field
+        if self.count is None and "count" in self.model_fields_set:
+            _dict['count'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of TokenResponse from a dict"""
+        """Create an instance of ListResponseToken from a dict"""
         if obj is None:
             return None
 
@@ -84,9 +97,9 @@ class TokenResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "refresh_token": obj.get("refresh_token"),
-            "expires_at": obj.get("expires_at")
+            "timestamp": obj.get("timestamp"),
+            "count": obj.get("count"),
+            "results": [Token.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

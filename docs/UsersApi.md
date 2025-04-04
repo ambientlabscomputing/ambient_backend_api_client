@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**delete_user_users_user_id_delete**](UsersApi.md#delete_user_users_user_id_delete) | **DELETE** /users/{user_id} | Delete User
 [**get_current_user_users_whoami_get**](UsersApi.md#get_current_user_users_whoami_get) | **GET** /users/whoami | Get Current User
 [**get_user_users_user_id_get**](UsersApi.md#get_user_users_user_id_get) | **GET** /users/{user_id} | Get User
+[**get_users_users_get**](UsersApi.md#get_users_users_get) | **GET** /users | Get Users
 [**login_user_users_login_post**](UsersApi.md#login_user_users_login_post) | **POST** /users/login | Login User
 [**update_user_users_user_id_patch**](UsersApi.md#update_user_users_user_id_patch) | **PATCH** /users/{user_id} | Update User
 
@@ -21,7 +22,7 @@ Create Refresh Token
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -40,7 +41,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -68,7 +73,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -90,7 +95,7 @@ Create Service Account
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -110,7 +115,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -142,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -165,7 +174,7 @@ Create User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -185,7 +194,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -219,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -242,7 +255,7 @@ Delete User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -260,7 +273,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -290,7 +307,7 @@ void (empty response body)
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -313,7 +330,7 @@ Get Current User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -332,7 +349,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -360,7 +381,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -382,7 +403,7 @@ Get User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -401,7 +422,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -433,7 +458,95 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_users_users_get**
+> GetUsersResponse get_users_users_get(limit=limit, offset=offset, order_by=order_by, order=order, role=role, search=search)
+
+Get Users
+
+### Example
+
+* Api Key Authentication (APIKeyHeader):
+
+```python
+import ambient_backend_api_client
+from ambient_backend_api_client.models.get_users_response import GetUsersResponse
+from ambient_backend_api_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ambient_backend_api_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with ambient_backend_api_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ambient_backend_api_client.UsersApi(api_client)
+    limit = 100 # int |  (optional) (default to 100)
+    offset = 0 # int |  (optional) (default to 0)
+    order_by = 'name' # str |  (optional) (default to 'name')
+    order = 'asc' # str |  (optional) (default to 'asc')
+    role = 'role_example' # str |  (optional)
+    search = 'search_example' # str |  (optional)
+
+    try:
+        # Get Users
+        api_response = await api_instance.get_users_users_get(limit=limit, offset=offset, order_by=order_by, order=order, role=role, search=search)
+        print("The response of UsersApi->get_users_users_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->get_users_users_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**|  | [optional] [default to 100]
+ **offset** | **int**|  | [optional] [default to 0]
+ **order_by** | **str**|  | [optional] [default to &#39;name&#39;]
+ **order** | **str**|  | [optional] [default to &#39;asc&#39;]
+ **role** | **str**|  | [optional] 
+ **search** | **str**|  | [optional] 
+
+### Return type
+
+[**GetUsersResponse**](GetUsersResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -456,7 +569,7 @@ Login User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -475,7 +588,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -503,7 +620,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 
@@ -525,7 +642,7 @@ Update User
 
 ### Example
 
-* OAuth Authentication (OAuth2PasswordBearer):
+* Api Key Authentication (APIKeyHeader):
 
 ```python
 import ambient_backend_api_client
@@ -544,7 +661,11 @@ configuration = ambient_backend_api_client.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-configuration.access_token = os.environ["ACCESS_TOKEN"]
+# Configure API key authorization: APIKeyHeader
+configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with ambient_backend_api_client.ApiClient(configuration) as api_client:
@@ -578,7 +699,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[OAuth2PasswordBearer](../README.md#OAuth2PasswordBearer)
+[APIKeyHeader](../README.md#APIKeyHeader)
 
 ### HTTP request headers
 

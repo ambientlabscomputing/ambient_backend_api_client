@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **request_id** | **int** |  | 
-**requested_ts** | **str** |  | [optional] [default to '2025-03-15T06:34:03.620273']
+**requested_ts** | **str** |  | [optional] [default to '2025-04-01T02:28:19.439985']
 **location_root** | **str** |  | [optional] [default to 'http://localhost:8001/requests/']
 **refresh_interval** | **int** |  | [optional] [default to 10]
 **location** | **str** |  | [optional] 

@@ -294,7 +294,7 @@ class NotificationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -555,7 +555,7 @@ class NotificationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -816,7 +816,7 @@ class NotificationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -1079,7 +1079,7 @@ class NotificationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -1368,7 +1368,7 @@ class NotificationsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'OAuth2PasswordBearer'
+            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(

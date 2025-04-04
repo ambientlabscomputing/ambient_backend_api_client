@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_type** | [**TokenType**](TokenType.md) |  | 
-**duration** | **int** |  | [optional] [default to 3600]
-**user_id** | **int** |  | [optional] 
-**org_id** | **int** |  | [optional] 
-**node_id** | **int** |  | [optional] 
 **id** | **int** |  | 
-**value** | **str** |  | 
-**value_hash** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
+**expires_at** | **datetime** |  | 
+**uid** | **str** |  | 
+**tombstoned** | **bool** |  | [optional] [default to False]
+**user_id** | **int** |  | 
+**org_id** | **int** |  | 
+**node_id** | **int** |  | 
 
 ## Example
 

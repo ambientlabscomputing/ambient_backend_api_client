@@ -18,25 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from ambient_backend_api_client.models.grant_type import GrantType
+from ambient_backend_api_client.models.token_request_type import TokenRequestType
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Token(BaseModel):
+class TokenRequest(BaseModel):
     """
-    Token
+    TokenRequest
     """ # noqa: E501
-    id: StrictInt
-    description: Optional[StrictStr] = None
-    expires_at: datetime
-    uid: StrictStr
-    tombstoned: Optional[StrictBool] = False
-    user_id: StrictInt
-    org_id: StrictInt
-    node_id: Optional[StrictInt]
-    __properties: ClassVar[List[str]] = ["id", "description", "expires_at", "uid", "tombstoned", "user_id", "org_id", "node_id"]
+    grant_type: GrantType = Field(description="The type of token request")
+    duration: Optional[StrictInt] = Field(default=3600, description="The duration of the token in seconds")
+    token_description: Optional[StrictStr] = None
+    request_type: TokenRequestType = Field(description="The type of token request (node or api)")
+    access_token: Optional[StrictStr] = None
+    refresh_token: Optional[StrictStr] = None
+    node_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["grant_type", "duration", "token_description", "request_type", "access_token", "refresh_token", "node_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +56,7 @@ class Token(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Token from a JSON string"""
+        """Create an instance of TokenRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -77,10 +77,20 @@ class Token(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if description (nullable) is None
+        # set to None if token_description (nullable) is None
         # and model_fields_set contains the field
-        if self.description is None and "description" in self.model_fields_set:
-            _dict['description'] = None
+        if self.token_description is None and "token_description" in self.model_fields_set:
+            _dict['token_description'] = None
+
+        # set to None if access_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.access_token is None and "access_token" in self.model_fields_set:
+            _dict['access_token'] = None
+
+        # set to None if refresh_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.refresh_token is None and "refresh_token" in self.model_fields_set:
+            _dict['refresh_token'] = None
 
         # set to None if node_id (nullable) is None
         # and model_fields_set contains the field
@@ -91,7 +101,7 @@ class Token(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Token from a dict"""
+        """Create an instance of TokenRequest from a dict"""
         if obj is None:
             return None
 
@@ -99,13 +109,12 @@ class Token(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "description": obj.get("description"),
-            "expires_at": obj.get("expires_at"),
-            "uid": obj.get("uid"),
-            "tombstoned": obj.get("tombstoned") if obj.get("tombstoned") is not None else False,
-            "user_id": obj.get("user_id"),
-            "org_id": obj.get("org_id"),
+            "grant_type": obj.get("grant_type"),
+            "duration": obj.get("duration") if obj.get("duration") is not None else 3600,
+            "token_description": obj.get("token_description"),
+            "request_type": obj.get("request_type"),
+            "access_token": obj.get("access_token"),
+            "refresh_token": obj.get("refresh_token"),
             "node_id": obj.get("node_id")
         })
         return _obj
