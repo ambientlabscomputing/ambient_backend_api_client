@@ -75,6 +75,16 @@ class TestListResponseNodeWithRegistries(unittest.TestCase):
                             node_addr = '', 
                             local_node_state = '', 
                             error = '', ), 
+                        device_authorization = ambient_backend_api_client.models.device_authorization.DeviceAuthorization(
+                            device_code = '', 
+                            user_code = '', 
+                            created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            expires_in = 56, 
+                            interval = 56, 
+                            node_id = 56, 
+                            user_id = 56, 
+                            org_id = 56, 
+                            id = 56, ), 
                         registry_associations = [
                             ambient_backend_api_client.models.registry_node_association.RegistryNodeAssociation(
                                 node_id = 56, 
@@ -134,6 +144,16 @@ class TestListResponseNodeWithRegistries(unittest.TestCase):
                             node_addr = '', 
                             local_node_state = '', 
                             error = '', ), 
+                        device_authorization = ambient_backend_api_client.models.device_authorization.DeviceAuthorization(
+                            device_code = '', 
+                            user_code = '', 
+                            created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                            expires_in = 56, 
+                            interval = 56, 
+                            node_id = 56, 
+                            user_id = 56, 
+                            org_id = 56, 
+                            id = 56, ), 
                         registry_associations = [
                             ambient_backend_api_client.models.registry_node_association.RegistryNodeAssociation(
                                 node_id = 56, 

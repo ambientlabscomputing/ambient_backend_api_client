@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **status** | [**StatusEnum**](StatusEnum.md) |  | 
 **cluster_id** | **int** |  | [optional] 
 **docker_swarm_info** | [**DockerSwarmInfo**](DockerSwarmInfo.md) |  | [optional] 
+**device_authorization** | [**DeviceAuthorization**](DeviceAuthorization.md) |  | [optional] 
 **registry_associations** | [**List[RegistryNodeAssociation]**](RegistryNodeAssociation.md) |  | [optional] [default to []]
 **registries** | [**List[ContainerRegistry]**](ContainerRegistry.md) |  | [optional] [default to []]
 

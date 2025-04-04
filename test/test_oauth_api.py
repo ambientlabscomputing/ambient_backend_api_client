@@ -27,6 +27,20 @@ class TestOauthApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_device_authorization_oauth_device_authorization_post(self) -> None:
+        """Test case for create_device_authorization_oauth_device_authorization_post
+
+        Create Device Authorization
+        """
+        pass
+
+    def test_create_device_authorization_oauth_device_authorization_post_0(self) -> None:
+        """Test case for create_device_authorization_oauth_device_authorization_post_0
+
+        Create Device Authorization
+        """
+        pass
+
     def test_delete_token_oauth_tokens_token_id_delete(self) -> None:
         """Test case for delete_token_oauth_tokens_token_id_delete
 
