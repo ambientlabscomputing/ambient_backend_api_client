@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **expires_at** | **datetime** |  | 
 **uid** | **str** |  | 
 **tombstoned** | **bool** |  | [optional] [default to False]
-**user_id** | **int** |  | 
-**org_id** | **int** |  | 
-**node_id** | **int** |  | 
+**user_id** | **int** |  | [optional] 
+**org_id** | **int** |  | [optional] 
+**node_id** | **int** |  | [optional] 
 
 ## Example
 

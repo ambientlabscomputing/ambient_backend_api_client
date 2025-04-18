@@ -18,72 +18,72 @@ import unittest
 from ambient_backend_api_client.api.users_api import UsersApi
 
 
-class TestUsersApi(unittest.TestCase):
+class TestUsersApi(unittest.IsolatedAsyncioTestCase):
     """UsersApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = UsersApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_create_refresh_token_users_api_token_post(self) -> None:
+    async def test_create_refresh_token_users_api_token_post(self) -> None:
         """Test case for create_refresh_token_users_api_token_post
 
         Create Refresh Token
         """
         pass
 
-    def test_create_service_account_users_service_accounts_post(self) -> None:
+    async def test_create_service_account_users_service_accounts_post(self) -> None:
         """Test case for create_service_account_users_service_accounts_post
 
         Create Service Account
         """
         pass
 
-    def test_create_user_users_post(self) -> None:
+    async def test_create_user_users_post(self) -> None:
         """Test case for create_user_users_post
 
         Create User
         """
         pass
 
-    def test_delete_user_users_user_id_delete(self) -> None:
+    async def test_delete_user_users_user_id_delete(self) -> None:
         """Test case for delete_user_users_user_id_delete
 
         Delete User
         """
         pass
 
-    def test_get_current_user_users_whoami_get(self) -> None:
+    async def test_get_current_user_users_whoami_get(self) -> None:
         """Test case for get_current_user_users_whoami_get
 
         Get Current User
         """
         pass
 
-    def test_get_user_users_user_id_get(self) -> None:
+    async def test_get_user_users_user_id_get(self) -> None:
         """Test case for get_user_users_user_id_get
 
         Get User
         """
         pass
 
-    def test_get_users_users_get(self) -> None:
+    async def test_get_users_users_get(self) -> None:
         """Test case for get_users_users_get
 
         Get Users
         """
         pass
 
-    def test_login_user_users_login_post(self) -> None:
+    async def test_login_user_users_login_post(self) -> None:
         """Test case for login_user_users_login_post
 
         Login User
         """
         pass
 
-    def test_update_user_users_user_id_patch(self) -> None:
+    async def test_update_user_users_user_id_patch(self) -> None:
         """Test case for update_user_users_user_id_patch
 
         Update User

@@ -149,6 +149,7 @@ class CommandCreate(BaseModel):
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),
             "os_user": obj.get("os_user"),
+            "env_vars": obj.get("env_vars"),
             "shell": obj.get("shell") if obj.get("shell") is not None else False,
             "node_options": NodeSelectOptions.from_dict(obj["node_options"]) if obj.get("node_options") is not None else None,
             "cluster_options": ClusterSelectOptions.from_dict(obj["cluster_options"]) if obj.get("cluster_options") is not None else None,

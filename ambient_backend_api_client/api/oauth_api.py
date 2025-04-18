@@ -19,8 +19,11 @@ from typing_extensions import Annotated
 
 from pydantic import StrictBool, StrictInt, StrictStr
 from typing import Any, Optional
+from ambient_backend_api_client.models.client_secret import ClientSecret
+from ambient_backend_api_client.models.create_client_secret import CreateClientSecret
 from ambient_backend_api_client.models.device_authorization import DeviceAuthorization
-from ambient_backend_api_client.models.device_authorization_create import DeviceAuthorizationCreate
+from ambient_backend_api_client.models.device_authorization_request import DeviceAuthorizationRequest
+from ambient_backend_api_client.models.jwt_claims import JWTClaims
 from ambient_backend_api_client.models.list_response_token import ListResponseToken
 from ambient_backend_api_client.models.token import Token
 from ambient_backend_api_client.models.token_request import TokenRequest
@@ -45,9 +48,10 @@ class OauthApi:
 
 
     @validate_call
-    async def create_device_authorization_oauth_device_authorization_post(
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
+        user_code: StrictStr,
+        node_id: StrictInt,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,12 +65,574 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceAuthorization:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post_with_http_info(
+        self,
+        user_code: StrictStr,
+        node_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DeviceAuthorization]:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post_without_preload_content(
+        self,
+        user_code: StrictStr,
+        node_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _confirm_device_authorization_oauth_device_authorization_confirm_post_serialize(
+        self,
+        user_code,
+        node_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_code is not None:
+            
+            _query_params.append(('user_code', user_code))
+            
+        if node_id is not None:
+            
+            _query_params.append(('node_id', node_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'APIKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/device_authorization/confirm',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post_0(
+        self,
+        user_code: StrictStr,
+        node_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DeviceAuthorization:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_0_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post_0_with_http_info(
+        self,
+        user_code: StrictStr,
+        node_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DeviceAuthorization]:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_0_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def confirm_device_authorization_oauth_device_authorization_confirm_post_0_without_preload_content(
+        self,
+        user_code: StrictStr,
+        node_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Confirm Device Authorization
+
+        Confirm device authorization
+
+        :param user_code: (required)
+        :type user_code: str
+        :param node_id: (required)
+        :type node_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._confirm_device_authorization_oauth_device_authorization_confirm_post_0_serialize(
+            user_code=user_code,
+            node_id=node_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeviceAuthorization",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _confirm_device_authorization_oauth_device_authorization_confirm_post_0_serialize(
+        self,
+        user_code,
+        node_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_code is not None:
+            
+            _query_params.append(('user_code', user_code))
+            
+        if node_id is not None:
+            
+            _query_params.append(('node_id', node_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'APIKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/device_authorization/confirm',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_device_authorization_oauth_device_authorization_post(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DeviceAuthorizationRequest:
         """Create Device Authorization
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +656,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,9 +663,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -116,7 +680,6 @@ class OauthApi:
     @validate_call
     async def create_device_authorization_oauth_device_authorization_post_with_http_info(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -129,13 +692,11 @@ class OauthApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DeviceAuthorization]:
+    ) -> ApiResponse[DeviceAuthorizationRequest]:
         """Create Device Authorization
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -159,7 +720,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -167,9 +727,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -185,7 +744,6 @@ class OauthApi:
     @validate_call
     async def create_device_authorization_oauth_device_authorization_post_without_preload_content(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,8 +761,6 @@ class OauthApi:
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -228,7 +784,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -236,9 +791,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -249,7 +803,6 @@ class OauthApi:
 
     def _create_device_authorization_oauth_device_authorization_post_serialize(
         self,
-        device_authorization_create,
         _request_auth,
         _content_type,
         _headers,
@@ -265,7 +818,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -273,34 +828,19 @@ class OauthApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if device_authorization_create is not None:
-            _body_params = device_authorization_create
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
             )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
         ]
 
         return self.api_client.param_serialize(
@@ -324,7 +864,6 @@ class OauthApi:
     @validate_call
     async def create_device_authorization_oauth_device_authorization_post_0(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -337,13 +876,11 @@ class OauthApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DeviceAuthorization:
+    ) -> DeviceAuthorizationRequest:
         """Create Device Authorization
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -367,7 +904,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_0_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -375,9 +911,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -393,7 +928,6 @@ class OauthApi:
     @validate_call
     async def create_device_authorization_oauth_device_authorization_post_0_with_http_info(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -406,13 +940,11 @@ class OauthApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DeviceAuthorization]:
+    ) -> ApiResponse[DeviceAuthorizationRequest]:
         """Create Device Authorization
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -436,7 +968,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_0_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -444,9 +975,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -462,7 +992,6 @@ class OauthApi:
     @validate_call
     async def create_device_authorization_oauth_device_authorization_post_0_without_preload_content(
         self,
-        device_authorization_create: DeviceAuthorizationCreate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,8 +1009,6 @@ class OauthApi:
 
         Create device authorization
 
-        :param device_authorization_create: (required)
-        :type device_authorization_create: DeviceAuthorizationCreate
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -505,7 +1032,6 @@ class OauthApi:
         """ # noqa: E501
 
         _param = self._create_device_authorization_oauth_device_authorization_post_0_serialize(
-            device_authorization_create=device_authorization_create,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -513,9 +1039,8 @@ class OauthApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeviceAuthorization",
-            '201': "DeviceAuthorization",
-            '422': "HTTPValidationError",
+            '200': "DeviceAuthorizationRequest",
+            '201': "DeviceAuthorizationRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -526,7 +1051,6 @@ class OauthApi:
 
     def _create_device_authorization_oauth_device_authorization_post_0_serialize(
         self,
-        device_authorization_create,
         _request_auth,
         _content_type,
         _headers,
@@ -542,7 +1066,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -550,30 +1076,261 @@ class OauthApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if device_authorization_create is not None:
-            _body_params = device_authorization_create
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/device_authorization',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
         )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> JWTClaims:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[JWTClaims]:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _decode_jwt_oauth_decode_post_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
             )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -582,7 +1339,253 @@ class OauthApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/oauth/device_authorization',
+            resource_path='/oauth/decode',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post_0(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> JWTClaims:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_0_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post_0_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[JWTClaims]:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_0_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def decode_jwt_oauth_decode_post_0_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Decode Jwt
+
+        Decode JWT
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._decode_jwt_oauth_decode_post_0_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "JWTClaims",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _decode_jwt_oauth_decode_post_0_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'APIKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/decode',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -819,7 +1822,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -832,11 +1837,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1083,7 +2089,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1096,11 +2104,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1344,7 +2353,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1357,11 +2368,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1605,7 +2617,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1618,11 +2632,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1657,7 +2672,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -1691,7 +2706,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -1761,7 +2776,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -1795,7 +2810,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -1865,7 +2880,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -1899,7 +2914,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -1983,7 +2998,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2034,11 +3051,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2073,7 +3091,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -2107,7 +3125,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -2177,7 +3195,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -2211,7 +3229,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -2281,7 +3299,7 @@ class OauthApi:
         order: Optional[StrictStr] = None,
         user_id: Optional[StrictInt] = None,
         org_id: Optional[StrictInt] = None,
-        node_id: Optional[Any] = None,
+        node_id: Optional[StrictInt] = None,
         tombstoned: Optional[StrictBool] = None,
         uid: Optional[StrictStr] = None,
         search: Optional[StrictStr] = None,
@@ -2315,7 +3333,7 @@ class OauthApi:
         :param org_id:
         :type org_id: int
         :param node_id:
-        :type node_id: NodeId
+        :type node_id: int
         :param tombstoned:
         :type tombstoned: bool
         :param uid:
@@ -2399,7 +3417,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2450,11 +3470,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2481,7 +3502,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post(
+    async def handle_token_request_oauth_token_post(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2497,9 +3518,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TokenResponse:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2525,7 +3546,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_serialize(
+        _param = self._handle_token_request_oauth_token_post_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2549,7 +3570,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post_with_http_info(
+    async def handle_token_request_oauth_token_post_with_http_info(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2565,9 +3586,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TokenResponse]:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2593,7 +3614,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_serialize(
+        _param = self._handle_token_request_oauth_token_post_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2617,7 +3638,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post_without_preload_content(
+    async def handle_token_request_oauth_token_post_without_preload_content(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2633,9 +3654,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2661,7 +3682,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_serialize(
+        _param = self._handle_token_request_oauth_token_post_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2680,7 +3701,7 @@ class OauthApi:
         return response_data.response
 
 
-    def _handle_token_refresh_oauth_token_post_serialize(
+    def _handle_token_request_oauth_token_post_serialize(
         self,
         token_request,
         _request_auth,
@@ -2698,7 +3719,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2711,11 +3734,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2754,7 +3778,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post_0(
+    async def handle_token_request_oauth_token_post_0(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2770,9 +3794,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TokenResponse:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2798,7 +3822,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_0_serialize(
+        _param = self._handle_token_request_oauth_token_post_0_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2822,7 +3846,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post_0_with_http_info(
+    async def handle_token_request_oauth_token_post_0_with_http_info(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2838,9 +3862,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TokenResponse]:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2866,7 +3890,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_0_serialize(
+        _param = self._handle_token_request_oauth_token_post_0_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2890,7 +3914,7 @@ class OauthApi:
 
 
     @validate_call
-    async def handle_token_refresh_oauth_token_post_0_without_preload_content(
+    async def handle_token_request_oauth_token_post_0_without_preload_content(
         self,
         token_request: TokenRequest,
         _request_timeout: Union[
@@ -2906,9 +3930,9 @@ class OauthApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Handle Token Refresh
+        """Handle Token Request
 
-        Handle token refresh
+        Handle OAuth2 token request
 
         :param token_request: (required)
         :type token_request: TokenRequest
@@ -2934,7 +3958,7 @@ class OauthApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._handle_token_refresh_oauth_token_post_0_serialize(
+        _param = self._handle_token_request_oauth_token_post_0_serialize(
             token_request=token_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2953,7 +3977,7 @@ class OauthApi:
         return response_data.response
 
 
-    def _handle_token_refresh_oauth_token_post_0_serialize(
+    def _handle_token_request_oauth_token_post_0_serialize(
         self,
         token_request,
         _request_auth,
@@ -2971,7 +3995,9 @@ class OauthApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2984,11 +4010,12 @@ class OauthApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3011,6 +4038,560 @@ class OauthApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/oauth/token',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def register_client_oauth_clients_post(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ClientSecret:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def register_client_oauth_clients_post_with_http_info(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ClientSecret]:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def register_client_oauth_clients_post_without_preload_content(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _register_client_oauth_clients_post_serialize(
+        self,
+        create_client_secret,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_client_secret is not None:
+            _body_params = create_client_secret
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'APIKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/clients',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def register_client_oauth_clients_post_0(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ClientSecret:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_0_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def register_client_oauth_clients_post_0_with_http_info(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ClientSecret]:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_0_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def register_client_oauth_clients_post_0_without_preload_content(
+        self,
+        create_client_secret: CreateClientSecret,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Register Client
+
+        Register client
+
+        :param create_client_secret: (required)
+        :type create_client_secret: CreateClientSecret
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._register_client_oauth_clients_post_0_serialize(
+            create_client_secret=create_client_secret,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ClientSecret",
+            '422': "HTTPValidationError",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _register_client_oauth_clients_post_0_serialize(
+        self,
+        create_client_secret,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_client_secret is not None:
+            _body_params = create_client_secret
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'APIKeyHeader'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/oauth/clients',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

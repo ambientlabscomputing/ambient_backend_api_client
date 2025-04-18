@@ -18,100 +18,100 @@ import unittest
 from ambient_backend_api_client.api.services_api import ServicesApi
 
 
-class TestServicesApi(unittest.TestCase):
+class TestServicesApi(unittest.IsolatedAsyncioTestCase):
     """ServicesApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = ServicesApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_add_node_to_service_services_service_id_nodes_post(self) -> None:
+    async def test_add_node_to_service_services_service_id_nodes_post(self) -> None:
         """Test case for add_node_to_service_services_service_id_nodes_post
 
         Add Node To Service
         """
         pass
 
-    def test_delete_service_services_service_id_delete(self) -> None:
+    async def test_delete_service_services_service_id_delete(self) -> None:
         """Test case for delete_service_services_service_id_delete
 
         Delete Service
         """
         pass
 
-    def test_deploy_service_services_service_id_deploy_post(self) -> None:
+    async def test_deploy_service_services_service_id_deploy_post(self) -> None:
         """Test case for deploy_service_services_service_id_deploy_post
 
         Deploy Service
         """
         pass
 
-    def test_get_service_node_relationship_services_service_id_node_relationships_node_id_get(self) -> None:
+    async def test_get_service_node_relationship_services_service_id_node_relationships_node_id_get(self) -> None:
         """Test case for get_service_node_relationship_services_service_id_node_relationships_node_id_get
 
         Get Service Node Relationship
         """
         pass
 
-    def test_get_service_node_relationships_services_service_id_node_relationships_get(self) -> None:
+    async def test_get_service_node_relationships_services_service_id_node_relationships_get(self) -> None:
         """Test case for get_service_node_relationships_services_service_id_node_relationships_get
 
         Get Service Node Relationships
         """
         pass
 
-    def test_get_service_nodes_services_service_id_nodes_get(self) -> None:
+    async def test_get_service_nodes_services_service_id_nodes_get(self) -> None:
         """Test case for get_service_nodes_services_service_id_nodes_get
 
         Get Service Nodes
         """
         pass
 
-    def test_get_service_requests_services_service_id_requests_get(self) -> None:
+    async def test_get_service_requests_services_service_id_requests_get(self) -> None:
         """Test case for get_service_requests_services_service_id_requests_get
 
         Get Service Requests
         """
         pass
 
-    def test_get_service_services_service_id_get(self) -> None:
+    async def test_get_service_services_service_id_get(self) -> None:
         """Test case for get_service_services_service_id_get
 
         Get Service
         """
         pass
 
-    def test_get_services_services_get(self) -> None:
+    async def test_get_services_services_get(self) -> None:
         """Test case for get_services_services_get
 
         Get Services
         """
         pass
 
-    def test_patch_service_services_service_id_patch(self) -> None:
+    async def test_patch_service_services_service_id_patch(self) -> None:
         """Test case for patch_service_services_service_id_patch
 
         Patch Service
         """
         pass
 
-    def test_update_service_node_relationship_services_node_relationships_put(self) -> None:
+    async def test_update_service_node_relationship_services_node_relationships_put(self) -> None:
         """Test case for update_service_node_relationship_services_node_relationships_put
 
         Update Service Node Relationship
         """
         pass
 
-    def test_update_service_services_service_id_put(self) -> None:
+    async def test_update_service_services_service_id_put(self) -> None:
         """Test case for update_service_services_service_id_put
 
         Update Service
         """
         pass
 
-    def test_updateservice_services_post(self) -> None:
+    async def test_updateservice_services_post(self) -> None:
         """Test case for updateservice_services_post
 
         Updateservice

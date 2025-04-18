@@ -18,30 +18,30 @@ import unittest
 from ambient_backend_api_client.api.unimplemented_api import UnimplementedApi
 
 
-class TestUnimplementedApi(unittest.TestCase):
+class TestUnimplementedApi(unittest.IsolatedAsyncioTestCase):
     """UnimplementedApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = UnimplementedApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_create_event_events_event_get(self) -> None:
+    async def test_create_event_events_event_get(self) -> None:
         """Test case for create_event_events_event_get
 
         Create Event
         """
         pass
 
-    def test_create_event_label_events_event_label_get(self) -> None:
+    async def test_create_event_label_events_event_label_get(self) -> None:
         """Test case for create_event_label_events_event_label_get
 
         Create Event Label
         """
         pass
 
-    def test_create_event_template_events_event_template_get(self) -> None:
+    async def test_create_event_template_events_event_template_get(self) -> None:
         """Test case for create_event_template_events_event_template_get
 
         Create Event Template

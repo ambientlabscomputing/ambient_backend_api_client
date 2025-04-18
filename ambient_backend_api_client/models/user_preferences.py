@@ -27,7 +27,7 @@ class UserPreferences(BaseModel):
     """
     UserPreferences
     """ # noqa: E501
-    dark_mode: Optional[StrictBool] = False
+    dark_mode: Optional[StrictBool] = True
     __properties: ClassVar[List[str]] = ["dark_mode"]
 
     model_config = ConfigDict(
@@ -81,7 +81,7 @@ class UserPreferences(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "dark_mode": obj.get("dark_mode") if obj.get("dark_mode") is not None else False
+            "dark_mode": obj.get("dark_mode") if obj.get("dark_mode") is not None else True
         })
         return _obj
 

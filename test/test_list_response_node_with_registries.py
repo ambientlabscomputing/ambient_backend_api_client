@@ -28,7 +28,7 @@ class TestListResponseNodeWithRegistries(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ListResponseNodeWithRegistries:
         """Test ListResponseNodeWithRegistries
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ListResponseNodeWithRegistries`
@@ -81,10 +81,12 @@ class TestListResponseNodeWithRegistries(unittest.TestCase):
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             expires_in = 56, 
                             interval = 56, 
+                            verification_uri = 'https://portal.ambientlabsdev.io/device-authorization', 
+                            verification_uri_complete = '', 
+                            id = 56, 
                             node_id = 56, 
                             user_id = 56, 
-                            org_id = 56, 
-                            id = 56, ), 
+                            org_id = 56, ), 
                         registry_associations = [
                             ambient_backend_api_client.models.registry_node_association.RegistryNodeAssociation(
                                 node_id = 56, 
@@ -150,10 +152,12 @@ class TestListResponseNodeWithRegistries(unittest.TestCase):
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             expires_in = 56, 
                             interval = 56, 
+                            verification_uri = 'https://portal.ambientlabsdev.io/device-authorization', 
+                            verification_uri_complete = '', 
+                            id = 56, 
                             node_id = 56, 
                             user_id = 56, 
-                            org_id = 56, 
-                            id = 56, ), 
+                            org_id = 56, ), 
                         registry_associations = [
                             ambient_backend_api_client.models.registry_node_association.RegistryNodeAssociation(
                                 node_id = 56, 

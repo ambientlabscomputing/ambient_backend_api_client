@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **node_id** | **int** |  | [optional] 
 **device_code** | **str** |  | [optional] 
 **user_code** | **str** |  | [optional] 
+**client_id** | **str** |  | [optional] 
+**client_secret** | **str** |  | [optional] 
 
 ## Example
 

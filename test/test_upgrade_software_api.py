@@ -18,16 +18,16 @@ import unittest
 from ambient_backend_api_client.api.upgrade_software_api import UpgradeSoftwareApi
 
 
-class TestUpgradeSoftwareApi(unittest.TestCase):
+class TestUpgradeSoftwareApi(unittest.IsolatedAsyncioTestCase):
     """UpgradeSoftwareApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = UpgradeSoftwareApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_list_version_upgrade_software_versions_get(self) -> None:
+    async def test_list_version_upgrade_software_versions_get(self) -> None:
         """Test case for list_version_upgrade_software_versions_get
 
         List Version

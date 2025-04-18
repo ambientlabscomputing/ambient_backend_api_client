@@ -1,10 +1,11 @@
 # TokenRequestType
 
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `NODE` (value: `'node'`)
+
+* `API` (value: `'api'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
