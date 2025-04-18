@@ -21,12 +21,12 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "ambient_backend_api_client"
-VERSION = "3.0.0"
+VERSION = "3.0.1"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 3.0.0",
+    "urllib3 >= 1.25.3, < 3.0.1",
     "python-dateutil",
-    "aiohttp >= 3.0.0",
+    "aiohttp >= 3.0.1",
     "aiohttp-retry >= 2.8.3",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",

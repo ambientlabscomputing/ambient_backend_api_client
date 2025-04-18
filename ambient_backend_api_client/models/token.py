@@ -33,9 +33,9 @@ class Token(BaseModel):
     expires_at: datetime
     uid: StrictStr
     tombstoned: Optional[StrictBool] = False
-    user_id: StrictInt
-    org_id: StrictInt
-    node_id: Optional[StrictInt]
+    user_id: Optional[StrictInt] = None
+    org_id: Optional[StrictInt] = None
+    node_id: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["id", "description", "expires_at", "uid", "tombstoned", "user_id", "org_id", "node_id"]
 
     model_config = ConfigDict(
@@ -81,6 +81,16 @@ class Token(BaseModel):
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if org_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.org_id is None and "org_id" in self.model_fields_set:
+            _dict['org_id'] = None
 
         # set to None if node_id (nullable) is None
         # and model_fields_set contains the field

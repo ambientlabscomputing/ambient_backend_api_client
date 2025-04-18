@@ -18,44 +18,44 @@ import unittest
 from ambient_backend_api_client.api.commands_api import CommandsApi
 
 
-class TestCommandsApi(unittest.TestCase):
+class TestCommandsApi(unittest.IsolatedAsyncioTestCase):
     """CommandsApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = CommandsApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_get_command_commands_command_id_get(self) -> None:
+    async def test_get_command_commands_command_id_get(self) -> None:
         """Test case for get_command_commands_command_id_get
 
         Get Command
         """
         pass
 
-    def test_get_command_outputs_commands_command_id_outputs_get(self) -> None:
+    async def test_get_command_outputs_commands_command_id_outputs_get(self) -> None:
         """Test case for get_command_outputs_commands_command_id_outputs_get
 
         Get Command Outputs
         """
         pass
 
-    def test_get_commands_commands_get(self) -> None:
+    async def test_get_commands_commands_get(self) -> None:
         """Test case for get_commands_commands_get
 
         Get Commands
         """
         pass
 
-    def test_post_command_commands_post(self) -> None:
+    async def test_post_command_commands_post(self) -> None:
         """Test case for post_command_commands_post
 
         Post Command
         """
         pass
 
-    def test_update_command_outputs_commands_outputs_put(self) -> None:
+    async def test_update_command_outputs_commands_outputs_put(self) -> None:
         """Test case for update_command_outputs_commands_outputs_put
 
         Update Command Outputs

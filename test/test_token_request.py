@@ -28,7 +28,7 @@ class TestTokenRequest(unittest.TestCase):
 
     def make_instance(self, include_optional) -> TokenRequest:
         """Test TokenRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TokenRequest`
@@ -44,7 +44,9 @@ class TestTokenRequest(unittest.TestCase):
                 refresh_token = '',
                 node_id = 56,
                 device_code = '',
-                user_code = ''
+                user_code = '',
+                client_id = '',
+                client_secret = ''
             )
         else:
             return TokenRequest(

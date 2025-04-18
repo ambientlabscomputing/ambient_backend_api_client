@@ -18,23 +18,23 @@ import unittest
 from ambient_backend_api_client.api.ping_api import PingApi
 
 
-class TestPingApi(unittest.TestCase):
+class TestPingApi(unittest.IsolatedAsyncioTestCase):
     """PingApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = PingApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_auth_ping_auth_ping_get(self) -> None:
+    async def test_auth_ping_auth_ping_get(self) -> None:
         """Test case for auth_ping_auth_ping_get
 
         Auth Ping
         """
         pass
 
-    def test_ping_ping_get(self) -> None:
+    async def test_ping_ping_get(self) -> None:
         """Test case for ping_ping_get
 
         Ping

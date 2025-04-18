@@ -1,10 +1,11 @@
 # ClusterRunType
 
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `MANAGER` (value: `'manager'`)
+
+* `ALL` (value: `'all'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

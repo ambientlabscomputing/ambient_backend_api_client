@@ -98,9 +98,9 @@ class NodeInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in interfaces (list)
         _items = []
         if self.interfaces:
-            for _item in self.interfaces:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_interfaces in self.interfaces:
+                if _item_interfaces:
+                    _items.append(_item_interfaces.to_dict())
             _dict['interfaces'] = _items
         # override the default output from pydantic by calling `to_dict()` of docker_swarm_info
         if self.docker_swarm_info:
@@ -118,10 +118,20 @@ class NodeInput(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if interfaces (nullable) is None
+        # and model_fields_set contains the field
+        if self.interfaces is None and "interfaces" in self.model_fields_set:
+            _dict['interfaces'] = None
+
         # set to None if advertised_interface (nullable) is None
         # and model_fields_set contains the field
         if self.advertised_interface is None and "advertised_interface" in self.model_fields_set:
             _dict['advertised_interface'] = None
+
+        # set to None if tags (nullable) is None
+        # and model_fields_set contains the field
+        if self.tags is None and "tags" in self.model_fields_set:
+            _dict['tags'] = None
 
         # set to None if last_seen (nullable) is None
         # and model_fields_set contains the field

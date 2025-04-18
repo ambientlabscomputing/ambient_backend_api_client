@@ -18,65 +18,65 @@ import unittest
 from ambient_backend_api_client.api.clusters_api import ClustersApi
 
 
-class TestClustersApi(unittest.TestCase):
+class TestClustersApi(unittest.IsolatedAsyncioTestCase):
     """ClustersApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = ClustersApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_add_nodes_to_cluster_clusters_cluster_id_nodes_post(self) -> None:
+    async def test_add_nodes_to_cluster_clusters_cluster_id_nodes_post(self) -> None:
         """Test case for add_nodes_to_cluster_clusters_cluster_id_nodes_post
 
         Add Nodes To Cluster
         """
         pass
 
-    def test_create_cluster_clusters_post(self) -> None:
+    async def test_create_cluster_clusters_post(self) -> None:
         """Test case for create_cluster_clusters_post
 
         Create Cluster
         """
         pass
 
-    def test_delete_cluster_clusters_cluster_id_delete(self) -> None:
+    async def test_delete_cluster_clusters_cluster_id_delete(self) -> None:
         """Test case for delete_cluster_clusters_cluster_id_delete
 
         Delete Cluster
         """
         pass
 
-    def test_get_cluster_clusters_cluster_id_get(self) -> None:
+    async def test_get_cluster_clusters_cluster_id_get(self) -> None:
         """Test case for get_cluster_clusters_cluster_id_get
 
         Get Cluster
         """
         pass
 
-    def test_get_cluster_nodes_clusters_cluster_id_nodes_get(self) -> None:
+    async def test_get_cluster_nodes_clusters_cluster_id_nodes_get(self) -> None:
         """Test case for get_cluster_nodes_clusters_cluster_id_nodes_get
 
         Get Cluster Nodes
         """
         pass
 
-    def test_get_clusters_clusters_get(self) -> None:
+    async def test_get_clusters_clusters_get(self) -> None:
         """Test case for get_clusters_clusters_get
 
         Get Clusters
         """
         pass
 
-    def test_remove_nodes_from_cluster_clusters_cluster_id_nodes_delete(self) -> None:
+    async def test_remove_nodes_from_cluster_clusters_cluster_id_nodes_delete(self) -> None:
         """Test case for remove_nodes_from_cluster_clusters_cluster_id_nodes_delete
 
         Remove Nodes From Cluster
         """
         pass
 
-    def test_update_cluster_clusters_cluster_id_put(self) -> None:
+    async def test_update_cluster_clusters_cluster_id_put(self) -> None:
         """Test case for update_cluster_clusters_cluster_id_put
 
         Update Cluster

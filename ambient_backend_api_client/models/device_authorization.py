@@ -33,11 +33,13 @@ class DeviceAuthorization(BaseModel):
     created_at: Optional[datetime] = Field(default=None, description="Time when the device authorization was created")
     expires_in: Optional[StrictInt] = Field(default=600, description="Time in seconds until the device authorization expires")
     interval: Optional[StrictInt] = Field(default=5, description="Interval in seconds to poll for the device authorization")
+    verification_uri: Optional[StrictStr] = Field(default='https://portal.ambientlabsdev.io/device-authorization', description="URI to verify the device authorization")
+    verification_uri_complete: Optional[StrictStr] = None
+    id: StrictInt
     node_id: StrictInt
     user_id: StrictInt
     org_id: StrictInt
-    id: StrictInt
-    __properties: ClassVar[List[str]] = ["device_code", "user_code", "created_at", "expires_in", "interval", "node_id", "user_id", "org_id", "id"]
+    __properties: ClassVar[List[str]] = ["device_code", "user_code", "created_at", "expires_in", "interval", "verification_uri", "verification_uri_complete", "id", "node_id", "user_id", "org_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +80,11 @@ class DeviceAuthorization(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if verification_uri_complete (nullable) is None
+        # and model_fields_set contains the field
+        if self.verification_uri_complete is None and "verification_uri_complete" in self.model_fields_set:
+            _dict['verification_uri_complete'] = None
+
         return _dict
 
     @classmethod
@@ -95,10 +102,12 @@ class DeviceAuthorization(BaseModel):
             "created_at": obj.get("created_at"),
             "expires_in": obj.get("expires_in") if obj.get("expires_in") is not None else 600,
             "interval": obj.get("interval") if obj.get("interval") is not None else 5,
+            "verification_uri": obj.get("verification_uri") if obj.get("verification_uri") is not None else 'https://portal.ambientlabsdev.io/device-authorization',
+            "verification_uri_complete": obj.get("verification_uri_complete"),
+            "id": obj.get("id"),
             "node_id": obj.get("node_id"),
             "user_id": obj.get("user_id"),
-            "org_id": obj.get("org_id"),
-            "id": obj.get("id")
+            "org_id": obj.get("org_id")
         })
         return _obj
 

@@ -18,16 +18,16 @@ import unittest
 from ambient_backend_api_client.api.health_api import HealthApi
 
 
-class TestHealthApi(unittest.TestCase):
+class TestHealthApi(unittest.IsolatedAsyncioTestCase):
     """HealthApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = HealthApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_health_health_get(self) -> None:
+    async def test_health_health_get(self) -> None:
         """Test case for health_health_get
 
         Health

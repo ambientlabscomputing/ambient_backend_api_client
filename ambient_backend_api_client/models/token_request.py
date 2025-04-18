@@ -38,7 +38,9 @@ class TokenRequest(BaseModel):
     node_id: Optional[StrictInt] = None
     device_code: Optional[StrictStr] = None
     user_code: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["grant_type", "duration", "token_description", "request_type", "access_token", "refresh_token", "node_id", "device_code", "user_code"]
+    client_id: Optional[StrictStr] = None
+    client_secret: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["grant_type", "duration", "token_description", "request_type", "access_token", "refresh_token", "node_id", "device_code", "user_code", "client_id", "client_secret"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +111,16 @@ class TokenRequest(BaseModel):
         if self.user_code is None and "user_code" in self.model_fields_set:
             _dict['user_code'] = None
 
+        # set to None if client_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_id is None and "client_id" in self.model_fields_set:
+            _dict['client_id'] = None
+
+        # set to None if client_secret (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_secret is None and "client_secret" in self.model_fields_set:
+            _dict['client_secret'] = None
+
         return _dict
 
     @classmethod
@@ -129,7 +141,9 @@ class TokenRequest(BaseModel):
             "refresh_token": obj.get("refresh_token"),
             "node_id": obj.get("node_id"),
             "device_code": obj.get("device_code"),
-            "user_code": obj.get("user_code")
+            "user_code": obj.get("user_code"),
+            "client_id": obj.get("client_id"),
+            "client_secret": obj.get("client_secret")
         })
         return _obj
 

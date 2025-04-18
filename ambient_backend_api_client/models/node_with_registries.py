@@ -102,9 +102,9 @@ class NodeWithRegistries(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in interfaces (list)
         _items = []
         if self.interfaces:
-            for _item in self.interfaces:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_interfaces in self.interfaces:
+                if _item_interfaces:
+                    _items.append(_item_interfaces.to_dict())
             _dict['interfaces'] = _items
         # override the default output from pydantic by calling `to_dict()` of docker_swarm_info
         if self.docker_swarm_info:
@@ -115,16 +115,16 @@ class NodeWithRegistries(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in registry_associations (list)
         _items = []
         if self.registry_associations:
-            for _item in self.registry_associations:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_registry_associations in self.registry_associations:
+                if _item_registry_associations:
+                    _items.append(_item_registry_associations.to_dict())
             _dict['registry_associations'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in registries (list)
         _items = []
         if self.registries:
-            for _item in self.registries:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_registries in self.registries:
+                if _item_registries:
+                    _items.append(_item_registries.to_dict())
             _dict['registries'] = _items
         # set to None if id (nullable) is None
         # and model_fields_set contains the field

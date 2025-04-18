@@ -30,6 +30,7 @@ class GrantType(str, Enum):
     REFRESH_TOKEN = 'refresh_token'
     CREATE_TOKEN = 'create_token'
     DEVICE_AUTHORIZATION = 'device_authorization'
+    CLIENT_CREDENTIALS = 'client_credentials'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

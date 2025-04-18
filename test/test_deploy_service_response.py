@@ -28,7 +28,7 @@ class TestDeployServiceResponse(unittest.TestCase):
 
     def make_instance(self, include_optional) -> DeployServiceResponse:
         """Test DeployServiceResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `DeployServiceResponse`
@@ -37,7 +37,7 @@ class TestDeployServiceResponse(unittest.TestCase):
         if include_optional:
             return DeployServiceResponse(
                 request_id = 56,
-                requested_ts = '2025-04-03T21:01:12.078425',
+                requested_ts = '2025-04-17T03:38:54.771014',
                 location_root = 'http://localhost:8001/requests/',
                 refresh_interval = 56,
                 location = '',

@@ -18,82 +18,124 @@ import unittest
 from ambient_backend_api_client.api.oauth_api import OauthApi
 
 
-class TestOauthApi(unittest.TestCase):
+class TestOauthApi(unittest.IsolatedAsyncioTestCase):
     """OauthApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = OauthApi()
 
-    def tearDown(self) -> None:
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
+
+    async def test_confirm_device_authorization_oauth_device_authorization_confirm_post(self) -> None:
+        """Test case for confirm_device_authorization_oauth_device_authorization_confirm_post
+
+        Confirm Device Authorization
+        """
         pass
 
-    def test_create_device_authorization_oauth_device_authorization_post(self) -> None:
+    async def test_confirm_device_authorization_oauth_device_authorization_confirm_post_0(self) -> None:
+        """Test case for confirm_device_authorization_oauth_device_authorization_confirm_post_0
+
+        Confirm Device Authorization
+        """
+        pass
+
+    async def test_create_device_authorization_oauth_device_authorization_post(self) -> None:
         """Test case for create_device_authorization_oauth_device_authorization_post
 
         Create Device Authorization
         """
         pass
 
-    def test_create_device_authorization_oauth_device_authorization_post_0(self) -> None:
+    async def test_create_device_authorization_oauth_device_authorization_post_0(self) -> None:
         """Test case for create_device_authorization_oauth_device_authorization_post_0
 
         Create Device Authorization
         """
         pass
 
-    def test_delete_token_oauth_tokens_token_id_delete(self) -> None:
+    async def test_decode_jwt_oauth_decode_post(self) -> None:
+        """Test case for decode_jwt_oauth_decode_post
+
+        Decode Jwt
+        """
+        pass
+
+    async def test_decode_jwt_oauth_decode_post_0(self) -> None:
+        """Test case for decode_jwt_oauth_decode_post_0
+
+        Decode Jwt
+        """
+        pass
+
+    async def test_delete_token_oauth_tokens_token_id_delete(self) -> None:
         """Test case for delete_token_oauth_tokens_token_id_delete
 
         Delete Token
         """
         pass
 
-    def test_delete_token_oauth_tokens_token_id_delete_0(self) -> None:
+    async def test_delete_token_oauth_tokens_token_id_delete_0(self) -> None:
         """Test case for delete_token_oauth_tokens_token_id_delete_0
 
         Delete Token
         """
         pass
 
-    def test_get_token_oauth_tokens_token_id_get(self) -> None:
+    async def test_get_token_oauth_tokens_token_id_get(self) -> None:
         """Test case for get_token_oauth_tokens_token_id_get
 
         Get Token
         """
         pass
 
-    def test_get_token_oauth_tokens_token_id_get_0(self) -> None:
+    async def test_get_token_oauth_tokens_token_id_get_0(self) -> None:
         """Test case for get_token_oauth_tokens_token_id_get_0
 
         Get Token
         """
         pass
 
-    def test_get_tokens_oauth_tokens_get(self) -> None:
+    async def test_get_tokens_oauth_tokens_get(self) -> None:
         """Test case for get_tokens_oauth_tokens_get
 
         Get Tokens
         """
         pass
 
-    def test_get_tokens_oauth_tokens_get_0(self) -> None:
+    async def test_get_tokens_oauth_tokens_get_0(self) -> None:
         """Test case for get_tokens_oauth_tokens_get_0
 
         Get Tokens
         """
         pass
 
-    def test_handle_token_refresh_oauth_token_post(self) -> None:
-        """Test case for handle_token_refresh_oauth_token_post
+    async def test_handle_token_request_oauth_token_post(self) -> None:
+        """Test case for handle_token_request_oauth_token_post
 
-        Handle Token Refresh
+        Handle Token Request
         """
         pass
 
-    def test_handle_token_refresh_oauth_token_post_0(self) -> None:
-        """Test case for handle_token_refresh_oauth_token_post_0
+    async def test_handle_token_request_oauth_token_post_0(self) -> None:
+        """Test case for handle_token_request_oauth_token_post_0
 
-        Handle Token Refresh
+        Handle Token Request
+        """
+        pass
+
+    async def test_register_client_oauth_clients_post(self) -> None:
+        """Test case for register_client_oauth_clients_post
+
+        Register Client
+        """
+        pass
+
+    async def test_register_client_oauth_clients_post_0(self) -> None:
+        """Test case for register_client_oauth_clients_post_0
+
+        Register Client
         """
         pass
 

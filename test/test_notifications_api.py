@@ -18,44 +18,44 @@ import unittest
 from ambient_backend_api_client.api.notifications_api import NotificationsApi
 
 
-class TestNotificationsApi(unittest.TestCase):
+class TestNotificationsApi(unittest.IsolatedAsyncioTestCase):
     """NotificationsApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = NotificationsApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_create_notification_notifications_post(self) -> None:
+    async def test_create_notification_notifications_post(self) -> None:
         """Test case for create_notification_notifications_post
 
         Create Notification
         """
         pass
 
-    def test_delete_notification_notifications_notification_id_delete(self) -> None:
+    async def test_delete_notification_notifications_notification_id_delete(self) -> None:
         """Test case for delete_notification_notifications_notification_id_delete
 
         Delete Notification
         """
         pass
 
-    def test_get_notification_notifications_notification_id_get(self) -> None:
+    async def test_get_notification_notifications_notification_id_get(self) -> None:
         """Test case for get_notification_notifications_notification_id_get
 
         Get Notification
         """
         pass
 
-    def test_get_notifications_notifications_get(self) -> None:
+    async def test_get_notifications_notifications_get(self) -> None:
         """Test case for get_notifications_notifications_get
 
         Get Notifications
         """
         pass
 
-    def test_patch_notification_notifications_notification_id_patch(self) -> None:
+    async def test_patch_notification_notifications_notification_id_patch(self) -> None:
         """Test case for patch_notification_notifications_notification_id_patch
 
         Patch Notification

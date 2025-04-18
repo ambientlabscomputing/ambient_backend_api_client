@@ -28,6 +28,8 @@ ambient_backend_api_client/models/account_type.py
 ambient_backend_api_client/models/ambient_action_enum.py
 ambient_backend_api_client/models/ambient_event_type_enum.py
 ambient_backend_api_client/models/app_version.py
+ambient_backend_api_client/models/aud.py
+ambient_backend_api_client/models/client_secret.py
 ambient_backend_api_client/models/cluster.py
 ambient_backend_api_client/models/cluster_create.py
 ambient_backend_api_client/models/cluster_run_type.py
@@ -43,13 +45,14 @@ ambient_backend_api_client/models/container_registry_auth.py
 ambient_backend_api_client/models/container_registry_auth_create.py
 ambient_backend_api_client/models/container_registry_create.py
 ambient_backend_api_client/models/container_registry_type.py
+ambient_backend_api_client/models/create_client_secret.py
 ambient_backend_api_client/models/create_custer_request.py
 ambient_backend_api_client/models/create_service_acct_request.py
 ambient_backend_api_client/models/creation_method.py
 ambient_backend_api_client/models/data.py
 ambient_backend_api_client/models/deploy_service_response.py
 ambient_backend_api_client/models/device_authorization.py
-ambient_backend_api_client/models/device_authorization_create.py
+ambient_backend_api_client/models/device_authorization_request.py
 ambient_backend_api_client/models/docker_cluster_data.py
 ambient_backend_api_client/models/docker_swarm_info.py
 ambient_backend_api_client/models/event.py
@@ -59,6 +62,7 @@ ambient_backend_api_client/models/get_users_response.py
 ambient_backend_api_client/models/grant_type.py
 ambient_backend_api_client/models/http_validation_error.py
 ambient_backend_api_client/models/interface_type_enum.py
+ambient_backend_api_client/models/jwt_claims.py
 ambient_backend_api_client/models/list_response_cluster.py
 ambient_backend_api_client/models/list_response_command.py
 ambient_backend_api_client/models/list_response_command_node_relationship.py
@@ -74,7 +78,6 @@ ambient_backend_api_client/models/list_response_token.py
 ambient_backend_api_client/models/network_interface.py
 ambient_backend_api_client/models/node_architecture_enum.py
 ambient_backend_api_client/models/node_create.py
-ambient_backend_api_client/models/node_id.py
 ambient_backend_api_client/models/node_input.py
 ambient_backend_api_client/models/node_list.py
 ambient_backend_api_client/models/node_output.py
@@ -89,6 +92,7 @@ ambient_backend_api_client/models/notification_severity_enum.py
 ambient_backend_api_client/models/organization_create.py
 ambient_backend_api_client/models/post_api_token_response.py
 ambient_backend_api_client/models/post_registries_creds_trigger_response.py
+ambient_backend_api_client/models/realm_access.py
 ambient_backend_api_client/models/registry_node_association.py
 ambient_backend_api_client/models/registry_node_association_status_enum.py
 ambient_backend_api_client/models/request.py
@@ -123,6 +127,8 @@ docs/AccountType.md
 docs/AmbientActionEnum.md
 docs/AmbientEventTypeEnum.md
 docs/AppVersion.md
+docs/Aud.md
+docs/ClientSecret.md
 docs/Cluster.md
 docs/ClusterCreate.md
 docs/ClusterRunType.md
@@ -140,13 +146,14 @@ docs/ContainerRegistryAuth.md
 docs/ContainerRegistryAuthCreate.md
 docs/ContainerRegistryCreate.md
 docs/ContainerRegistryType.md
+docs/CreateClientSecret.md
 docs/CreateCusterRequest.md
 docs/CreateServiceAcctRequest.md
 docs/CreationMethod.md
 docs/Data.md
 docs/DeployServiceResponse.md
 docs/DeviceAuthorization.md
-docs/DeviceAuthorizationCreate.md
+docs/DeviceAuthorizationRequest.md
 docs/DockerClusterData.md
 docs/DockerSwarmInfo.md
 docs/Event.md
@@ -157,6 +164,7 @@ docs/GrantType.md
 docs/HTTPValidationError.md
 docs/HealthApi.md
 docs/InterfaceTypeEnum.md
+docs/JWTClaims.md
 docs/ListResponseCluster.md
 docs/ListResponseCommand.md
 docs/ListResponseCommandNodeRelationship.md
@@ -172,7 +180,6 @@ docs/ListResponseToken.md
 docs/NetworkInterface.md
 docs/NodeArchitectureEnum.md
 docs/NodeCreate.md
-docs/NodeId.md
 docs/NodeInput.md
 docs/NodeList.md
 docs/NodeOutput.md
@@ -191,6 +198,7 @@ docs/OrganizationCreate.md
 docs/PingApi.md
 docs/PostAPITokenResponse.md
 docs/PostRegistriesCredsTriggerResponse.md
+docs/RealmAccess.md
 docs/RegistriesApi.md
 docs/RegistryNodeAssociation.md
 docs/RegistryNodeAssociationStatusEnum.md
@@ -236,6 +244,8 @@ test/test_account_type.py
 test/test_ambient_action_enum.py
 test/test_ambient_event_type_enum.py
 test/test_app_version.py
+test/test_aud.py
+test/test_client_secret.py
 test/test_cluster.py
 test/test_cluster_create.py
 test/test_cluster_run_type.py
@@ -253,13 +263,14 @@ test/test_container_registry_auth.py
 test/test_container_registry_auth_create.py
 test/test_container_registry_create.py
 test/test_container_registry_type.py
+test/test_create_client_secret.py
 test/test_create_custer_request.py
 test/test_create_service_acct_request.py
 test/test_creation_method.py
 test/test_data.py
 test/test_deploy_service_response.py
 test/test_device_authorization.py
-test/test_device_authorization_create.py
+test/test_device_authorization_request.py
 test/test_docker_cluster_data.py
 test/test_docker_swarm_info.py
 test/test_event.py
@@ -270,6 +281,7 @@ test/test_grant_type.py
 test/test_health_api.py
 test/test_http_validation_error.py
 test/test_interface_type_enum.py
+test/test_jwt_claims.py
 test/test_list_response_cluster.py
 test/test_list_response_command.py
 test/test_list_response_command_node_relationship.py
@@ -285,7 +297,6 @@ test/test_list_response_token.py
 test/test_network_interface.py
 test/test_node_architecture_enum.py
 test/test_node_create.py
-test/test_node_id.py
 test/test_node_input.py
 test/test_node_list.py
 test/test_node_output.py
@@ -304,6 +315,7 @@ test/test_organization_create.py
 test/test_ping_api.py
 test/test_post_api_token_response.py
 test/test_post_registries_creds_trigger_response.py
+test/test_realm_access.py
 test/test_registries_api.py
 test/test_registry_node_association.py
 test/test_registry_node_association_status_enum.py

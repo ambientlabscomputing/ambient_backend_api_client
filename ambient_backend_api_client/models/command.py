@@ -129,6 +129,7 @@ class Command(BaseModel):
             "store_output": obj.get("store_output") if obj.get("store_output") is not None else False,
             "workdir": obj.get("workdir"),
             "os_user": obj.get("os_user"),
+            "env_vars": obj.get("env_vars"),
             "shell": obj.get("shell") if obj.get("shell") is not None else False,
             "id": obj.get("id"),
             "user_id": obj.get("user_id"),

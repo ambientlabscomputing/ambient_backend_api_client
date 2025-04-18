@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dark_mode** | **bool** |  | [optional] [default to False]
+**dark_mode** | **bool** |  | [optional] [default to True]
 
 ## Example
 

@@ -18,30 +18,30 @@ import unittest
 from ambient_backend_api_client.api.requests_api import RequestsApi
 
 
-class TestRequestsApi(unittest.TestCase):
+class TestRequestsApi(unittest.IsolatedAsyncioTestCase):
     """RequestsApi unit test stubs"""
 
-    def setUp(self) -> None:
+    async def asyncSetUp(self) -> None:
         self.api = RequestsApi()
 
-    def tearDown(self) -> None:
-        pass
+    async def asyncTearDown(self) -> None:
+        await self.api.api_client.close()
 
-    def test_add_notes_to_request_requests_request_id_notes_post(self) -> None:
+    async def test_add_notes_to_request_requests_request_id_notes_post(self) -> None:
         """Test case for add_notes_to_request_requests_request_id_notes_post
 
         Add Notes To Request
         """
         pass
 
-    def test_get_request_requests_request_id_get(self) -> None:
+    async def test_get_request_requests_request_id_get(self) -> None:
         """Test case for get_request_requests_request_id_get
 
         Get Request
         """
         pass
 
-    def test_patch_request_requests_request_id_patch(self) -> None:
+    async def test_patch_request_requests_request_id_patch(self) -> None:
         """Test case for patch_request_requests_request_id_patch
 
         Patch Request

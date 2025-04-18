@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | Time when the device authorization was created | [optional] 
 **expires_in** | **int** | Time in seconds until the device authorization expires | [optional] [default to 600]
 **interval** | **int** | Interval in seconds to poll for the device authorization | [optional] [default to 5]
+**verification_uri** | **str** | URI to verify the device authorization | [optional] [default to 'https://portal.ambientlabsdev.io/device-authorization']
+**verification_uri_complete** | **str** |  | [optional] 
+**id** | **int** |  | 
 **node_id** | **int** |  | 
 **user_id** | **int** |  | 
 **org_id** | **int** |  | 
-**id** | **int** |  | 
 
 ## Example
 
